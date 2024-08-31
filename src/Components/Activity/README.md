@@ -1,0 +1,1 @@
+En esta carpeta se encuentran los componentes mas complejos y los que necesitan utilziar el .map
