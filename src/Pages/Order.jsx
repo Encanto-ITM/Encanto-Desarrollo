@@ -13,7 +13,7 @@ export function Order({ Categoria }) {
                 <h2 className="text-xl md:text-3xl mb-8">{Categoria} Corte de pelo</h2>
                 <h3 className="text-lg md:text-xl">Elige tu fecha</h3>
             </div>
-
+            
             <div className="flex justify-center mt-10 mb-20">
                 <GenericButton placeholder={"Completar Orden"} className="w-32 h-12 text-base md:text-lg p-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition duration-300"/>
             </div>
