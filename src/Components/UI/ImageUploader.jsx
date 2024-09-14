@@ -9,7 +9,7 @@ export default function ImageUploader() {
     if (file) {
       setSelectedImage(file);
 
-      // Crear una URL de vista previa para la imagen
+    
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewUrl(reader.result);
@@ -20,19 +20,19 @@ export default function ImageUploader() {
 
   return (
     <div className="flex flex-col items-center p-4">
-      {/* Input para seleccionar archivos */}
+     
       <input
         type="file"
         accept="image/*"
         onChange={handleImageChange}
-        className="hidden" // Ocultar el input de archivo
+        className="hidden" 
         id="file-input"
       />
       
-      {/* Vista previa de la imagen */}
+     
       <label htmlFor="file-input">
         <div className="relative w-32 h-32">
-          {/* Mostrar la vista previa si está disponible */}
+       
           {previewUrl ? (
             <img
               src={previewUrl}

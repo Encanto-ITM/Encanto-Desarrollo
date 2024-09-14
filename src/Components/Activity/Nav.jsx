@@ -6,7 +6,7 @@ export function Nav() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (e) => {
-    e.preventDefault(); // Prevenir comportamiento predeterminado del enlace
+    e.preventDefault();
     setIsModalOpen(true);
   };
 
@@ -25,7 +25,7 @@ export function Nav() {
   const profileImage = '/img/Death_Note.jpg';
 
   return (
-    <nav className="bg-[#65439B] text-white px-8 py-4 flex justify-between items-center relative z-20">
+    <nav className="bg-[#65439B] text-white px-8 py-1 flex justify-between items-center relative z-20">
       <div className="flex items-center">
         <a href="#">
           <img src="/img/Logo-Landing.png" alt="TuLook Logo" className="h-16 w-30 mr-2 transition duration-500 hover:scale-110" />

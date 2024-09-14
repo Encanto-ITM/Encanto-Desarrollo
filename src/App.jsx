@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Pages/Login';
 import Landing from './Pages/Landing';
-
 export function App() {
     return (
         <div>
