@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NestedProfile from '../UI/UserProfile';
+import UserProfile from '../UI/UserProfile';
 
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +67,7 @@ export function Nav() {
         </li>
       </ul>
 
-      <NestedProfile open={isModalOpen} onClose={closeModal} />
+      <UserProfile open={isModalOpen} onClose={closeModal} />
     </nav>
   );
 }

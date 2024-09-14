@@ -2,7 +2,7 @@ import * as React from 'react';
 import ImageUploader from './ImageUploader';
 import Modal from '@mui/material/Modal';
 
-export default function NestedProfile({ open, onClose }) {
+export default function UserProfile({ open, onClose }) {
   return (
     <Modal
       open={open}
