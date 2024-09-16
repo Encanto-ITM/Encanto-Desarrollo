@@ -15,7 +15,7 @@ export function Order({ Categoria }) {
             </div>
             
             <div className="flex justify-center mt-10 mb-20">
-                <GenericButton placeholder={"Completar Orden"}/>
+                <button className=" font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/3 h-12 rounded-xl mt-3">Completar Orden</button>
             </div>
 
             <Footer />

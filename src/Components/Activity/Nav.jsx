@@ -45,22 +45,22 @@ export function Nav() {
       </button>
 
       <ul className={menuClasses}>
-        <li className="transition duration-500 hover:scale-90">
+        <li className="transition duration-500 hover:scale-110">
           <a href="#">Services</a>
         </li>
-        <li className="transition duration-500 hover:scale-90">
+        <li className="transition duration-500 hover:scale-110">
           <a href="#">Community</a>
         </li>
-        <li className="transition duration-500 hover:scale-90">
+        <li className="transition duration-500 hover:scale-110">
           <a href="#">About Us</a>
         </li>
-        <li className="transition duration-500 hover:scale-90">
+        <li className="transition duration-500 hover:scale-110">
           <a href="#">Contact Us</a>
         </li>
-        <li className="transition duration-500 hover:scale-90">
+        <li className="transition duration-500 hover:scale-110">
           <a href="#">Blog</a>
         </li>
-        <li className="transition duration-500 hover:scale-90">
+        <li className="transition duration-500 hover:scale-110">
           <a href="#" onClick={openModal} className="flex gap-4 items-center">
             <img className="w-14 h-12 rounded-full" src={profileImage} alt="Profile picture" />
           </a>
