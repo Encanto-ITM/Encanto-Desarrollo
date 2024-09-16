@@ -2,16 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background: #EBEBEB;
+}
+
 h1{
   font-size: 40px;
 }
 
 h2{
-  font-size: 1rem;
+  font-size: 32px;
 }
 
 h3{
-  font-size: 0.875rem;
+  font-size: 25px;
 }
 
 
