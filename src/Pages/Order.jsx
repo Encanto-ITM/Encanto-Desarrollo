@@ -32,7 +32,7 @@ export function Order({ Emprendedor, Servicio }) {
         
 
             </div>
-            <div className='flex justify-center'>
+            <div className='flex justify-center mt-6'>
                 <h1 className='weight-bold'>Total a pagar: 100$</h1>
             </div>
             <div className="flex justify-center mt-10 mb-20">
