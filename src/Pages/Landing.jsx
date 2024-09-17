@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Landing() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
-    setIsMenuOpen(!isMenuOpen); 
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login?form=signin'); 
+  };
+
+  const handleSignUpClick = () => {
+    navigate('/login?form=signup'); 
   };
 
   return (
@@ -39,7 +49,12 @@ export default function Landing() {
           <li className="transition duration-500 hover:scale-90"><a href="#">About Us</a></li>
           <li className="transition duration-500 hover:scale-90"><a href="#">Contact Us</a></li>
           <li className="transition duration-500 hover:scale-90"><a href="#">Blog</a></li>
-          <button className="bg-[#EBEBEB] text-[#65439B] transition duration-500 ease-in-out px-8 py-2 rounded hover:bg-[#f3eded] hover:scale-110">Login</button>
+          <button
+            className="bg-[#EBEBEB] text-[#65439B] transition duration-500 ease-in-out px-8 py-2 rounded hover:bg-[#f3eded] hover:scale-110"
+            onClick={handleLoginClick}
+          >
+            Login
+          </button>
         </ul>
       </nav>
 
@@ -51,7 +66,10 @@ export default function Landing() {
           <p className="text-black text-[clamp(1rem,_1.25rem,_1.50rem)] mb-8 max-w-lg">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at diam eu tortor lobortis molestie.
           </p>
-          <button className="bg-[#65439B] text-white px-12 py-3 rounded-lg hover:bg-purple-800 text-[clamp(1rem,_1.25rem,_1.50rem)] transition duration-500 ease-in-out hover:bg-[#482d74] transform hover:-translate-y-1 hover:scale-110">
+          <button
+            className="bg-[#65439B] text-white px-12 py-3 rounded-lg hover:bg-purple-800 text-[clamp(1rem,_1.25rem,_1.50rem)] transition duration-500 ease-in-out hover:bg-[#482d74] transform hover:-translate-y-1 hover:scale-110"
+            onClick={handleSignUpClick} 
+          >
             Sign Up
           </button>
         </div>
