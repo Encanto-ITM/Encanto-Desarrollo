@@ -3,7 +3,7 @@ import { SignInForm } from '../Components/UI/SignInForm';
 import { SignUpForm } from '../Components/UI/SignUpForm';
 import { useLogin } from '../Components/hooks/useLogin';
 
-export default function Login() {
+export default function Login({ showSignUp = false }) {
     const { showSignIn, toggleForm } = useLogin();
 
     return (
