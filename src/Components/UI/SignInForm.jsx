@@ -58,7 +58,7 @@ export function SignInForm({ onToggleForm }) {
             }
 
             console.log('Login exitoso:', user);
-            window.location.href = '/Landing';
+            window.location.href = '/Home';
 
         } catch (error) {
             console.error('Error en la solicitud de login:', error);

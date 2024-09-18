@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function NavLanding(){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleLoginClick = () => {
+      navigate('/login?form=signin'); 
+    };
+  
 
     const handleMenuToggle = () => {
         setIsMenuOpen(!isMenuOpen); 
@@ -38,7 +46,12 @@ export function NavLanding(){
           <li className="transition duration-500 hover:scale-90"><a href="#">About Us</a></li>
           <li className="transition duration-500 hover:scale-90"><a href="#">Contact Us</a></li>
           <li className="transition duration-500 hover:scale-90"><a href="#">Blog</a></li>
-          <a href='/Login' className="bg-[#EBEBEB] text-[#65439B] transition duration-500 ease-in-out px-8 py-2 rounded hover:bg-[#f3eded] hover:scale-110">Login</a>
+          <button
+            className="bg-[#EBEBEB] text-[#65439B] transition duration-500 ease-in-out px-8 py-2 rounded hover:bg-[#f3eded] hover:scale-110"
+            onClick={handleLoginClick}
+          >
+            Login
+          </button>
         </ul>
       </nav>
 
