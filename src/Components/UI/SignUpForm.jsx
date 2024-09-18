@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
-import { sha256 } from 'js-sha256'; // Importamos sha256
+import { sha256 } from 'js-sha256'; 
 
 export function SignUpForm({ onToggleForm }) {
     const [formData, setFormData] = useState({
@@ -25,9 +25,9 @@ export function SignUpForm({ onToggleForm }) {
 
         let newValue = value;
 
-        // Si el campo es 'password' o 'password_confirmation', aplicamos el hash
+        
         if (name === 'password' || name === 'password_confirmation') {
-            newValue = sha256(value); // Aplicamos el hash usando js-sha256
+            newValue = sha256(value); 
         }
 
         setFormData({ ...formData, [name]: newValue });
