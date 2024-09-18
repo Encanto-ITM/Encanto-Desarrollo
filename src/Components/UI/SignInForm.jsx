@@ -4,7 +4,7 @@ import GenericButton from './GenericButton';
 export function SignInForm({ onToggleForm }) {
     return (
         <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8"> 
-            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden  flex-grow hidden md:block">
+            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden  flex-grow md:block">
                 <img
                     src="/img/Login-Hombre.png"
                     className="w-full h-full object-cover rounded-bl-[40px] rounded-tl-[40px]"
