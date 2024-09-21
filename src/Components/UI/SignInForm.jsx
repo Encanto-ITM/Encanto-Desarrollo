@@ -111,9 +111,9 @@ export function SignInForm({ onToggleForm }) {
                     placeholder="Iniciar Sesión"
                 />
 
-                <a onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer">
+                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
                     Regístrate
-                </a>
+                </div>
 
                 <a href="/forgot-password" className="text-purple hover:underline text-center">
                     Login Emprendedor
