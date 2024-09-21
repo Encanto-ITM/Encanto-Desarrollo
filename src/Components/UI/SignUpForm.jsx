@@ -131,11 +131,11 @@ export function SignUpForm({ onToggleForm }) {
                     placeholder="Registrarse" 
                 />
 
-                <a onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer">
+                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
                     Iniciar Sesión
-                </a>
+                </div>
             </div>
-            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
+            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow md:block">
                 <img
                     src="/img/Register-Mujer.png"
                     className="w-full h-full object-cover rounded-tr-[40px] rounded-br-[40px]"
