@@ -22,7 +22,7 @@ export function PopularWorkers({ filteredWorkers, searchTerm }) {
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisis nisi vitae magna.
                                 </p>
                                 <div className="text-center mt-6">
-                                    <button className="bg-[#65439B] text-white py-2 px-6 rounded-full hover:bg-purple-800 transition-colors duration-300">
+                                    <button className="bg-purple hover:bg-black text-white py-2 px-6 rounded-full hover:bg-purple-800 transition-colors duration-300">
                                         Choose Worker
                                     </button>
                                 </div>

@@ -80,19 +80,8 @@ h3{
 
 .fc .fc-toolbar-title{
   @apply text-[clamp(1.1em,_1.5vw,_1.75em)]; 
-}
-.fc-toolbar-title{
   @apply text-white;
-  
 }
-
-.fc .fc-button{
-  /* @apply text-[clamp(.5em,_3vw_,_1em)] */
-}
-.h-97{
-  height: 38rem;
-}
-
 
 @media (max-width: 768px) {
   .Forms {
