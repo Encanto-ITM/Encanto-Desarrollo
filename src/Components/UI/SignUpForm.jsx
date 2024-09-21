@@ -14,7 +14,9 @@ export function SignUpForm({ onToggleForm }) {
                 <SignInputs placeholder={"Contraseña"} />
                 <SignInputs placeholder={"Confirmar contraseña"} />
                 <GenericButton placeholder={"Registrarse"} />
-                <a onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer ">Iniciar Sesión</a>
+                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
+                    Regístrate
+                </div>
             </div>
             <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden  flex-grow ">
                 <img

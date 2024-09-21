@@ -21,7 +21,9 @@ export function SignInForm({ onToggleForm }) {
                 <SignInputs placeholder={"Contraseña"} />
                 <a href="/forgot-password" className="text-gray-500 hover:underline text-center">Olvidé mi contraseña</a>
                 <GenericButton placeholder={"Iniciar Sesión"} />
-                <a onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer">Regístrate</a>
+                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
+                    Regístrate
+                </div>
                 <a href="/forgot-password" className="text-purple hover:underline text-center">Login Emprendedor</a>
             </div>
         </section>
