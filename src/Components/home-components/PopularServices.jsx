@@ -1,4 +1,5 @@
 import React from 'react';
+import GenericButton from '../UI/GenericButton';
 
 export function PopularServices({ filteredServices, searchTerm }) {
     return (
@@ -19,6 +20,12 @@ export function PopularServices({ filteredServices, searchTerm }) {
                             />
                             <h3 className="text-xl font-semibold text-gray-700">{service.name}</h3>
                             <p className="text-gray-500">Service from {service.price}</p>
+                            <div className='flex justify-center'>
+                                <GenericButton
+                                    placeholder={"Order"}
+                                    onClick={() => window.location.href = `/order`}
+                                />
+                            </div>
                         </div>
                     ))
                 ) : (

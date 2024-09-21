@@ -3,6 +3,8 @@ import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
 import ServiceCard from '../Components/UI/ServiceCard.jsx';
 import GenericButton from '../Components/UI/GenericButton.jsx';
+import { Calendario } from '../Components/UI/Calendario.jsx';
+
 
 export function Order() {
     return (
@@ -22,7 +24,7 @@ export function Order() {
                     <ServiceCard serviceName={`Cortes SA`} />
                 </div>
                 <div className="w-2/3 bg-purple flex items-center justify-center p-4 rounded-xl">
-                    <h1 className="text-white text-2xl">Calendario</h1>
+                    <Calendario />
                 </div>
             </div>
 

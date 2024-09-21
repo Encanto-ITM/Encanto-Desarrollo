@@ -3,6 +3,8 @@ import { Search } from "../Components/home-components/Search";
 import { Services } from "../Components/home-components/Services";
 import { PopularServices } from "../Components/home-components/PopularServices";
 import { PopularWorkers } from "../Components/home-components/PopularWorkers";
+import { Nav } from '../Components/Activity/Nav.jsx';
+import Footer from '../Components/Activity/Footer.jsx';
 
 export function Home() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -41,12 +43,14 @@ export function Home() {
     return (
         <>
             <div className="bg-gray-100 min-h-screen">
+                <Nav />
                 <main className="p-6">
                     <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                     <Services />
                     <PopularServices filteredServices={filteredServices} searchTerm={searchTerm} />
                     <PopularWorkers filteredWorkers={filteredWorkers} searchTerm={searchTerm} />
                 </main>
+                <Footer />
             </div>
         </>
     );
