@@ -22,16 +22,15 @@ export function Services() {
     ];
 
     return (
-        <div className="flex justify-around mt-8 mb-24">
+        <div className="flex flex-wrap justify-center mt-8 mb-24">
             {services.map((service, index) => (
-                <div key={service} className="flex flex-col items-center space-y-2 transition duration-500 hover:scale-110">
-                    <a href="#" className="w-16 h-16  rounded-full flex items-center justify-center">
+                <div key={service} className="flex flex-col items-center space-y-2 m-4 transition duration-500 hover:scale-110 w-24 sm:w-32 lg:w-40 lg:mx-6">
+                    <a href="#" className="w-16 h-16 rounded-full flex items-center justify-center bg-gray-200">
                         <img src={img[index]} alt={service} className="w-full h-full object-contain" />
                     </a>
-                    <span>{service}</span>
+                    <span className="text-center">{service}</span>
                 </div>
             ))}
         </div>
     );
 }
-
