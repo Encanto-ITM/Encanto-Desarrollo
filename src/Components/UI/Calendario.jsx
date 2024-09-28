@@ -25,7 +25,7 @@ export function Calendario() {
     };
 
     return (
-        <div className="bg-white m-auto w-full h-[70vh] mt-0 rounded-3xl laptop:row-[1/4] laptop:col-start-1 laptop:col-end-4 md:col-[1/4] laptop:h-full">
+        <div className="bg-white m-auto w-full h-[70vh] mt-0  laptop:row-[1/4] laptop:col-start-1 laptop:col-end-4 md:col-[1/4] laptop:h-full">
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView='dayGridMonth'

@@ -1,6 +1,6 @@
 export function ServiceLanding(){
     return (
-        <section className="py-16 bg-[#EBEBEB]">
+        <section className="py-16 bg-gray-100">
             <div className="container mx-auto text-center">
             <h3 className="text-4xl font-bold mb-12 text-gray-800">Nuestros Servicios</h3>
             <p className="mb-12 max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed">

@@ -58,7 +58,7 @@ export function SignInForm({ onToggleForm }) {
             }
 
             console.log('Login exitoso:', user);
-            window.location.href = '/Landing';
+            window.location.href = '/Home';
 
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
@@ -112,7 +112,9 @@ export function SignInForm({ onToggleForm }) {
                 />
 
                 <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
+                    
                     Regístrate
+                
                 </div>
 
                 <a href="/forgot-password" className="text-purple hover:underline text-center">

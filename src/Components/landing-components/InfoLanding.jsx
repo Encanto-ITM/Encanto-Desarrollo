@@ -10,7 +10,7 @@ export function InfoLanding(){
             />
             </div>
             
-            <div className="md:w-1/2 bg-[#65439B] text-white p-16 flex flex-col justify-center space-y-6">
+            <div className="md:w-1/2 bg-purple text-white p-16 flex flex-col justify-center space-y-6">
             <h2 className="text-4xl font-bold leading-snug mb-6">
                 Regístrate para obtener una <span className="text-purple-300">Belleza Brillante</span>
             </h2>
@@ -23,7 +23,7 @@ export function InfoLanding(){
             <p className="text-lg leading-relaxed mb-8">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <button className="bg-white text-[#65439B] font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors duration-300">
+            <button className="bg-white text-purple font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors duration-300">
                 Read More
             </button>
             </div>
