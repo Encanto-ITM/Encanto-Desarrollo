@@ -63,19 +63,19 @@ h3{
 }
 
 .fc-header-toolbar{
-  @apply bg-[#65439B];
-  @apply text-[#65439B];
+  @apply bg-purple;
+  @apply text-purple;
   @apply p-4;
   margin: 0;
 }
 
 .fc-button-primary:hover{
-  @apply text-[#65439B] !important;
+  @apply text-purple !important;
   @apply text-white !important;
 }
 
 .fc-button-active{
-  @apply text-[#65439B] !important;
+  @apply text-purple !important;
 }
 
 .fc .fc-toolbar-title{
