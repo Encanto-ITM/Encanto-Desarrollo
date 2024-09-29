@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background: #EBEBEB;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2{
+  font-size: 1rem;
+}
+
+h3{
+  font-size: 0.875rem;
+}
+
+
+.slide-left-enter {
+  transform: translateX(-100%); 
+  opacity: 0;
+}
+.slide-left-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out; 
+}
+.slide-left-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.slide-left-exit-active {
+  transform: translateX(100%); 
+
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out; 
+}
+
+
+.slide-right-enter {
+  transform: translateX(100%); 
+  opacity: 0;
+}
+.slide-right-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out; 
+}
+.slide-right-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.slide-right-exit-active {
+  transform: translateX(-100%); 
+  opacity: 0;
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out; 
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0;
+}
+
+.fc-header-toolbar{
+  @apply bg-purple;
+  @apply text-purple;
+  @apply p-4;
+  margin: 0;
+}
+
+.fc-button-primary:hover{
+  @apply text-purple !important;
+  @apply text-white !important;
+}
+
+.fc-button-active{
+  @apply text-purple !important;
+}
+
+.fc .fc-toolbar-title{
+  @apply text-[clamp(1.1em,_1.5vw,_1.75em)]; 
+  @apply text-white;
+}
+
+@media (max-width: 768px) {
+  .Forms {
+    border-radius: 40px;
+  }
+}
