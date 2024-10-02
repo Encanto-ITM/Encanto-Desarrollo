@@ -118,7 +118,6 @@ export function SignInForm({ onToggleForm }) {
                 </div>
 
                 <a href="/loginem?form=signin" className="text-purple hover:underline text-center">
-                <a href="/forgot-password" className="text-purple hover:underline text-center">
                     Login Emprendedor
                 </a>
             </div>
