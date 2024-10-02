@@ -60,7 +60,6 @@ export function SignUpForm({ onToggleForm }) {
         console.log('Datos del formulario antes de enviar:', formDataToSubmit);
 
         fetch('https://tulook-api.vercel.app/api/api/users', {
-        fetch('http://127.0.0.1:8000/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
