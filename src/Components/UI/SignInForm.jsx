@@ -25,6 +25,7 @@ export function SignInForm({ onToggleForm }) {
         try {
             
             const response = await fetch('https://tulook-api.vercel.app/api/api/users', {
+            const response = await fetch('http://127.0.0.1:8000/api/users', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -118,6 +119,7 @@ export function SignInForm({ onToggleForm }) {
                 </div>
 
                 <a href="/loginem?form=signin" className="text-purple hover:underline text-center">
+                <a href="/forgot-password" className="text-purple hover:underline text-center">
                     Login Emprendedor
                 </a>
             </div>
