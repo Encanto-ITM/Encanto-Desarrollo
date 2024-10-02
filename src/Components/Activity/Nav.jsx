@@ -65,10 +65,16 @@ export function Nav() {
           <a href="#">Services</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
+          <a href="#">Community</a>
+        </li>
+        <li className="transition duration-500 hover:scale-110">
           <a href="#">About Us</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
           <a href="#">Contact Us</a>
+        </li>
+        <li className="transition duration-500 hover:scale-110">
+          <a href="#">Blog</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
           <a href="#" onClick={openModal} className="flex items-center justify-center focus:outline-none gap-4">
