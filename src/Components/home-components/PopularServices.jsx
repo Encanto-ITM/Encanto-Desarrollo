@@ -9,7 +9,7 @@ export function PopularServices({ filteredServices }) {
                     <h2 className="text-3xl font-bold text-white mb-4 max-w-[94rem]">Popular Services</h2>
                     <h3 className="text-3xl font-bold text-white mb-8 max-w-[94rem]">A selection of the best services of the platform</h3>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center px-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center p-10">
                     {filteredServices.length > 0 ? (
                         filteredServices.map((service) => (
                             <div key={service.id} className="grid gap-2 p-4"> {/* Adjusted padding */}

@@ -3,7 +3,7 @@ import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 import { sha256 } from 'js-sha256';
 
-export function SignInForm({ onToggleForm }) {
+export function SignInFormEm({ onToggleForm }) {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -48,12 +48,12 @@ export function SignInForm({ onToggleForm }) {
             const user = users.find(user => user.email === formData.email);
 
             if (!user) {
-                setError('Correo electrónico o contraseña incorrecto.');
+                setError('Correo electrónico no encontrado.');
                 return;
             }
 
             if (user.password !== encryptedPassword) {
-                setError('Correo electrónico o contraseña incorrecto.');
+                setError('Contraseña incorrecta.');
                 return;
             }
 
@@ -70,9 +70,9 @@ export function SignInForm({ onToggleForm }) {
         <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8"> 
             <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
                 <img
-                    src="/img/Login-Hombre.png"
+                    src="/img/Login-Mujer.png"
                     className="w-full h-full object-cover rounded-bl-[40px] rounded-tl-[40px]"
-                    alt="Login Hombre"
+                    alt="Login Mujer"
                     loading="lazy"
                 />
             </div>
@@ -112,13 +112,11 @@ export function SignInForm({ onToggleForm }) {
                 />
 
                 <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
-                    
                     Regístrate
-                
                 </div>
 
-                <a href="/loginem?form=signin" className="text-purple hover:underline text-center">
-                    Login Emprendedor
+                <a href="/login?form=signin" className="text-purple hover:underline text-center">
+                    Login Usuario
                 </a>
             </div>
         </section>
