@@ -24,7 +24,7 @@ export function SignInForm({ onToggleForm }) {
 
         try {
             
-            const response = await fetch('http://127.0.0.1:8000/api/users', {
+            const response = await fetch('https://tulook-api.vercel.app/api/api/users', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,12 +48,12 @@ export function SignInForm({ onToggleForm }) {
             const user = users.find(user => user.email === formData.email);
 
             if (!user) {
-                setError('Correo electrónico no encontrado.');
+                setError('Correo electrónico o contraseña incorrecto.');
                 return;
             }
 
             if (user.password !== encryptedPassword) {
-                setError('Contraseña incorrecta.');
+                setError('Correo electrónico o contraseña incorrecto.');
                 return;
             }
 

@@ -25,7 +25,6 @@ export function SignUpForm({ onToggleForm }) {
 
         let newValue = value;
 
-        
         if (name === 'password' || name === 'password_confirmation') {
             newValue = sha256(value); 
         }
@@ -59,16 +58,24 @@ export function SignUpForm({ onToggleForm }) {
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit);
 
-        fetch('http://127.0.0.1:8000/api/users', {
+        fetch('https://tulook-api.vercel.app/api/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formDataToSubmit),
         })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Convierte la respuesta a JSON solo si es exitosa
+            } else {
+                throw new Error('Error al registrarse.');
+            }
+        })
         .then(data => {
             console.log('Éxito:', data);
+            // Llama a la función para cambiar al formulario de inicio de sesión con animación
+            onToggleForm();
         })
         .catch((error) => {
             console.error('Error:', error);
