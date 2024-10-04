@@ -16,16 +16,17 @@ export function Home() {
         { id: 4, name: "Hair Coloring", price: "50$", image: "/img/Iconos/Estilismo-white.png" },
     ];
 
-    const popularWorkers = [
-        { id: 1, image:"img/Pablito-Placeholder.png", name: "Pablito", profession: "Barbero", rating: 4.5, jobs: 300, description: "As a professional barber, my passion for styling and shaving goes beyond any conventional techniques. Each client who passes through my chair receives a unique, tailored experience, meticulously personalized to their style and personality."},
-        { id: 2, image:"img/Pablito-Placeholder.png", name: "María", profession: "Estilista", rating: 4.8, jobs: 250, description: "As a professional barber, my passion for styling and shaving goes beyond any conventional techniques. Each client who passes through my chair receives a unique, tailored experience, meticulously personalized to their style and personality." },
-        { id: 3, image:"img/Pablito-Placeholder.png", name: "Luisa", profession: "Manicurista", rating: 4.7, jobs: 150, description: "As a professional barber, my passion for styling and shaving goes beyond any conventional techniques. Each client who passes through my chair receives a unique, tailored experience, meticulously personalized to their style and personality." },
-        { id: 4, image:"img/Pablito-Placeholder.png", name: "Pedro", profession: "Masajista", rating: 4.3, jobs: 120, description: "As a professional barber, my passion for styling and shaving goes beyond any conventional techniques. Each client who passes through my chair receives a unique, tailored experience, meticulously personalized to their style and personality." },
-        { id: 5, image:"img/Pablito-Placeholder.png", name: "Pablito", profession: "Barbero", rating: 4.5, jobs: 300, description: "As a professional barber, my passion for styling and shaving goes beyond any conventional techniques. Each client who passes through my chair receives a unique, tailored experience, meticulously personalized to their style and personality." },
-        { id: 6, image:"img/Pablito-Placeholder.png", name: "María", profession: "Estilista", rating: 4.8, jobs: 250, description: "As a professional barber, my passion for styling and shaving goes beyond any conventional techniques. Each client who passes through my chair receives a unique, tailored experience, meticulously personalized to their style and personality." },
-        { id: 7, image:"img/Pablito-Placeholder.png", name: "Luisa", profession: "Manicurista", rating: 4.7, jobs: 150, description: "As a professional barber, my passion for styling and shaving goes beyond any conventional techniques. Each client who passes through my chair receives a unique, tailored experience, meticulously personalized to their style and personality." },
-        { id: 8, image:"img/Pablito-Placeholder.png", name: "Pedro", profession: "Masajista", rating: 4.3, jobs: 120, description: "As a professional barber, my passion for styling and shaving goes beyond any conventional techniques. Each client who passes through my chair receives a unique, tailored experience, meticulously personalized to their style and personality." },
-    ];
+    const getWorkers = async () => {
+        const response = await fetch('https://tulook-api.vercel.app/api/api/users');
+        const data = await response.json();
+        const[setWorkers, workers] = useState([]);
+        setWorkers(data);
+        return data;
+    };
+
+    useEffect(() => {
+        getActivities();
+    }, []);
 
     const filteredServices = popularServices.filter(service => 
         service.name.toLowerCase().includes(searchTerm.toLowerCase())
