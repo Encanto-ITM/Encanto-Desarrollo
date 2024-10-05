@@ -3,8 +3,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export function PopularWorkers({ filteredWorkers }) {
+    const navigate = useNavigate();  // Hook para redirigir
+
     // Configuración del slider
     const settings = {
         dots: true,
@@ -22,6 +25,11 @@ export function PopularWorkers({ filteredWorkers }) {
                 }
             }
         ]
+    };
+
+    const handleFindOutMore = (workerId) => {
+        // Navegar al perfil del trabajador seleccionado
+        navigate(`/workerprofile/${workerId}`);
     };
 
     return (
@@ -51,7 +59,10 @@ export function PopularWorkers({ filteredWorkers }) {
                                         <p>{worker.description}</p>
 
                                         <div className="text-center mt-4">
-                                            <button className="flex items-center">
+                                            <button
+                                                className="flex items-center"
+                                                onClick={() => handleFindOutMore(worker.id)} // Redirigir al perfil del trabajador
+                                            >
                                                 <div className="rounded-full bg-purple p-1">
                                                     <ChevronRight className="text-white" />
                                                 </div>

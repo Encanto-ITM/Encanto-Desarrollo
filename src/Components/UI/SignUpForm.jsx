@@ -142,7 +142,7 @@ export function SignUpForm({ onToggleForm }) {
                     Iniciar Sesión
                 </div>
             </div>
-            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow md:block">
+            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
                 <img
                     src="/img/Register-Mujer.png"
                     className="w-full h-full object-cover rounded-tr-[40px] rounded-br-[40px]"
