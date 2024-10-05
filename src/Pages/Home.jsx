@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "../Components/home-components/Search";
 import { Services } from "../Components/home-components/Services";
 import { PopularServices } from "../Components/home-components/PopularServices";
@@ -8,6 +8,7 @@ import Footer from '../Components/Activity/Footer.jsx';
 
 export function Home() {
     const [searchTerm, setSearchTerm] = useState("");
+    const [workers, setWorkers] = useState([]);
 
     const popularServices = [
         { id: 1, name: "HairCut", price: "11$", image: "/img/Iconos/Barberia-white.png" },
@@ -17,25 +18,26 @@ export function Home() {
     ];
 
     const getWorkers = async () => {
-        const response = await fetch('https://tulook-api.vercel.app/api/api/users');
-        const data = await response.json();
-        const[setWorkers, workers] = useState([]);
-        setWorkers(data);
-        return data;
+        try {
+            const response = await fetch('https://tulook-api.vercel.app/api/api/workers');
+            const data = await response.json();
+            console.log(data); 
+            setWorkers(data.data); 
+        } catch (error) {
+            console.error("Error fetching workers:", error);
+        }
     };
+    
 
     useEffect(() => {
-        getActivities();
+        getWorkers();
     }, []);
 
     const filteredServices = popularServices.filter(service => 
         service.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const filteredWorkers = popularWorkers.filter(worker =>
-        worker.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        worker.profession.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    console.log(workers); // This will help you check the structure of the workers data
 
     return (
         <>
@@ -50,7 +52,7 @@ export function Home() {
                         <PopularServices filteredServices={filteredServices} searchTerm={searchTerm} />
                     </div>
                     <div className="p-6">
-                        <PopularWorkers filteredWorkers={filteredWorkers} searchTerm={searchTerm} />
+                        <PopularWorkers workers={workers} /> {/* Passing workers without filtering */}
                     </div>
                 </main>
                 <Footer />
@@ -58,3 +60,5 @@ export function Home() {
         </>
     );
 }
+
+
