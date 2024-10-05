@@ -138,7 +138,7 @@ export function SignUpFormEm({ onToggleForm }) {
 
     // Renderiza el formulario
     return (
-        <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8 overflow-hidden">
+        <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8 overflow-hidden" style={{ transform: 'scale(0.8)', transformOrigin: 'center' }}>
             <div className="flex flex-col w-full lg:w-1/2 bg-white gap-4 p-6 place-items-center rounded-tl-[40px] rounded-bl-[40px] shadow-lg flex-grow Forms">
                 <div className="h-32 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
                     <img
@@ -249,7 +249,7 @@ export function SignUpFormEm({ onToggleForm }) {
                     Iniciar Sesión
                 </div>
             </div>
-            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow md:block">
+            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
                 <img
                     src="/img/Register-Hombre.png"
                     className="w-full h-full object-cover rounded-tr-[40px] rounded-br-[40px]"

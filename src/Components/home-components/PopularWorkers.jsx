@@ -5,22 +5,21 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export function PopularWorkers({ filteredWorkers }) {
+export function PopularWorkers({ workers }) {
     const navigate = useNavigate();  // Hook para redirigir
 
-    // Configuración del slider
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3, 
-        slidesToScroll: 3, 
+        slidesToShow: 3,
+        slidesToScroll: 3,
         responsive: [
             {
-                breakpoint: 768, 
+                breakpoint: 768,
                 settings: {
-                    slidesToShow: 1, 
-                    slidesToScroll: 1, 
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
                     dots: true,
                 }
             }
@@ -39,19 +38,19 @@ export function PopularWorkers({ filteredWorkers }) {
                     Know Some Workers
                 </h2>
 
-                {filteredWorkers.length > 0 ? (
+                {workers && workers.length > 0 ? (
                     <Slider {...settings}>
-                        {filteredWorkers.map(worker => (
+                        {workers.map(worker => (
                             <div key={worker.id} className="relative p-4">
                                 <div className="bg-white shadow-lg overflow-hidden">
                                     <img 
-                                        src={worker.image} 
-                                        alt={worker.name} 
+                                        src={worker.profilephoto} 
+                                        alt={`${worker.name} ${worker.lastname}`}
                                         className="w-full h-48 object-cover" 
                                     />
                                     <div className='p-8'>
                                         <h2 className="text-xl font-semibold text-left text-gray-700">
-                                            {worker.name}
+                                            {worker.name} {worker.lastname}
                                         </h2>
                                         <h3 className="text-left text-gray-500">
                                             {worker.profession}

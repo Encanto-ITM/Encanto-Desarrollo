@@ -3,7 +3,7 @@ import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 import { sha256 } from 'js-sha256'; 
 
-export function SignUpForm({ onToggleForm }) {
+export function SignUpForm({ onToggleForm }) { 
     const [formData, setFormData] = useState({
         name: '',
         lastname: '',
@@ -22,7 +22,6 @@ export function SignUpForm({ onToggleForm }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
         let newValue = value;
 
         if (name === 'password' || name === 'password_confirmation') {
