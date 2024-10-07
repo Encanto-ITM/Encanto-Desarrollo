@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '@mui/material/Modal';
 import GenericButton from '../UI/GenericButton';
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaTwitter } from 'react-icons/fa';
@@ -10,33 +10,55 @@ const socialMediaOptions = [
     { name: 'Twitter', icon: <FaTwitter /> },
 ];
 
-export default function UpdateInfoModal({ open, onClose }) {
+export default function UpdateInfoModal({ open, onClose, worker }) {
     const [socialMedia, setSocialMedia] = useState([]);
     const [socialMediaName, setSocialMediaName] = useState('');
     const [selectedIcon, setSelectedIcon] = useState('');
     const [direction, setDirection] = useState('');
     const [description, setDescription] = useState('');
-    const [experienceList, setExperienceList] = useState(['']);
-    const [profession, setProfession] = useState(''); // Nuevo estado para la profesión
+    const [profession, setProfession] = useState('');
 
-    const handleSave = () => {
-        console.log('Updated Info:', { socialMedia, direction, description, experienceList, profession });
-        onClose();
-    };
+    useEffect(() => {
+        if (worker) {
+            setSocialMedia(worker.socialMedia || []);
+            setDirection(worker.direction || '');
+            setDescription(worker.description || '');
+            setProfession(worker.profession || '');
+        }
+    }, [worker, open]);
 
-    const addExperience = () => {
-        setExperienceList([...experienceList, '']);
-    };
+    const handleSave = async () => {
+        const updatedInfo = {
+            socialMedia,
+            direction,
+            description,
+            profession,
+        };
 
-    const removeExperience = (index) => {
-        const newList = experienceList.filter((_, i) => i !== index);
-        setExperienceList(newList);
-    };
+        console.log('Updated Info:', updatedInfo);
 
-    const handleExperienceChange = (index, value) => {
-        const newList = [...experienceList];
-        newList[index] = value;
-        setExperienceList(newList);
+        // Asegúrate de que worker.id esté definido y que lo estás pasando a la API
+        try {
+            const response = await fetch(`https://tulook-api.vercel.app/api/api/workers/${worker.id}`, {
+                method: 'PUT', // O 'PATCH' si es más apropiado
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedInfo),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al actualizar la información');
+            }
+
+            // Puedes manejar la respuesta aquí si es necesario
+            console.log('Información actualizada correctamente');
+
+        } catch (error) {
+            console.error('Error al actualizar la información:', error);
+        }
+
+        onClose(); 
     };
 
     const addSocialMedia = () => {
@@ -63,108 +85,75 @@ export default function UpdateInfoModal({ open, onClose }) {
                     </button>
                     <h2 className="text-xl font-bold mb-4">Update Information</h2>
 
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2">Social Media</label>
-                        <div className="flex flex-wrap mb-2">
-                            {socialMedia.map((media, index) => (
-                                <div key={index} className="flex items-center mr-2 mb-2">
-                                    <div className="bg-gray-300 rounded-md px-3 py-1 text-sm flex items-center">
-                                        <span className="flex items-center mr-2">
-                                            {media.icon}
-                                            <span className="ml-1">{media.name}</span>
-                                        </span>
-                                        <button onClick={() => removeSocialMedia(media.name)} className="text-red-500 font-extrabold">X</button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <input
-                            type="text"
-                            value={socialMediaName}
-                            onChange={(e) => setSocialMediaName(e.target.value)}
-                            placeholder="Enter social media name"
-                            className="border rounded-md p-2 w-full mb-2"
-                        />
-                        <select
-                            value={selectedIcon}
-                            onChange={(e) => setSelectedIcon(e.target.value)}
-                            className="border rounded-md p-2 w-full mb-2"
-                        >
-                            <option value="">Select Icon</option>
-                            {socialMediaOptions.map((option) => (
-                                <option key={option.name} value={option.name}>
-                                    {option.name} {/* Solo el nombre, sin SVG */}
-                                </option>
-                            ))}
-                        </select>
-                        <div className='flex justify-center'>
-                            <button
-                                onClick={addSocialMedia}
-                                className="bg-blue-600 text-white font-bold rounded-lg py-2 px-4 hover:bg-blue-700 transition-colors"
-                            >
-                                Add Social Media
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2">Direction</label>
-                        <input
-                            type="text"
-                            value={direction}
-                            onChange={(e) => setDirection(e.target.value)}
-                            className="border rounded-lg p-2 w-full"
-                            placeholder="Enter direction"
-                        />
-                    </div>
-
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2">Profession</label> {/* Nueva sección para profesión */}
+                    <div>
+                        <label className="block text-sm font-medium">Profession</label>
                         <input
                             type="text"
                             value={profession}
                             onChange={(e) => setProfession(e.target.value)}
-                            className="border rounded-lg p-2 w-full"
-                            placeholder="Enter profession"
+                            className="mt-1 p-2 border rounded w-full"
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2">Description</label>
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Direction</label>
+                        <input
+                            type="text"
+                            value={direction}
+                            onChange={(e) => setDirection(e.target.value)}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Description</label>
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            className="border rounded-md p-2 w-full"
-                            placeholder="Enter description"
-                            rows="3"
+                            className="mt-1 p-2 border rounded w-full"
                         />
                     </div>
 
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2">Experience</label>
-                        <div className="flex flex-wrap mb-2 justify-center">
-                            {experienceList.map((exp, index) => (
-                                <div key={index} className="flex items-center mr-2 mb-2">
-                                    <div className="bg-gray-300 rounded-md px-3 py-1 text-sm flex items-center ">
-                                        <input
-                                            type="text"
-                                            value={exp}
-                                            onChange={(e) => handleExperienceChange(index, e.target.value)}
-                                            placeholder="Experience"
-                                            className="border rounded-lg p-1 "
-                                        />
-                                        <button onClick={() => removeExperience(index)} className="text-red-500 font-extrabold ml-2">X</button>
-                                    </div>
-                                </div>
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Add Social Media</label>
+                        <input
+                            type="text"
+                            value={socialMediaName}
+                            onChange={(e) => setSocialMediaName(e.target.value)}
+                            placeholder="Social Media Name"
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                        <select
+                            value={selectedIcon}
+                            onChange={(e) => setSelectedIcon(e.target.value)}
+                            className="mt-2 p-2 border rounded w-full"
+                        >
+                            <option value="">Select Icon</option>
+                            {socialMediaOptions.map((option) => (
+                                <option key={option.name} value={option.name}>{option.name}</option>
                             ))}
-                        </div>
-                        <div className='flex justify-center'>
-                            <button
-                                onClick={addExperience}
-                                className="bg-blue-600 text-white font-bold rounded-lg py-2 px-4 hover:bg-blue-700 transition-colors"
-                            >
-                                Add Experience
-                            </button>
+                        </select>
+                        <button 
+                            onClick={addSocialMedia} 
+                            className="mt-2 p-2 bg-blue-500 text-white rounded"
+                        >
+                            Add
+                        </button>
+                        <div className="mt-4">
+                            <h3 className="text-lg font-semibold">Current Social Media</h3>
+                            <ul>
+                                {socialMedia.map((media, index) => (
+                                    <li key={index} className="flex justify-between items-center mt-2">
+                                        <span>{media.icon} {media.name}</span>
+                                        <button 
+                                            onClick={() => removeSocialMedia(media.name)} 
+                                            className="text-red-500"
+                                        >
+                                            Remove
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
 

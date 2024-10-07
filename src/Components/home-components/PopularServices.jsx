@@ -12,7 +12,7 @@ export function PopularServices({ filteredServices }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center p-10">
                     {filteredServices.length > 0 ? (
                         filteredServices.map((service) => (
-                            <div key={service.id} className="grid gap-2 p-4"> {/* Adjusted padding */}
+                            <div key={service.id} className="grid gap-2 p-4"> 
                                 <div className="border-4 border-white w-48 h-48 flex items-center justify-center">
                                     <img src={service.image} alt={service.name} className="max-w-full max-h-full object-cover" />
                                 </div>

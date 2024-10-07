@@ -6,7 +6,7 @@ import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export function PopularWorkers({ workers }) {
-    const navigate = useNavigate();  // Hook para redirigir
+    const navigate = useNavigate(); 
 
     const settings = {
         dots: true,
@@ -26,9 +26,14 @@ export function PopularWorkers({ workers }) {
         ]
     };
 
-    const handleFindOutMore = (workerId) => {
-        // Navegar al perfil del trabajador seleccionado
-        navigate(`/workerprofile/${workerId}`);
+    const handleFindOutMore = (worker) => {
+        if (!worker.id) {
+            console.error("Worker ID is undefined");
+            return;
+        }
+        console.log("Navigating to worker profile with ID:", worker.id);
+        navigate(`/workerprofile/${worker.id}`, { state: { worker } });
+        
     };
 
     return (
@@ -44,7 +49,7 @@ export function PopularWorkers({ workers }) {
                             <div key={worker.id} className="relative p-4">
                                 <div className="bg-white shadow-lg overflow-hidden">
                                     <img 
-                                        src={worker.profilephoto} 
+                                        src={worker.profilephoto || 'agregar imagen por defecto'} 
                                         alt={`${worker.name} ${worker.lastname}`}
                                         className="w-full h-48 object-cover" 
                                     />
@@ -55,12 +60,12 @@ export function PopularWorkers({ workers }) {
                                         <h3 className="text-left text-gray-500">
                                             {worker.profession}
                                         </h3>
-                                        <p>{worker.description}</p>
+                                        <p>{worker.description || 'No description available'}</p>
 
                                         <div className="text-center mt-4">
                                             <button
                                                 className="flex items-center"
-                                                onClick={() => handleFindOutMore(worker.id)} // Redirigir al perfil del trabajador
+                                                onClick={() => handleFindOutMore(worker)} 
                                             >
                                                 <div className="rounded-full bg-purple p-1">
                                                     <ChevronRight className="text-white" />

@@ -37,7 +37,6 @@ export function Home() {
         service.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    console.log(workers); // This will help you check the structure of the workers data
 
     return (
         <>
@@ -52,7 +51,7 @@ export function Home() {
                         <PopularServices filteredServices={filteredServices} searchTerm={searchTerm} />
                     </div>
                     <div className="p-6">
-                        <PopularWorkers workers={workers} /> {/* Passing workers without filtering */}
+                        <PopularWorkers workers={workers} />
                     </div>
                 </main>
                 <Footer />
