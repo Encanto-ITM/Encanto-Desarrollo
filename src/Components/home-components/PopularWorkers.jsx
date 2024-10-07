@@ -1,12 +1,12 @@
 import React from 'react';
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export function PopularWorkers({ workers }) {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const settings = {
         dots: true,
@@ -33,7 +33,7 @@ export function PopularWorkers({ workers }) {
         }
         console.log("Navigating to worker profile with ID:", worker.id);
         navigate(`/workerprofile/${worker.id}`, { state: { worker } });
-        
+
     };
 
     return (
@@ -48,24 +48,27 @@ export function PopularWorkers({ workers }) {
                         {workers.map(worker => (
                             <div key={worker.id} className="relative p-4">
                                 <div className="bg-white shadow-lg overflow-hidden">
-                                    <img 
-                                        src={worker.profilephoto || 'agregar imagen por defecto'} 
+                                    <img
+                                        src={worker.profilephoto || 'agregar imagen por defecto'}
                                         alt={`${worker.name} ${worker.lastname}`}
-                                        className="w-full h-48 object-cover" 
+                                        className="w-full h-48 object-cover"
                                     />
                                     <div className='p-8'>
-                                        <h2 className="text-xl font-semibold text-left text-gray-700">
+                                        <h2 className="text-xl font-semibold text-left text-gray-700 overflow-hidden whitespace-nowrap text-ellipsis max-h-6">
                                             {worker.name} {worker.lastname}
                                         </h2>
+
                                         <h3 className="text-left text-gray-500">
                                             {worker.profession}
                                         </h3>
-                                        <p>{worker.description || 'No description available'}</p>
+                                        <p className="overflow-hidden whitespace-nowrap text-ellipsis max-h-6">
+                                            {worker.description || 'No description available'}
+                                        </p>
 
                                         <div className="text-center mt-4">
                                             <button
                                                 className="flex items-center"
-                                                onClick={() => handleFindOutMore(worker)} 
+                                                onClick={() => handleFindOutMore(worker)}
                                             >
                                                 <div className="rounded-full bg-purple p-1">
                                                     <ChevronRight className="text-white" />
