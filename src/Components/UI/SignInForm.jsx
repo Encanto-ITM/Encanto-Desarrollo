@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';  
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 import { sha256 } from 'js-sha256';
@@ -9,21 +10,30 @@ export function SignInForm({ onToggleForm }) {
         password: ''
     });
     const [error, setError] = useState('');
+    const navigate = useNavigate();  
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    const validateForm = () => {
+        if (!formData.email || !formData.password) {
+            setError('Por favor, rellena todos los campos.');
+            return false;
+        }
+        return true;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setError('');
+
+        if (!validateForm()) return;
 
         const encryptedPassword = sha256(formData.password);
 
         try {
-            
             const response = await fetch('https://tulook-api.vercel.app/api/api/users', {
                 method: 'GET',
                 headers: {
@@ -36,9 +46,6 @@ export function SignInForm({ onToggleForm }) {
             }
 
             const result = await response.json();
-
-            console.log('Resultado de la API:', result);
-
             const users = result.data;
 
             if (!Array.isArray(users)) {
@@ -48,12 +55,12 @@ export function SignInForm({ onToggleForm }) {
             const user = users.find(user => user.email === formData.email);
 
             if (!user) {
-                setError('Correo electrónico no encontrado.');
+                setError('Correo electrónico o contraseña incorrectos.');
                 return;
             }
 
             if (user.password !== encryptedPassword) {
-                setError('Contraseña incorrecta.');
+                setError('Correo electrónico o contraseña incorrectos.');
                 return;
             }
 
@@ -64,6 +71,15 @@ export function SignInForm({ onToggleForm }) {
                 console.log('Login exitoso:', user);
                 window.location.href = '/Home';
             }
+
+            console.log('Login exitoso:', user);
+            
+          
+            localStorage.setItem('user', JSON.stringify({ email: user.email }));
+
+           
+            navigate('/home');  
+
 
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
@@ -106,7 +122,7 @@ export function SignInForm({ onToggleForm }) {
 
                 {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
-                <a href="/forgot-password" className="text-gray-500 hover:underline text-center">
+                <a href="/resetpassword" className="text-gray-500 hover:underline text-center">
                     Olvidé mi contraseña
                 </a>
 
@@ -117,9 +133,7 @@ export function SignInForm({ onToggleForm }) {
                 />
 
                 <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
-                    
                     Regístrate
-                
                 </div>
 
                 <a href="/loginem?form=signin" className="text-purple hover:underline text-center">

@@ -49,11 +49,9 @@ export function NavLanding(){
             isMenuOpen ? 'fixed inset-0 bg-purple flex justify-center items-center flex-col text-center' : 'hidden'
           }`}
         >
-          <li className="transition duration-500 hover:scale-90"><a href="#">Services</a></li>
-          <li className="transition duration-500 hover:scale-90"><a href="#">Community</a></li>
-          <li className="transition duration-500 hover:scale-90"><a href="#">About Us</a></li>
-          <li className="transition duration-500 hover:scale-90"><a href="#">Contact Us</a></li>
-          <li className="transition duration-500 hover:scale-90"><a href="#">Blog</a></li>
+          <li className="transition duration-500 hover:scale-110"><a href="#services">Services</a></li>
+          <li className="transition duration-500 hover:scale-110"><a href="#footer">About Us</a></li>
+          <li className="transition duration-500 hover:scale-110"><a href="#info">Contact Us</a></li>
           <button
             className="bg-gray-100 text-purple transition duration-500 ease-in-out px-8 py-2 rounded hover:bg-gray-200 hover:scale-110"
             onClick={handleLoginClick}

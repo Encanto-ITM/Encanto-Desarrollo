@@ -101,7 +101,7 @@ export function SignInFormEm({ onToggleForm }) {
 
                 {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
-                <a href="/forgot-password" className="text-gray-500 hover:underline text-center">
+                <a href="/resetpassword" className="text-gray-500 hover:underline text-center">
                     Olvidé mi contraseña
                 </a>
 

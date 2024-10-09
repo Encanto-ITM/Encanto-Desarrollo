@@ -64,9 +64,17 @@ export function SignUpForm({ onToggleForm }) {
             },
             body: JSON.stringify(formDataToSubmit),
         })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Convierte la respuesta a JSON solo si es exitosa
+            } else {
+                throw new Error('Error al registrarse.');
+            }
+        })
         .then(data => {
             console.log('Éxito:', data);
+            // Llama a la función para cambiar al formulario de inicio de sesión con animación
+            onToggleForm();
         })
         .catch((error) => {
             console.error('Error:', error);
