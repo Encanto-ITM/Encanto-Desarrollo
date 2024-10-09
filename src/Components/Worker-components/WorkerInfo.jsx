@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';  
+import { useLocation } from 'react-router-dom';
 import GenericButton from '../UI/GenericButton';
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaTwitter } from 'react-icons/fa';
 import UpdateInfoModal from './UpdateInfoModal';
@@ -10,27 +10,27 @@ export function WorkerInfo() {
   const closeModal = () => setIsModalOpen(false);
 
   const location = useLocation();
-  const { worker } = location.state || {}; 
+  const { worker } = location.state || {};
 
   if (!worker) {
-    return <p>No worker data found</p>; 
+    return <p>No worker data found</p>;
   }
 
   // Manejo de la actualización de la información
   const handleUpdate = async (updatedInfo) => {
     try {
-        const response = await api.updateWorker(worker.id, updatedInfo);
-        
-        if (response.ok) {
-            console.log('Worker info updated successfully:', response.data);
-            // Aquí puedes actualizar el estado local si es necesario
-        } else {
-            console.error('Error updating worker info:', response.statusText);
-        }
+      const response = await api.updateWorker(worker.id, updatedInfo);
 
-        closeModal();
+      if (response.ok) {
+        console.log('Worker info updated successfully:', response.data);
+        // Aquí puedes actualizar el estado local si es necesario
+      } else {
+        console.error('Error updating worker info:', response.statusText);
+      }
+
+      closeModal();
     } catch (error) {
-        console.error('Error updating worker info:', error);
+      console.error('Error updating worker info:', error);
     }
   };
 
@@ -60,7 +60,7 @@ export function WorkerInfo() {
             <p className="text-lg font-semibold">Direction</p>
             <div className="w-full bg-gray-100 border border-gray-300 rounded-lg mt-2 p-1">
               <p className="text-md text-gray-700 text-center">
-                100 mts este, 75 norte de la Universidad de Costa Rica, Nances Esparza 
+                {worker.address}
               </p>
             </div>
           </div>
@@ -71,28 +71,29 @@ export function WorkerInfo() {
                 <div className="bg-purple text-white p-2 rounded-md">
                   <FaFacebookF />
                 </div>
-                <span className="text-gray-600">{worker.facebook || 'No se han registra redes sociales'}</span>
+                <span className="text-gray-600">{worker.facebook || 'No se han registrado redes sociales'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-purple text-white p-2 rounded-md">
                   <FaWhatsapp />
                 </div>
-                <span className="text-gray-600">{worker.whatsapp }</span>
+                <span className="text-gray-600">{worker.whatsapp || 'No se han registrado redes sociales'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-purple text-white p-2 rounded-md">
                   <FaInstagram />
                 </div>
-                <span className="text-gray-600">{worker.instagram || 'Pablito Barbers'}</span>
+                <span className="text-gray-600">{worker.instagram || 'No se han registrado redes sociales'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-purple text-white p-2 rounded-md">
                   <FaTwitter />
                 </div>
-                <span className="text-gray-600">{worker.twitter || 'Pablito Barbers'}</span>
+                <span className="text-gray-600">{worker.twitter || 'No se han registrado redes sociales'}</span>
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -103,11 +104,11 @@ export function WorkerInfo() {
         </div>
       </div>
 
-      <UpdateInfoModal 
-          open={isModalOpen} 
-          onClose={closeModal} 
-          worker={worker} 
-          onUpdate={handleUpdate} 
+      <UpdateInfoModal
+        open={isModalOpen}
+        onClose={closeModal}
+        worker={worker}
+        onUpdate={handleUpdate}
       />
     </div>
   );
