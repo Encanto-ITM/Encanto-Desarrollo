@@ -64,14 +64,17 @@ export function SignInForm({ onToggleForm }) {
                 return;
             }
 
-            if (user) {
+            /*if (user) {
                 localStorage.setItem('email', formData.email); 
                 localStorage.setItem('userId', user.id); 
                 localStorage.setItem('token', response.token); 
                 console.log('Login exitoso:', user);
                 window.location.href = '/Home';
-            }
-
+            }*/
+                localStorage.setItem('email', formData.email); 
+                localStorage.setItem('userId', user.id); 
+                localStorage.setItem('token', response.token);
+ 
             console.log('Login exitoso:', user);
             
           
