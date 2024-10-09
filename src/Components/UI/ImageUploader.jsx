@@ -1,38 +1,29 @@
 import React, { useState } from 'react';
 
-export default function ImageUploader() {
-  const [selectedImage, setSelectedImage] = useState(null);
+export default function ImageUploader({ onImageChange }) {
   const [previewUrl, setPreviewUrl] = useState('');
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setSelectedImage(file);
-
-    
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result);
-      };
-      reader.readAsDataURL(file);
+      setPreviewUrl(URL.createObjectURL(file));
+      onImageChange(file);
     }
   };
 
+  
+
   return (
     <div className="flex flex-col items-center p-4">
-     
       <input
         type="file"
         accept="image/*"
         onChange={handleImageChange}
-        className="hidden" 
+        className="hidden"
         id="file-input"
       />
-      
-     
       <label htmlFor="file-input">
         <div className="relative w-32 h-32">
-       
           {previewUrl ? (
             <img
               src={previewUrl}
@@ -49,4 +40,3 @@ export default function ImageUploader() {
     </div>
   );
 }
-

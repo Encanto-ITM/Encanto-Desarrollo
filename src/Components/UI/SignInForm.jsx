@@ -64,6 +64,14 @@ export function SignInForm({ onToggleForm }) {
                 return;
             }
 
+            if (user) {
+                localStorage.setItem('email', formData.email); 
+                localStorage.setItem('userId', user.id); 
+                localStorage.setItem('token', response.token); 
+                console.log('Login exitoso:', user);
+                window.location.href = '/Home';
+            }
+
             console.log('Login exitoso:', user);
             
           
@@ -71,6 +79,7 @@ export function SignInForm({ onToggleForm }) {
 
            
             navigate('/home');  
+
 
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
