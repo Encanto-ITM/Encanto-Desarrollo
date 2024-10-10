@@ -66,7 +66,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
       const data = await response.json();
       console.log('Perfil actualizado:', data);
 
-      onProfileUpdated(data.data);
+      onProfileUpdated(data);
       onClose();
     } catch (error) {
       console.error('Error al actualizar la información:', error);

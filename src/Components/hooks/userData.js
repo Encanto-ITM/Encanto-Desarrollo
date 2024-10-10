@@ -14,7 +14,7 @@ export const fetchUserData = async () => {
 
         const data = await response.json();
         const email = localStorage.getItem('email');
-        const user = data.data.find(user => user.email === email);
+        const user = data.find(user => user.email === email);
 
         if (user) return user;
         else {

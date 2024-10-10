@@ -46,7 +46,7 @@ export function SignInForm({ onToggleForm }) {
             }
 
             const result = await response.json();
-            const users = result.data;
+            const users = result;
 
             if (!Array.isArray(users)) {
                 throw new Error('La respuesta de la API no contiene un array de usuarios');
@@ -64,13 +64,6 @@ export function SignInForm({ onToggleForm }) {
                 return;
             }
 
-            /*if (user) {
-                localStorage.setItem('email', formData.email); 
-                localStorage.setItem('userId', user.id); 
-                localStorage.setItem('token', response.token); 
-                console.log('Login exitoso:', user);
-                window.location.href = '/Home';
-            }*/
                 localStorage.setItem('email', formData.email); 
                 localStorage.setItem('userId', user.id); 
                 localStorage.setItem('token', response.token);

@@ -16,14 +16,14 @@ export function WorkerInfo() {
     return <p>No worker data found</p>; 
   }
 
-  // Manejo de la actualización de la información
+
   const handleUpdate = async (updatedInfo) => {
     try {
         const response = await api.updateWorker(worker.id, updatedInfo);
         
         if (response.ok) {
             console.log('Worker info updated successfully:', response.data);
-            // Aquí puedes actualizar el estado local si es necesario
+           
         } else {
             console.error('Error updating worker info:', response.statusText);
         }
