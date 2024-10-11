@@ -26,7 +26,7 @@ export function Nav() {
   return (
     <nav className="bg-purple text-white px-8 py-1 flex justify-between items-center relative z-20">
       <div className="flex items-center">
-        <a href="#">
+        <a href="/Home">
           <img src="/img/Logo-Landing.png"
             alt="TuLook Logo"
             className="h-16 w-30 mr-2 transition duration-500 hover:scale-110" />

@@ -60,39 +60,48 @@ export function WorkerInfo() {
             <p className="text-lg font-semibold">Direction</p>
             <div className="w-full bg-gray-100 border border-gray-300 rounded-lg mt-2 p-1">
               <p className="text-md text-gray-700 text-center">
-                100 mts este, 75 norte de la Universidad de Costa Rica, Nances Esparza 
+                {worker.address} 
               </p>
             </div>
           </div>
           <div className="mt-6">
-            <p className="text-lg font-semibold">Social Media</p>
-            <div className="grid grid-cols-2 gap-4 mt-4">
-              <div className="flex items-center gap-2">
-                <div className="bg-purple text-white p-2 rounded-md">
-                  <FaFacebookF />
-                </div>
-                <span className="text-gray-600">{worker.facebook || 'No se han registra redes sociales'}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="bg-purple text-white p-2 rounded-md">
-                  <FaWhatsapp />
-                </div>
-                <span className="text-gray-600">{worker.whatsapp }</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="bg-purple text-white p-2 rounded-md">
-                  <FaInstagram />
-                </div>
-                <span className="text-gray-600">{worker.instagram || 'Pablito Barbers'}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="bg-purple text-white p-2 rounded-md">
-                  <FaTwitter />
-                </div>
-                <span className="text-gray-600">{worker.twitter || 'Pablito Barbers'}</span>
-              </div>
+    <p className="text-lg font-semibold">Social Media</p>
+    <div className="grid grid-cols-1 gap-4 mt-4">
+        <div className="flex items-center gap-2 mb-2">
+            <div className="bg-purple text-white p-2 rounded-md">
+                <FaFacebookF />
             </div>
-          </div>
+            <span className="text-gray-600">
+                {worker.facebook ? worker.facebook : 'No Facebook account'}
+            </span>
+        </div>
+        <div className="flex items-center gap-2 mb-2">
+            <div className="bg-purple text-white p-2 rounded-md">
+                <FaWhatsapp />
+            </div>
+            <span className="text-gray-600">
+                {worker.whatsapp ? worker.whatsapp : 'No WhatsApp number'}
+            </span>
+        </div>
+        <div className="flex items-center gap-2 mb-2">
+            <div className="bg-purple text-white p-2 rounded-md">
+                <FaInstagram />
+            </div>
+            <span className="text-gray-600">
+                {worker.instagram ? worker.instagram : 'No Instagram account'}
+            </span>
+        </div>
+        <div className="flex items-center gap-2 mb-2">
+            <div className="bg-purple text-white p-2 rounded-md">
+                <FaTwitter />
+            </div>
+            <span className="text-gray-600">
+                {worker.twitter ? worker.twitter : 'No Twitter account'}
+            </span>
+        </div>
+    </div>
+</div>
+
         </div>
       </div>
 

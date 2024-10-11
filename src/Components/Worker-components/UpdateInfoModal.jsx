@@ -135,9 +135,9 @@ export default function UpdateInfoModal({ open, onClose, worker }) {
                         </select>
                         <button 
                             onClick={addSocialMedia} 
-                            className="mt-2 p-2 bg-blue-500 text-white rounded"
+                            className="mt-2 p-2 bg-purple text-white rounded w-full"
                         >
-                            Add
+                            Confirm Social Media
                         </button>
                         <div className="mt-4">
                             <h3 className="text-lg font-semibold">Current Social Media</h3>
