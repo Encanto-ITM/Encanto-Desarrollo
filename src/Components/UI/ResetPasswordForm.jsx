@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import GenericButton from './GenericButton'; // Asegúrate de tener este componente
-import SignInputs from './SignInputs'; // Importa el componente de inputs
+import GenericButton from './GenericButton'; 
+import SignInputs from './SignInputs'; 
 import { sha256 } from 'js-sha256';
 
 export function ResetPasswordForm() {

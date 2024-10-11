@@ -23,9 +23,12 @@ export default function UpdateInfoModal({ open, onClose, worker }) {
             profession,
         };
 
+        console.log('Updated Info:', updatedInfo);
+
+       
         try {
-            const response = await fetch(`https://tulook-api.vercel.app/api/api/users/${worker.id}`, {
-                method: 'PUT',
+            const response = await fetch(`https://tulook-api.vercel.app/api/api/workers/${worker.id}`, {
+                method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -36,6 +39,7 @@ export default function UpdateInfoModal({ open, onClose, worker }) {
                 throw new Error('Error al actualizar la información');
             }
 
+          
             console.log('Información actualizada correctamente');
         } catch (error) {
             console.error('Error al actualizar la información:', error);
