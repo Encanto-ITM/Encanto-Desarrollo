@@ -8,6 +8,7 @@ import { Results } from './Pages/Results';
 import { Home } from './Pages/Home';
 import { WorkerProfile } from './Pages/WorkerProfile';
 import { Order } from './Pages/Order';
+import AboutUs from './Pages/AboutUs';
 //import { LogoutButton } from './Components/LogoutButton';
 
 export function App() {
@@ -42,7 +43,7 @@ export function App() {
                 <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />}/>
                 <Route path="/order" element={<PrivateRoute element={<Order />} />} />
                 <Route path="/results" element={<PrivateRoute element={<Results />} />} />
-
+                <Route path="/aboutus" element={<AboutUs />} />
                 
             </Routes>
         </div>

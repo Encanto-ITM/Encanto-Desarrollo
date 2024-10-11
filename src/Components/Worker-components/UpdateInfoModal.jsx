@@ -37,10 +37,10 @@ export default function UpdateInfoModal({ open, onClose, worker }) {
 
         console.log('Updated Info:', updatedInfo);
 
-        // Asegúrate de que worker.id esté definido y que lo estás pasando a la API
+       
         try {
             const response = await fetch(`https://tulook-api.vercel.app/api/api/workers/${worker.id}`, {
-                method: 'PUT', // O 'PATCH' si es más apropiado
+                method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -51,7 +51,7 @@ export default function UpdateInfoModal({ open, onClose, worker }) {
                 throw new Error('Error al actualizar la información');
             }
 
-            // Puedes manejar la respuesta aquí si es necesario
+          
             console.log('Información actualizada correctamente');
 
         } catch (error) {

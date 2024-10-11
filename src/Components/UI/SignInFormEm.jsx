@@ -39,7 +39,7 @@ export function SignInFormEm({ onToggleForm }) {
 
             console.log('Resultado de la API:', result);
 
-            const users = result.data;
+            const users = result;
 
             if (!Array.isArray(users)) {
                 throw new Error('La respuesta de la API no contiene un array de usuarios');
