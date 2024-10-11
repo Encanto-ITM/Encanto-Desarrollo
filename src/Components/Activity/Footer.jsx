@@ -17,7 +17,7 @@ export default function Footer() {
                 <div className="w-full md:w-1/2 lg:w-1/3 mb-4">
                     <h2 className="text-lg font-semibold mb-2">Company</h2>
                     <ul>
-                        <li><a href="#about-us" className="hover:underline">About Us</a></li>
+                        <li><a href="/aboutus" className="hover:underline">About Us</a></li>
                         <li><a href="#careers" className="hover:underline">Careers</a></li>
                         <li><a href="#do-not-sell" className="hover:underline">Do Not Sell My Personal Information</a></li>
                     </ul>

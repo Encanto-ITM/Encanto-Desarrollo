@@ -65,7 +65,7 @@ export function Nav() {
           <a href="#">Services</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
-          <a href="#">About Us</a>
+          <a href="/aboutus">About Us</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
           <a href="#">Contact Us</a>
