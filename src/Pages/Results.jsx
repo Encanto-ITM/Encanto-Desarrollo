@@ -49,7 +49,8 @@ export function Results() {
                             <div key={service.id} className="bg-white border rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105">
                                 <div className="p-4">
                                     <h2 className="text-lg font-semibold mb-2">{service.name}</h2>
-                                    <p className="text-gray-700 mb-2">{service.description}</p>
+                                    <p className="font-bold text-gray-700 mb-2">{service.schedule}</p>
+                                    <p className=" text-lg">{service.details}</p>
                                     <p className="font-bold text-lg">${service.price}</p>
                                 </div>
                             </div>
