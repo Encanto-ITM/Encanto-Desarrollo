@@ -9,11 +9,9 @@ import { Home } from './Pages/Home';
 import { WorkerProfile } from './Pages/WorkerProfile';
 import { Order } from './Pages/Order';
 import AboutUs from './Pages/AboutUs';
-//import { LogoutButton } from './Components/LogoutButton';
 
 export function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
 
     useEffect(() => {
         const user = localStorage.getItem('user');
@@ -22,7 +20,6 @@ export function App() {
         }
     }, []);
 
- 
     const PrivateRoute = ({ element }) => {
         return isAuthenticated ? element : <Navigate to="/login" />;
     };
@@ -32,22 +29,22 @@ export function App() {
             <Routes>
                 <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
                 
-            
                 <Route path="/login" element={<Login />} />
                 <Route path="/loginem" element={<LoginEm />} />
                 <Route path="/resetpassword" element={<ResetPassword />} />
                 <Route path="/landing" element={<Landing />} />
-
-             
-                <Route path="/home" element={<PrivateRoute element={<Home />} />} />
-                <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />}/>
-                <Route path="/order" element={<PrivateRoute element={<Order />} />} />
-                <Route path="/results" element={<PrivateRoute element={<Results />} />} />
-                <Route path="/aboutus" element={<AboutUs />} />
                 
+                <Route path="/home" element={<PrivateRoute element={<Home />} />} />
+                <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />} />
+                <Route path="/order" element={<PrivateRoute element={<Order />} />} />
+                
+                <Route path="/results/:id" element={<PrivateRoute element={<Results />} />} />
+                
+                <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
         </div>
     );
 }
 
 export default App;
+
