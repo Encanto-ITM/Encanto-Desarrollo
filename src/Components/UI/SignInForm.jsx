@@ -3,18 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 import { sha256 } from 'js-sha256';
+import * as jwtDecode from 'jwt-decode';
+
 
 export function SignInForm({ onToggleForm }) {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
+    const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const navigate = useNavigate();  
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData(prevData => ({ ...prevData, [name]: value }));
     };
 
     const validateForm = () => {
@@ -28,61 +27,64 @@ export function SignInForm({ onToggleForm }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
+    
         if (!validateForm()) return;
-
+    
         const encryptedPassword = sha256(formData.password);
-
+    
         try {
-            const response = await fetch('https://tulook-api.vercel.app/api/api/users', {
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/users', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-
+    
             if (!response.ok) {
                 throw new Error('Error fetching users');
             }
-
+    
             const result = await response.json();
+            console.log('API Response:', result);
+    
             const users = result;
-
+    
             if (!Array.isArray(users)) {
                 throw new Error('La respuesta de la API no contiene un array de usuarios');
             }
-
+    
             const user = users.find(user => user.email === formData.email);
-
+    
             if (!user) {
                 setError('Correo electrónico o contraseña incorrectos.');
                 return;
             }
-
+    
             if (user.password !== encryptedPassword) {
                 setError('Correo electrónico o contraseña incorrectos.');
                 return;
             }
-
-                localStorage.setItem('email', formData.email); 
-                localStorage.setItem('userId', user.id); 
-                localStorage.setItem('token', response.token);
- 
-            console.log('Login exitoso:', user);
-            
+    
           
+            if (result.token) {
+                localStorage.setItem('token', result.token); 
+            } else {
+                console.warn('No token received from API');
+            }
+    
+            localStorage.setItem('email', formData.email); 
+            localStorage.setItem('userId', user.id);
+    
+            console.log('Login exitoso:', user);
             localStorage.setItem('user', JSON.stringify({ email: user.email }));
-
-           
             navigate('/home');  
-
-
+    
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
             setError('Hubo un error con el servidor. Inténtalo más tarde.');
         }
     };
-
+    
     return (
         <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8"> 
             <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">

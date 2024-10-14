@@ -9,8 +9,8 @@ export function ServiceLanding() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-4">
                     <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div className="h-32 w-32 mx-auto mb-6">
-                            <button>
-                                <img src="/img/Iconos/customer-service.png" alt="" />
+                            <button className="transform transition-transform duration-300 hover:scale-105">
+                                <img src="/img/Iconos/customer-service.png" alt="" className="w-full h-full object-contain" />
                             </button>
                         </div>
                         <h4 className="text-2xl font-semibold text-gray-800 mb-4">Services</h4>
@@ -20,8 +20,8 @@ export function ServiceLanding() {
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div className="h-32 w-32 mx-auto mb-6">
-                            <button>
-                                <img src="/img/Iconos/worker.png" alt="" />
+                            <button className="transform transition-transform duration-300 hover:scale-105">
+                                <img src="/img/Iconos/worker.png" alt="" className="w-full h-full object-contain" />
                             </button>
                         </div>
                         <h4 className="text-2xl font-semibold text-gray-800 mb-4">Entrepreneurs</h4>
@@ -31,8 +31,8 @@ export function ServiceLanding() {
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div className="h-32 w-32 mx-auto mb-6">
-                            <button>
-                                <img src="/img/Iconos/dollar.png" alt="" />
+                            <button className="transform transition-transform duration-300 hover:scale-105">
+                                <img src="/img/Iconos/dollar.png" alt="" className="w-full h-full object-contain" />
                             </button>
                         </div>
                         <h4 className="text-2xl font-semibold text-gray-800 mb-4">Pricing</h4>

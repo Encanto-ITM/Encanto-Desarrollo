@@ -37,7 +37,7 @@ export function Nav() {
   return (
     <nav className="bg-purple text-white px-8 py-1 flex justify-between items-center relative z-20">
       <div className="flex items-center">
-        <a href="#">
+        <a href="/Home">
           <img
             src="/img/Logo-Landing.png"
             alt="TuLook Logo"
@@ -63,7 +63,7 @@ export function Nav() {
           <a href="#">Services</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
-          <a href="#">About Us</a>
+          <a href="/aboutus">About Us</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
           <a href="#">Contact Us</a>

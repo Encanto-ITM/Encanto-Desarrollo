@@ -33,8 +33,8 @@ export function WorkerProfile() {
     return (
         <div className="mx-auto">
             <Nav />
+            <ProfileHeader workerId={id} /> 
             <div className='px-8'>
-                <ProfileHeader workerId={id} /> 
                 <WorkerInfo workerId={id} /> 
                 <div className='py-10'>
                     <ServicesContainer /> 
