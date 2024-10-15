@@ -1,29 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';  
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 import { sha256 } from 'js-sha256';
 
+/**
+ * Componente de formulario de inicio de sesión.
+ * Permite a los usuarios iniciar sesión con su correo electrónico y contraseña.
+ * Solo permite loguear tipos de cuenta específicos (1, 3, 4).
+ * Muestra un mensaje especial si el tipo de cuenta es 2.
+ */
 export function SignInFormEm({ onToggleForm }) {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
     const [error, setError] = useState('');
+    const [accountTypes, setAccountTypes] = useState([]); // Inicializado como un array vacío
+    const navigate = useNavigate(); 
+
+    // Efecto para cargar los tipos de cuenta desde la API al montar el componente
+    useEffect(() => {
+        const fetchAccountTypes = async () => {
+            try {
+                const response = await fetch('https://tulookapiv2.vercel.app/api/api/acounttypes');
+                if (!response.ok) {
+                    throw new Error('Error fetching account types');
+                }
+                const result = await response.json();
+
+                // Extraer el array de tipos de cuenta de la respuesta
+                if (Array.isArray(result.data)) {
+                    setAccountTypes(result.data); // Almacena los tipos de cuenta en el estado
+                } else {
+                    throw new Error('La respuesta de la API no contiene un array de tipos de cuenta');
+                }
+            } catch (error) {
+                console.error('Error fetching account types:', error);
+            }
+        };
+
+        fetchAccountTypes(); // Llama a la función para obtener los tipos de cuenta
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData({ ...formData, [name]: value }); // Actualiza el estado con los nuevos valores
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Previene la acción predeterminada del formulario
+        setError(''); // Resetea el mensaje de error
 
-        setError('');
-
-        const encryptedPassword = sha256(formData.password);
+        const encryptedPassword = sha256(formData.password); // Encripta la contraseña
 
         try {
-            
             const response = await fetch('https://tulookapiv2.vercel.app/api/api/users', {
                 method: 'GET',
                 headers: {
@@ -36,10 +67,7 @@ export function SignInFormEm({ onToggleForm }) {
             }
 
             const result = await response.json();
-
-            console.log('Resultado de la API:', result);
-
-            const users = result;
+            const users = result; // Almacena los usuarios obtenidos
 
             if (!Array.isArray(users)) {
                 throw new Error('La respuesta de la API no contiene un array de usuarios');
@@ -49,20 +77,41 @@ export function SignInFormEm({ onToggleForm }) {
 
             if (!user) {
                 setError('Correo electrónico no encontrado.');
-                return;
+                return; // Termina la función si no se encuentra el usuario
             }
 
             if (user.password !== encryptedPassword) {
                 setError('Contraseña incorrecta.');
-                return;
+                return; // Termina la función si la contraseña no coincide
             }
 
-            console.log('Login exitoso:', user);
-            window.location.href = '/Home';
+            const accountType = accountTypes.find(type => type.id === user.acounttype_id);
+
+            if (!accountType) {
+                setError('Tipo de cuenta no encontrado.');
+                return; // Termina la función si no se encuentra el tipo de cuenta
+            }
+
+            if (accountType.id === 2) {
+                setError('Por favor, inicie sesión en el login de usuarios.');
+                return; // Termina la función si el tipo de cuenta es 2
+            }
+
+            if (![1, 3, 4].includes(accountType.id)) {
+                setError('Tipo de cuenta no permitido para el inicio de sesión.');
+                return; // Termina la función si el tipo de cuenta no es permitido
+            }
+
+            localStorage.setItem('token', result.token);
+            localStorage.setItem('email', formData.email); 
+            localStorage.setItem('userId', user.id);
+            localStorage.setItem('user', JSON.stringify({ email: user.email }));
+
+            navigate('/home'); // Redirige al usuario a la página principal
 
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
-            setError('Hubo un error con el servidor. Inténtalo más tarde.');
+            setError('Hubo un error con el servidor. Inténtalo más tarde.'); // Maneja errores de la API
         }
     };
 
