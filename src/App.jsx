@@ -27,7 +27,7 @@ export function App() {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/login"} />} />
+                <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/landing"} />} />
                 
                 <Route path="/login" element={<Login />} />
                 <Route path="/loginem" element={<LoginEm />} />
@@ -37,7 +37,7 @@ export function App() {
                 <Route path="/home" element={<PrivateRoute element={<Home />} />} />
                 <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />} />
                 <Route path="/order" element={<PrivateRoute element={<Order />} />} />
-                
+                <Route path="/results" element={<PrivateRoute element={<Results />} />} />
                 <Route path="/results/:id" element={<PrivateRoute element={<Results />} />} />
                 
                 <Route path="/aboutus" element={<AboutUs />} />
