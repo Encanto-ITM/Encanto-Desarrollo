@@ -3,15 +3,15 @@ import { useState, useEffect } from 'react';
 import ImageUploader from './ImageUploader';
 import Modal from '@mui/material/Modal';
 import EditProfile from './EditProfile';
-import { fetchUserData } from '../hooks/userData';
+import { fetchUserData } from '../hooks/userData'; 
 import { logout } from '../hooks/useLogout'; 
 
 export default function UserProfile({ open, onClose }) {
-    const [userData, setUserData] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [userData, setUserData] = useState(null); 
+    const [isModalOpen, setIsModalOpen] = useState(false); 
 
     const handleProfileUpdated = (updatedUser) => {
-        setUserData(updatedUser);
+        setUserData(updatedUser); 
     };
 
     const openModal = () => setIsModalOpen(true);
@@ -20,13 +20,16 @@ export default function UserProfile({ open, onClose }) {
     useEffect(() => {
         const fetchData = async () => {
             const user = await fetchUserData();
-            if (user) setUserData(user);
+            if (user) setUserData(user); 
+            else {
+                window.location.href = '/login'; 
+            }
         };
-
+    
         if (open) fetchData();
     }, [open]);
 
-    if (!userData) return null;
+    if (!userData) return null; 
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -34,11 +37,11 @@ export default function UserProfile({ open, onClose }) {
                 <div className="bg-purple text-white max-w-sm rounded-md p-10 relative">
                     <button onClick={onClose} className="absolute top-4 left-4 text-white text-lg font-semibold">X</button>
                     <div className='flex flex-col text-center'>
-                        <ImageUploader />
+                        <ImageUploader /> 
                         <h2 className="text-2xl font-bold mt-4">{userData.name}</h2>
                         <h3 className="text-xl font-semibold mb-2">{userData.lastname}</h3>
                         <p className="text-sm mb-2">{userData.email}</p>
-                        <p className="text-sm mb-6 italic">{userData.description}</p>
+                        <p className="text-sm mb-6 italic">{userData.description || 'No hay descripción disponible'}</p>
                         <div className="flex justify-center">
                             <button 
                                 onClick={openModal} 
@@ -47,12 +50,18 @@ export default function UserProfile({ open, onClose }) {
                             </button>
                         </div>
                         <button 
-                            onClick={logout}  // Llamar a la función de logout importada
+                            onClick={logout}  
                             className="mt-4 bg-red-500 text-white rounded-lg w-full py-4 hover:bg-red-600 transition duration-300 text-lg font-semibold">
                             Cerrar Sesión
                         </button>
                     </div>
-                    <EditProfile open={isModalOpen} onClose={closeModal} user={userData} onProfileUpdated={handleProfileUpdated} />
+                    
+                    <EditProfile 
+                        open={isModalOpen} 
+                        onClose={closeModal} 
+                        user={userData} 
+                        onProfileUpdated={handleProfileUpdated} 
+                    />
                 </div>
             </div>
         </Modal>
