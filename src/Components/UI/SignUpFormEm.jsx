@@ -28,7 +28,7 @@ export function SignUpFormEm({ onToggleForm }) {
     useEffect(() => {
         const fetchProfessions = async () => {
             try {
-                const response = await fetch('https://tulook-api.vercel.app/api/api/professions');
+                const response = await fetch('https://tulookapiv2.vercel.app/api/api/professions');
                 const data = await response.json();
 
                
@@ -96,7 +96,7 @@ export function SignUpFormEm({ onToggleForm }) {
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit); 
        
-        fetch('https://tulook-api.vercel.app/api/api/users', {
+        fetch('https://tulookapiv2.vercel.app/api/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

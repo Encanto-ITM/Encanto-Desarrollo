@@ -3,11 +3,13 @@ import { useLocation } from 'react-router-dom';
 import GenericButton from '../UI/GenericButton';
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaTwitter } from 'react-icons/fa';
 import UpdateInfoModal from './UpdateInfoModal';
+import NewServiceModal from './NewServiceModal';
 import { fetchUserData } from '../hooks/userData'; 
 import LoadingSpinner from '../UI/LoadingSpinner';  // Importamos el spinner
 
 export function WorkerInfo() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNewServiceModalOpen, setIsNewServiceModalOpen] = useState(false); 
   const [workerData, setWorkerData] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);  // Estado de carga
@@ -30,6 +32,8 @@ export function WorkerInfo() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const openNewServiceModal = () => setIsNewServiceModalOpen(true); 
+  const closeNewServiceModal = () => setIsNewServiceModalOpen(false); 
 
   const handleUpdate = async (updatedInfo) => {
     try {
@@ -74,7 +78,6 @@ export function WorkerInfo() {
   return (
     <div className="bg-gray-200 p-6 rounded-lg mt-4 shadow-md w-full mx-auto">
       <h3 className="text-xl font-bold mb-6">Worker Information</h3>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
           <div className="mb-6">
@@ -140,7 +143,10 @@ export function WorkerInfo() {
           {isOwner && (
             <>
               <GenericButton onClick={openModal} placeholder="Update Info" />
-              <button className="font-bold flex items-center justify-center bg-gray-100 hover:bg-gray-300 text-black p-2 w-[80%] h-10 rounded-xl transition-colors duration-300 mt-3">
+              <button
+                onClick={openNewServiceModal}
+                className="font-bold flex items-center justify-center bg-gray-100 hover:bg-gray-300 text-black p-2 w-[80%] h-10 rounded-xl transition-colors duration-300 mt-3"
+              >
                 New service
               </button>
             </>
@@ -154,6 +160,12 @@ export function WorkerInfo() {
         worker={workerData}
         onUpdate={handleUpdate}
       />
+      <NewServiceModal
+        open={isNewServiceModalOpen}
+        onClose={closeNewServiceModal}
+        worker={workerData}
+      />
     </div>
   );
 }
+
