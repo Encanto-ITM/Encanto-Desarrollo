@@ -66,12 +66,12 @@ export function SignInForm({ onToggleForm }) {
             }
     
           
-            if (result.token) {
+            /*if (result.token) {
                 localStorage.setItem('token', result.token); 
             } else {
                 console.warn('No token received from API');
-            }
-    
+            }*/
+            localStorage.setItem('token', result.token);
             localStorage.setItem('email', formData.email); 
             localStorage.setItem('userId', user.id);
     

@@ -12,27 +12,28 @@ export function Results() {
     const [error, setError] = useState(null); 
 
     useEffect(() => {
-        // Reset states on param change
+       
         setLoading(true);
         setError(null);
 
         const fetchServices = async () => {
             try {
-                const response = await fetch(`https://tulookapiv2.vercel.app/api/api/services/${id}/filtertype`);  
+                const response = await fetch(`https://tulookapiv2.vercel.app/api/api/services/${id}/filtertype`); 
+                 
                 if (!response.ok) {
-                    throw new Error('Error fetching services');
+                    throw new Error('No existen servicios para esta categoria');
                 }
                 const data = await response.json();
-                setServices(data.data); // Assuming data.data is the correct structure
+                setServices(data.data); 
             } catch (err) {
                 setError(err.message); 
             } finally {
-                setLoading(false); // Ensure loading state is set to false after fetch
+                setLoading(false); 
             }
         };
 
         fetchServices();
-    }, [id]); // Depend on id to refetch when it changes
+    }, [id]); 
 
     return (
         <div>

@@ -1,80 +1,90 @@
 import React, { useState, useEffect } from 'react';
 import Modal from '@mui/material/Modal';
 import GenericButton from '../UI/GenericButton';
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaTwitter } from 'react-icons/fa';
-
-const socialMediaOptions = [
-    { name: 'Facebook', icon: <FaFacebookF /> },
-    { name: 'WhatsApp', icon: <FaWhatsapp /> },
-    { name: 'Instagram', icon: <FaInstagram /> },
-    { name: 'Twitter', icon: <FaTwitter /> },
-];
 
 export default function UpdateInfoModal({ open, onClose, worker }) {
-    const [socialMedia, setSocialMedia] = useState([]);
-    const [socialMediaName, setSocialMediaName] = useState('');
-    const [selectedIcon, setSelectedIcon] = useState('');
-    const [direction, setDirection] = useState('');
+    const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
     const [profession, setProfession] = useState('');
+    const [profilePhoto, setProfilePhoto] = useState(null);
+    const [headerPhoto, setHeaderPhoto] = useState(null);
+    const [profilePhotoPreview, setProfilePhotoPreview] = useState(null);
+    const [headerPhotoPreview, setHeaderPhotoPreview] = useState(null);
 
     useEffect(() => {
         if (worker) {
-            setSocialMedia(worker.socialMedia || []);
-            setDirection(worker.direction || '');
+            setAddress(worker.address || '');
             setDescription(worker.description || '');
             setProfession(worker.profession || '');
+            setProfilePhoto(worker.profilephoto);
+            setHeaderPhoto(worker.headerphoto);
         }
     }, [worker, open]);
 
+    const handleProfilePhotoChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setProfilePhoto(file);
+            setProfilePhotoPreview(URL.createObjectURL(file));
+        }
+    };
+
+    const handleHeaderPhotoChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setHeaderPhoto(file);
+            setHeaderPhotoPreview(URL.createObjectURL(file));
+        }
+    };
+
     const handleSave = async () => {
         const updatedInfo = {
-            socialMedia,
-            direction,
+            address,
             description,
             profession,
+            profilephoto: profilePhoto,
+            headerphoto: headerPhoto
         };
 
         console.log('Updated Info:', updatedInfo);
 
-       
         try {
-            const response = await fetch(`https://tulook-api.vercel.app/api/api/workers/${worker.id}`, {
-                method: 'PUT', 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedInfo),
+            const formData = new FormData();
+            formData.append('address', address);
+            formData.append('description', description);
+            formData.append('profession', profession);
+            if (profilePhoto) formData.append('profilephoto', profilePhoto);
+            if (headerPhoto) formData.append('headerphoto', headerPhoto);
+
+            const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${worker.id}`, {
+                method: 'PUT',
+                body: formData,
             });
 
             if (!response.ok) {
                 throw new Error('Error al actualizar la información');
             }
 
-          
             console.log('Información actualizada correctamente');
-
         } catch (error) {
             console.error('Error al actualizar la información:', error);
         }
 
-        onClose(); 
+        onClose();
     };
 
-    const addSocialMedia = () => {
-        const selectedOption = socialMediaOptions.find(option => option.name === selectedIcon);
-        if (socialMediaName && selectedOption) {
-            const newSocialMedia = { name: socialMediaName, icon: selectedOption.icon };
-            setSocialMedia([...socialMedia, newSocialMedia]);
-            setSocialMediaName('');
-            setSelectedIcon('');
-        }
+    const professionsMap = {
+        2: 'Usuario',
+        3: 'Estilista',
+        4: 'Manicura',
+        5: 'Pedicura',
+        6: 'Peluquero',
+        7: 'Barbero',
+        8: 'Cuidador de piel',
+        9: 'Depiladora',
+        10: 'Maquilladora',
     };
 
-    const removeSocialMedia = (name) => {
-        const newList = socialMedia.filter((media) => media.name !== name);
-        setSocialMedia(newList);
-    };
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -85,22 +95,63 @@ export default function UpdateInfoModal({ open, onClose, worker }) {
                     </button>
                     <h2 className="text-xl font-bold mb-4">Update Information</h2>
 
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Profile Photo</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleProfilePhotoChange}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                        {profilePhotoPreview && (
+                            <img
+                                src={profilePhotoPreview}
+                                alt="Profile Preview"
+                                className="mt-4 w-32 h-32 object-cover rounded-full mx-auto"
+                            />
+                        )}
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Header Photo</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleHeaderPhotoChange}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                        {headerPhotoPreview && (
+                            <img
+                                src={headerPhotoPreview}
+                                alt="Header Preview"
+                                className="mt-4 w-full h-40 object-cover"
+                            />
+                        )}
+                    </div>
+
+
                     <div>
                         <label className="block text-sm font-medium">Profession</label>
-                        <input
-                            type="text"
+                        <select
                             value={profession}
                             onChange={(e) => setProfession(e.target.value)}
                             className="mt-1 p-2 border rounded w-full"
-                        />
+                        >
+                            <option value="" disabled>Select a profession</option>
+                            {Object.entries(professionsMap).map(([id, professionName]) => (
+                                <option key={id} value={id}>
+                                    {professionName}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="mt-4">
                         <label className="block text-sm font-medium">Direction</label>
                         <input
                             type="text"
-                            value={direction}
-                            onChange={(e) => setDirection(e.target.value)}
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                             className="mt-1 p-2 border rounded w-full"
                         />
                     </div>
@@ -114,48 +165,6 @@ export default function UpdateInfoModal({ open, onClose, worker }) {
                         />
                     </div>
 
-                    <div className="mt-4">
-                        <label className="block text-sm font-medium">Add Social Media</label>
-                        <input
-                            type="text"
-                            value={socialMediaName}
-                            onChange={(e) => setSocialMediaName(e.target.value)}
-                            placeholder="Social Media Name"
-                            className="mt-1 p-2 border rounded w-full"
-                        />
-                        <select
-                            value={selectedIcon}
-                            onChange={(e) => setSelectedIcon(e.target.value)}
-                            className="mt-2 p-2 border rounded w-full"
-                        >
-                            <option value="">Select Icon</option>
-                            {socialMediaOptions.map((option) => (
-                                <option key={option.name} value={option.name}>{option.name}</option>
-                            ))}
-                        </select>
-                        <button 
-                            onClick={addSocialMedia} 
-                            className="mt-2 p-2 bg-purple text-white rounded w-full"
-                        >
-                            Confirm Social Media
-                        </button>
-                        <div className="mt-4">
-                            <h3 className="text-lg font-semibold">Current Social Media</h3>
-                            <ul>
-                                {socialMedia.map((media, index) => (
-                                    <li key={index} className="flex justify-between items-center mt-2">
-                                        <span>{media.icon} {media.name}</span>
-                                        <button 
-                                            onClick={() => removeSocialMedia(media.name)} 
-                                            className="text-red-500"
-                                        >
-                                            Remove
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
 
                     <div className="flex justify-center mt-10">
                         <GenericButton className="text-white" onClick={handleSave} placeholder="Save Changes" />
