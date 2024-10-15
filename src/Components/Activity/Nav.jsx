@@ -6,7 +6,7 @@ export function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [isImageLoading, setIsImageLoading] = useState(true); // Estado para gestionar la carga de la imagen
+  const [isImageLoading, setIsImageLoading] = useState(true); 
 
   const openModal = (e) => {
     e.preventDefault();

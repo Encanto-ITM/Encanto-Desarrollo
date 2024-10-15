@@ -56,7 +56,7 @@ export default function UpdateInfoModal({ open, onClose, worker }) {
             if (profilePhoto) formData.append('profilephoto', profilePhoto);
             if (headerPhoto) formData.append('headerphoto', headerPhoto);
 
-            const response = await fetch(`https://tulook-api.vercel.app/api/api/users/${worker.id}`, {
+            const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${worker.id}`, {
                 method: 'PUT',
                 body: formData,
             });

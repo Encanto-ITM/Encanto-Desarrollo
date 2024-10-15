@@ -25,7 +25,7 @@ export function TypeServices() {
     ];
 
     const handleServiceClick = (id) => {
-        console.log(`Navigating to results for service ID: ${id}`); // Debugging statement
+        console.log(`Navigating to results for service ID: ${id}`);
         navigate(`/results/${id}`);
     };
 

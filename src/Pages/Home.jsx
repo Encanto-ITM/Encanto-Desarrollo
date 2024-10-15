@@ -19,10 +19,9 @@ export function Home() {
 
     const getWorkers = async () => {
         try {
-            const response = await fetch('https://tulook-api.vercel.app/api/api/workers');
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/workers');
             const data = await response.json();
-            console.log(data); 
-            setWorkers(data.data); 
+            setWorkers(data); 
         } catch (error) {
             console.error("Error fetching workers:", error);
         }

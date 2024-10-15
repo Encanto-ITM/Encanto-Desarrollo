@@ -4,11 +4,13 @@ import GenericButton from '../UI/GenericButton';
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaTwitter } from 'react-icons/fa';
 import UpdateInfoModal from './UpdateInfoModal';
 import { fetchUserData } from '../hooks/userData'; 
+import LoadingSpinner from '../UI/LoadingSpinner';  // Importamos el spinner
 
 export function WorkerInfo() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [workerData, setWorkerData] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);  // Estado de carga
   const location = useLocation();
   const { worker } = location.state || {};
 
@@ -16,6 +18,7 @@ export function WorkerInfo() {
     const getUserData = async () => {
       const user = await fetchUserData();
       setCurrentUser(user);
+      setIsLoading(false);  // Detener el loading cuando los datos se hayan cargado
     };
 
     getUserData();
@@ -30,12 +33,10 @@ export function WorkerInfo() {
 
   const handleUpdate = async (updatedInfo) => {
     try {
-
       const response = await api.updateWorker(workerData.id, updatedInfo);
 
       if (response.ok) {
         console.log('Worker info updated successfully:', response.data);
-
         setWorkerData(prevData => ({ ...prevData, ...updatedInfo }));
       } else {
         console.error('Error updating worker info:', response.statusText);
@@ -47,12 +48,15 @@ export function WorkerInfo() {
     }
   };
 
+  if (isLoading) {
+    return <LoadingSpinner />;  // Mostramos el componente de carga mientras los datos se cargan
+  }
+
   if (!workerData) {
     return <p>No worker data found</p>;
   }
 
   const isOwner = currentUser && currentUser.id === workerData.id;
-
 
   const professionsMap = {
     1: 'Admin',

@@ -25,7 +25,7 @@ export default function ServicesCard({ service }) {
                 {service.description}
             </p>
             <button
-                className="mt-4 bg-purple-500 text-white rounded-md px-4 py-2 hover:bg-purple-600"
+                className="mt-4 bg-purple text-white rounded-md px-4 py-2 hover:bg-purple-600"
                 onClick={toggleDescription}
             >
                 {isExpanded ? 'Show less' : 'Find out more'}

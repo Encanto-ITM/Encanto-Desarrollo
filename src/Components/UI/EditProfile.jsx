@@ -48,7 +48,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
     if (selectedImage) formData.append('profilephoto', selectedImage);
 
     try {
-      const response = await fetch(`https://tulook-api.vercel.app/api/api/users/${user.id}`, {
+      const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${user.id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
