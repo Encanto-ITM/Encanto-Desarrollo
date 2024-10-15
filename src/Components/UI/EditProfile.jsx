@@ -56,6 +56,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
 
     try {
       setIsLoading(true); 
+
       const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${user.id}`, {
         method: 'PUT',
         headers: {

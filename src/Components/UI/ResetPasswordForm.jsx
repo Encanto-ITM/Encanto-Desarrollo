@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GenericButton from './GenericButton'; 
-import SignInputs from './SignInputs'; 
-import { sha256 } from 'js-sha256';
+import SignInputsEm from './SignInputsEm'; 
+import { sha256 } from 'js-sha256'; 
 
 export function ResetPasswordForm() {
     const [formData, setFormData] = useState({
@@ -26,6 +26,16 @@ export function ResetPasswordForm() {
         return errors;
     };
 
+    const resetForm = () => {
+        setFormData({
+            email: '',
+            newPassword: '',
+            confirmPassword: '',
+        });
+        setError('');
+        setSubmitted(false); 
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitted(true);
@@ -39,19 +49,28 @@ export function ResetPasswordForm() {
         }
 
         try {
-            const response = await fetch('https://tulook-api.vercel.app/api/api/reset-password', {
+            const formDataToSubmit = {
+                email: formData.email,
+                password: sha256(formData.newPassword),
+                password_confirmation: sha256(formData.confirmPassword),
+            };
+
+            const response = await fetch('http://127.0.0.1:8000/api/users/update-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: formData.email, newPassword: sha256(formData.newPassword) }),
+                body: JSON.stringify(formDataToSubmit),
             });
 
+            const responseText = await response.text();
             if (!response.ok) {
-                throw new Error('Error al restablecer la contraseña');
+                throw new Error(responseText || 'Error al restablecer la contraseña');
             }
 
+            const data = JSON.parse(responseText);
             setSuccessMessage('Contraseña restablecida con éxito. Puedes iniciar sesión ahora.');
+            resetForm(); // Limpiar el formulario aquí
         } catch (error) {
             console.error('Error en la solicitud de restablecimiento de contraseña:', error);
             setError('Hubo un error al restablecer la contraseña. Inténtalo más tarde.');
@@ -71,23 +90,26 @@ export function ResetPasswordForm() {
                 <h1 className="text-xl font-bold text-center mb-4">Restablecer Contraseña</h1>
                 {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
                 {error && <p className="text-red-500 text-sm">{error}</p>}
-                <SignInputs
+                <SignInputsEm
                     placeholder="Correo electrónico"
                     name="email"
                     type="email"
                     onChange={handleChange}
+                    value={formData.email} // Asegúrate de vincular el valor
                 />
-                <SignInputs
+                <SignInputsEm
                     placeholder="Nueva Contraseña"
                     name="newPassword"
                     type="password"
                     onChange={handleChange}
+                    value={formData.newPassword} // Asegúrate de vincular el valor
                 />
-                <SignInputs
+                <SignInputsEm
                     placeholder="Confirmar Contraseña"
                     name="confirmPassword"
                     type="password"
                     onChange={handleChange}
+                    value={formData.confirmPassword} // Asegúrate de vincular el valor
                 />
                 <GenericButton
                     type="button"

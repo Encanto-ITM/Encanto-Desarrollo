@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Search } from "../Components/home-components/Search";
-import { Services } from "../Components/home-components/Services";
+import { TypeServices } from "../Components/home-components/TypeServices.jsx";
 import { PopularServices } from "../Components/home-components/PopularServices";
 import { PopularWorkers } from "../Components/home-components/PopularWorkers";
 import { Nav } from '../Components/Activity/Nav.jsx';
@@ -21,7 +21,6 @@ export function Home() {
         try {
             const response = await fetch('https://tulookapiv2.vercel.app/api/api/workers');
             const data = await response.json();
-            console.log(data); 
             setWorkers(data); 
         } catch (error) {
             console.error("Error fetching workers:", error);
@@ -45,7 +44,7 @@ export function Home() {
                 <main className="p-0">
                     <div className="p-6">
                         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                        <Services />
+                        <TypeServices />
                     </div>
                     <div className="p-0 bg-purple">
                         <PopularServices filteredServices={filteredServices} searchTerm={searchTerm} />
