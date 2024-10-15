@@ -8,13 +8,6 @@ import { fetchUserData } from '../hooks/userData';
 import { logout } from '../hooks/useLogout'; 
 
 export default function UserProfile({ open, onClose }) {
-    const [userData, setUserData] = useState(null); 
-    const [isModalOpen, setIsModalOpen] = useState(false); 
-
-import { fetchUserData } from '../hooks/userData';
-import { logout } from '../hooks/useLogout';
-
-export default function UserProfile({ open, onClose }) {
     const [userData, setUserData] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
@@ -40,14 +33,13 @@ export default function UserProfile({ open, onClose }) {
 
     if (!userData) return null; 
 
-
     const handleGoToWorkerProfile = () => {
         navigate(`/workerprofile/${userData.id}`, { state: { worker: userData } });
     };
 
     return (
         <Modal open={open} onClose={onClose}>
-            <div className="fixed inset-0 flex items-start justify-end p-4 pt-">
+            <div className="fixed inset-0 flex items-start justify-end p-4">
                 <div className="bg-purple text-white max-w-sm rounded-md p-10 relative">
                     <button onClick={onClose} className="absolute top-4 left-4 text-white text-lg font-semibold">X</button>
                     <div className='flex flex-col text-center'>
@@ -56,7 +48,6 @@ export default function UserProfile({ open, onClose }) {
                         <h3 className="text-xl font-semibold mb-2">{userData.lastname}</h3>
                         <p className="text-sm mb-2">{userData.email}</p>
                         <p className="text-sm mb-6 italic">{userData.description || 'No hay descripción disponible'}</p>
-                        <p className="text-sm mb-6 italic">{userData.description}</p>
                         <div className="flex justify-center">
                             <button
                                 onClick={openModal}
@@ -64,16 +55,13 @@ export default function UserProfile({ open, onClose }) {
                                 Editar
                             </button>
                         </div>
-                        <button 
-                            onClick={logout}  
-                        {userData.acounttype_id === 3 && (
+                        {userData.acounttype_id === 3 && (  // Solo mostrar si es un trabajador
                             <button
                                 onClick={handleGoToWorkerProfile}
                                 className="bg-gray-700 text-white rounded-lg w-full py-4 hover:bg-gray-600 transition duration-300 mb-2 text-lg font-semibold">
                                 Ver perfil
                             </button>
                         )}
-
                         <button
                             onClick={logout}
                             className="mt-4 bg-red-500 text-white rounded-lg w-full py-4 hover:bg-red-600 transition duration-300 text-lg font-semibold">
