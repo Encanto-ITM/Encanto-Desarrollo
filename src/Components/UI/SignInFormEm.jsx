@@ -1,97 +1,78 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 import { sha256 } from 'js-sha256';
-import * as jwtDecode from 'jwt-decode';
 
-
-export function SignInForm({ onToggleForm }) {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+export function SignInFormEm({ onToggleForm }) {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
     const [error, setError] = useState('');
-    const navigate = useNavigate();  
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prevData => ({ ...prevData, [name]: value }));
-    };
-
-    const validateForm = () => {
-        if (!formData.email || !formData.password) {
-            setError('Por favor, rellena todos los campos.');
-            return false;
-        }
-        return true;
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         setError('');
-    
-        if (!validateForm()) return;
-    
+
         const encryptedPassword = sha256(formData.password);
-    
+
         try {
-            const response = await fetch('https://tulookapiv2.vercel.app/api/api/users', {
+            
+            const response = await fetch('https://tulook-api.vercel.app/api/api/users', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-    
+
             if (!response.ok) {
                 throw new Error('Error fetching users');
             }
-    
+
             const result = await response.json();
-            console.log('API Response:', result);
-    
+
+            console.log('Resultado de la API:', result);
+
             const users = result;
-    
+
             if (!Array.isArray(users)) {
                 throw new Error('La respuesta de la API no contiene un array de usuarios');
             }
-    
+
             const user = users.find(user => user.email === formData.email);
-    
+
             if (!user) {
-                setError('Correo electrónico o contraseña incorrectos.');
+                setError('Correo electrónico no encontrado.');
                 return;
             }
-    
+
             if (user.password !== encryptedPassword) {
-                setError('Correo electrónico o contraseña incorrectos.');
+                setError('Contraseña incorrecta.');
                 return;
             }
-    
-          
-            if (result.token) {
-                localStorage.setItem('token', result.token); 
-            } else {
-                console.warn('No token received from API');
-            }
-    
-            localStorage.setItem('email', formData.email); 
-            localStorage.setItem('userId', user.id);
-    
+
             console.log('Login exitoso:', user);
-            localStorage.setItem('user', JSON.stringify({ email: user.email }));
-            navigate('/home');  
-    
+            window.location.href = '/Home';
+
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
             setError('Hubo un error con el servidor. Inténtalo más tarde.');
         }
     };
-    
+
     return (
         <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8"> 
             <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
                 <img
-                    src="/img/Login-Hombre.png"
+                    src="/img/Login-Mujer.png"
                     className="w-full h-full object-cover rounded-bl-[40px] rounded-tl-[40px]"
-                    alt="Login Hombre"
+                    alt="Login Mujer"
                     loading="lazy"
                 />
             </div>
@@ -134,8 +115,8 @@ export function SignInForm({ onToggleForm }) {
                     Regístrate
                 </div>
 
-                <a href="/loginem?form=signin" className="text-purple hover:underline text-center">
-                    Login Emprendedor
+                <a href="/login?form=signin" className="text-purple hover:underline text-center">
+                    Login Usuario
                 </a>
             </div>
         </section>

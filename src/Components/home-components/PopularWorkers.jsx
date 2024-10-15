@@ -1,27 +1,39 @@
 import React from 'react';
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export function PopularWorkers({ filteredWorkers }) {
-    // Configuración del slider
+export function PopularWorkers({ workers }) {
+    const navigate = useNavigate();
+
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3, 
-        slidesToScroll: 3, 
+        slidesToShow: 3,
+        slidesToScroll: 3,
         responsive: [
             {
-                breakpoint: 768, 
+                breakpoint: 768,
                 settings: {
-                    slidesToShow: 1, 
-                    slidesToScroll: 1, 
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
                     dots: true,
                 }
             }
         ]
+    };
+
+    const handleFindOutMore = (worker) => {
+        if (!worker.id) {
+            console.error("Worker ID is undefined");
+            return;
+        }
+        console.log("Navigating to worker profile with ID:", worker.id);
+        navigate(`/workerprofile/${worker.id}`, { state: { worker } });
+
     };
 
     return (
@@ -31,27 +43,33 @@ export function PopularWorkers({ filteredWorkers }) {
                     Know Some Workers
                 </h2>
 
-                {filteredWorkers.length > 0 ? (
+                {workers && workers.length > 0 ? (
                     <Slider {...settings}>
-                        {filteredWorkers.map(worker => (
+                        {workers.map(worker => (
                             <div key={worker.id} className="relative p-4">
                                 <div className="bg-white shadow-lg overflow-hidden">
-                                    <img 
-                                        src={worker.image} 
-                                        alt={worker.name} 
-                                        className="w-full h-48 object-cover" 
+                                    <img
+                                        src={worker.profilephoto || 'agregar imagen por defecto'}
+                                        alt={`${worker.name} ${worker.lastname}`}
+                                        className="w-full h-48 object-cover"
                                     />
                                     <div className='p-8'>
-                                        <h2 className="text-xl font-semibold text-left text-gray-700">
-                                            {worker.name}
+                                        <h2 className="text-xl font-semibold text-left text-gray-700 overflow-hidden whitespace-nowrap text-ellipsis max-h-6">
+                                            {worker.name} {worker.lastname}
                                         </h2>
+
                                         <h3 className="text-left text-gray-500">
                                             {worker.profession}
                                         </h3>
-                                        <p>{worker.description}</p>
+                                        <p className="overflow-hidden whitespace-nowrap text-ellipsis max-h-6">
+                                            {worker.description || 'No description available'}
+                                        </p>
 
                                         <div className="text-center mt-4">
-                                            <button className="flex items-center">
+                                            <button
+                                                className="flex items-center"
+                                                onClick={() => handleFindOutMore(worker)}
+                                            >
                                                 <div className="rounded-full bg-purple p-1">
                                                     <ChevronRight className="text-white" />
                                                 </div>

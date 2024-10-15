@@ -3,7 +3,7 @@ import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 import { sha256 } from 'js-sha256'; 
 
-export function SignUpForm({ onToggleForm }) {
+export function SignUpForm({ onToggleForm }) { 
     const [formData, setFormData] = useState({
         name: '',
         lastname: '',
@@ -22,10 +22,8 @@ export function SignUpForm({ onToggleForm }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
         let newValue = value;
 
-        
         if (name === 'password' || name === 'password_confirmation') {
             newValue = sha256(value); 
         }
@@ -59,16 +57,24 @@ export function SignUpForm({ onToggleForm }) {
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit);
 
-        fetch('http://127.0.0.1:8000/api/users', {
+        fetch('https://tulook-api.vercel.app/api/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formDataToSubmit),
         })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json(); 
+            } else {
+                throw new Error('Error al registrarse.');
+            }
+        })
         .then(data => {
             console.log('Éxito:', data);
+          
+            onToggleForm();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -135,7 +141,7 @@ export function SignUpForm({ onToggleForm }) {
                     Iniciar Sesión
                 </div>
             </div>
-            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow md:block">
+            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
                 <img
                     src="/img/Register-Mujer.png"
                     className="w-full h-full object-cover rounded-tr-[40px] rounded-br-[40px]"
