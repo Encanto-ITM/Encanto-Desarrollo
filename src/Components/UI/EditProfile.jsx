@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Modal from '@mui/material/Modal';
 import ImageUploader from './ImageUploader';
 import SignInputs from './SignInputs';
-import { sha256 } from 'js-sha256'; 
+
 
 export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
   const [name, setName] = useState('');
@@ -51,7 +51,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
     };
 
     if (newPassword) {
-      data.password = await sha256(newPassword); 
+      data.password = newPassword;
     }
 
     try {

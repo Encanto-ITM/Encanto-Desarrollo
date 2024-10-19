@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
-import { sha256 } from 'js-sha256'; 
+
 
 export function SignUpForm({ onToggleForm }) { 
     const [formData, setFormData] = useState({
         name: '',
         lastname: '',
         email: '',
-        contact_number: '0',
-        contact_public: '0',
-        is_active: '1',
-        password: '',
-        password_confirmation: '',
-        acounttype_id: '2',
-        professions_id: '1',
+        password: ''
+       
     });
 
     const [errors, setErrors] = useState({});
@@ -23,10 +18,6 @@ export function SignUpForm({ onToggleForm }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         let newValue = value;
-
-        if (name === 'password' || name === 'password_confirmation') {
-            newValue = sha256(value); 
-        }
 
         setFormData({ ...formData, [name]: newValue });
     };
@@ -57,7 +48,7 @@ export function SignUpForm({ onToggleForm }) {
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit);
 
-        fetch('https://tulookapiv2.vercel.app/api/api/users', {
+        fetch('https://tulookapiv2.vercel.app/api/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -151,4 +142,4 @@ export function SignUpForm({ onToggleForm }) {
             </div>
         </section>
     );
-}
+    }

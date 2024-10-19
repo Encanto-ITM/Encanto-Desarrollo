@@ -90,13 +90,11 @@ export function SignUpFormEm({ onToggleForm }) {
      
         const formDataToSubmit = {
             ...formData,
-            password: sha256(formData.password),
-            password_confirmation: sha256(formData.password_confirmation),
         };
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit); 
        
-        fetch('https://tulookapiv2.vercel.app/api/api/users', {
+        fetch('https://tulookapiv2.vercel.app/api/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
