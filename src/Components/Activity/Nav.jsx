@@ -36,7 +36,7 @@ export function Nav() {
 
   const handleServiceClick = (event) => {
     event.preventDefault(); 
-    navigate(`/results`); 
+    navigate(`/results/1`); 
   };
 
   return (

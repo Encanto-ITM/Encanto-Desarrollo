@@ -51,9 +51,11 @@ export function Order() {
                         Reserva tu cita para obtener <br />
                         una <span className="text-purple">Belleza</span> brillante
                     </h1>
-                    <h2 className="text-2xl md:text-4xl mt-6">
-                       {service.name}
-                    </h2>
+                    {service && (
+                        <h2 className="text-2xl md:text-4xl mt-6">
+                           {service.name}
+                        </h2>
+                    )}
                 </div>
 
                 {loading && <p className="text-center">Cargando servicio...</p>}
@@ -82,6 +84,7 @@ export function Order() {
                     <button 
                         className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/3 h-12 rounded-xl mt-3"
                         onClick={() => handleOrder(service.id)}
+                        disabled={loading} // Deshabilitar mientras carga
                     >
                         Completar Orden
                     </button>

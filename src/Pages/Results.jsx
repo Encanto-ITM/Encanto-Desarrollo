@@ -19,10 +19,13 @@ export function Results() {
             setError(null);
             try {
                 const response = await fetch(`https://tulookapiv2.vercel.app/api/api/services/${id}/filtertype`); 
+                if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
                 setServices(data.data); 
             } catch (err) {
-                setError(err.message); 
+                setError(<p className="text-center">No se han encontrado servicios que coincidan con su búsqueda.</p>); 
+            } finally {
+                setLoading(false); 
             }
         };
 
@@ -43,16 +46,16 @@ export function Results() {
             <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <TypeServices />
             <div className="p-6">
-                <h1 className="text-2xl font-bold text-center mb-4">Results</h1>
-                {loading && <p className="text-center">Cargando servicios...</p>}
-                {error && <p className="text-center text-red-500">Error: {error}</p>}
+                <h1 className="text-2xl font-bold text-center mb-4">Resultados de Busqueda:</h1>
+                {loading && <p className="text-center">Por favor espere...</p>}
+                {error && <p className="text-center text-red-500">{error}</p>}
                 {!loading && !error && filteredServices.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {filteredServices.map(service => (
                             <div key={service.id} className="bg-white shadow-lg rounded-md p-4 flex flex-col">
                                 <img
                                     src={service.imageUrl} 
-                                    alt={service.name}
+                                    alt={`Image of ${service.name}`}
                                     className="w-full h-48 object-cover rounded-t-md"
                                 />
                                 <h2 className="text-xl font-semibold mt-2">{service.name}</h2>
@@ -64,13 +67,13 @@ export function Results() {
                                     className="mt-4 bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-black"
                                     onClick={() => handleOrder(service.id)} 
                                 >
-                                    Order Now
+                                    Ordena Ahora
                                 </button>
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <p className="text-center">No se encontraron servicios que coincidan con su búsqueda.</p>
+                    null
                 )}
             </div>
             <Footer />
