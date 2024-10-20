@@ -36,7 +36,7 @@ export function App() {
                 
                 <Route path="/home" element={<PrivateRoute element={<Home />} />} />
                 <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />} />
-                <Route path="/order" element={<PrivateRoute element={<Order />} />} />
+                <Route path="/order/:id" element={<PrivateRoute element={<Order />} />} />
                 <Route path="/results" element={<PrivateRoute element={<Results />} />} />
                 <Route path="/results/:id" element={<PrivateRoute element={<Results />} />} />
                 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Search({ searchTerm, setSearchTerm }) {
     return (
         <div className="text-center mb-12 py-16 relative">
@@ -21,3 +19,4 @@ export function Search({ searchTerm, setSearchTerm }) {
         </div>
     );
 }
+
