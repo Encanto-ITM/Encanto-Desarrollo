@@ -37,54 +37,59 @@ export function Order() {
         fetchService();
     }, [id]); 
 
-    const handleOrder = (serviceId) => {
-        console.log(`Ordenando servicio con ID: ${serviceId}`);
-        // Lógica adicional para manejar la orden
+    const handleOrder = (id) => {
+        // Lógica para completar la orden
     };
 
     return (
         <>
             <Nav />
-            <div className='p-6'> 
-                <div className="text-center w-full p-10 font-bold">
-                    <h1 className="text-2xl md:text-5xl">
+            <div className='p-4 max-w-2xl mx-auto'>
+                <div className="text-center w-full p-4 font-bold">
+                    <h1 className="text-2xl md:text-4xl text-gray-800">
                         Reserva tu cita para obtener <br />
                         una <span className="text-purple">Belleza</span> brillante
                     </h1>
                     {service && (
-                        <h2 className="text-2xl md:text-4xl mt-6">
+                        <h2 className="text-xl md:text-3xl mt-16 text-gray">
                            {service.name}
                         </h2>
                     )}
                 </div>
 
-                {loading && <p className="text-center">Cargando servicio...</p>}
+                {loading && <p className="text-center text-gray-600">Cargando servicio...</p>}
                 {error && <p className="text-center text-red-500">Error: {error}</p>}
                 
                 {service && (
-                    <div className="flex flex-col md:flex-row gap-4 p-10">
-                        <div className="flex flex-col gap-4 w-full md:w-1/3">
-                            <ServiceCard serviceName={service.name} imgName="identificador" />
-                            <ServiceCard serviceName={service.aprox_time} imgName="identificador" />
-                        </div>
-                        
-                        <div className="w-full md:w-2/3 bg-purple flex items-center justify-center p-4 rounded-xl">
+                    <div className="flex flex-col md:flex-row gap-4 mb-4">
+                        <div className="w-full h-[77%] bg-purple flex items-center justify-center p-4 rounded-xl">
                             <Calendario />
                         </div>
                     </div>
                 )}
 
                 {service && (
-                    <div className="flex justify-center mt-6">
-                        <h1 className="font-bold">Precio del servicio: ₡{service.price}</h1>
+                    <div className="flex flex-row gap-6">
+                        <div className="w-full md:w-1/2">
+                            <ServiceCard serviceName={service.name} imgName="identificador" />
+                        </div>
+                        <div className="w-full md:w-1/2">
+                            <ServiceCard serviceName={service.aprox_time} imgName="identificador" />
+                        </div>
+                    </div>
+                )}
+
+                {service && (
+                    <div className="flex justify-center mt-4">
+                        <h1 className="text-xl md:text-3xl mt-16 text-gray font-bold">Precio del servicio: ₡{service.price}</h1>
                     </div>
                 )}
                 
-                <div className="flex justify-center mt-10 mb-20">
-                    <button 
-                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/3 h-12 rounded-xl mt-3"
+                <div className="flex justify-center mt-6 mb-20">
+                    <button  
+                        className=" font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/2 h-10 rounded-xl"
                         onClick={() => handleOrder(service.id)}
-                        disabled={loading} // Deshabilitar mientras carga
+                        disabled={loading} 
                     >
                         Completar Orden
                     </button>
@@ -94,3 +99,4 @@ export function Order() {
         </>
     );
 }
+
