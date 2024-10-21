@@ -12,20 +12,17 @@ export function InfoLanding() {
 
             <div className="md:w-1/2 bg-purple text-white p-8 md:p-16 flex flex-col justify-center space-y-16">
                 <h2 className="text-4xl font-bold leading-snug mb-4">
-                    Register for a <span className="text-purple-300">Brilliant Beauty</span>
+                    Registrate para obtener <span className="text-purple-300">una belleza brillante</span>
                 </h2>
                 <p className="text-lg leading-relaxed">
-                    Join our community and discover how our products can enhance your beauty. With unique and effective formulas, you’re just a step away from looking radiant!
-                </p>
+                Únete a nuestra comunidad y descubre cómo nuestros productos pueden realzar tu belleza. Con fórmulas únicas y efectivas, ¡estás a un paso de lucir radiante!                </p>
                 <p className="text-lg leading-relaxed">
-                    Don’t wait any longer. Register now and start your journey towards brilliant, healthy beauty. We can’t wait to see you!
-                </p>
+                No esperes más. Regístrate ahora y comienza tu viaje hacia una belleza radiante y saludable. ¡Estamos deseando verte!                </p>
                 <p className="text-lg leading-relaxed mb-4">
-                    Thousands have already transformed their beauty routines with us. Join them and experience the difference.
-                </p>
+                Miles de personas ya han transformado sus rutinas de belleza con nosotros. Únase a ellos y experimente la diferencia.                </p>
                
                 <button className="bg-white text-purple font-bold py-3 px-8 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300 mt-8">
-                    Learn More
+                    Aprende mas
                 </button>
             </div>
         </div>

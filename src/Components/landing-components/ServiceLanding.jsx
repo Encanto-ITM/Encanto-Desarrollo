@@ -2,10 +2,9 @@ export function ServiceLanding() {
     return (
         <section className="py-16 bg-gray-100" id="services">
             <div className="container mx-auto text-center">
-                <h3 className="text-4xl font-bold mb-6 text-gray-800">Our Services</h3>
+                <h3 className="text-4xl font-bold mb-6 text-gray-800">Nuetsros Servicios</h3>
                 <p className="mb-16 max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed p-4">
-                    Discover our range of services tailored to enhance your beauty and well-being. We provide personalized treatments and expert advice to help you achieve your beauty goals. Experience the difference with our high-quality offerings designed just for you.
-                </p>
+                Descubra nuestra gama de servicios diseñados para realzar su belleza y bienestar. Ofrecemos tratamientos personalizados y asesoramiento especializado para ayudarle a alcanzar sus objetivos de belleza. Experimente la diferencia con nuestras ofertas de alta calidad diseñadas especialmente para usted.                </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-4">
                     <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div className="h-32 w-32 mx-auto mb-6">
@@ -13,10 +12,10 @@ export function ServiceLanding() {
                                 <img src="/img/Iconos/customer-service.png" alt="" className="w-full h-full object-contain" />
                             </button>
                         </div>
-                        <h4 className="text-2xl font-semibold text-gray-800 mb-4">Services</h4>
+                        <a href="/results"><h4 className="text-2xl font-semibold text-gray-800 mb-4">Servicios</h4></a>
+                        
                         <p className="text-gray-600">
-                            Discover our services designed to enhance your beauty and well-being. We offer personalized treatments, expert advice, and high-quality products to help you look and feel amazing.
-                        </p>
+                        Descubra nuestros servicios diseñados para realzar su belleza y bienestar. Ofrecemos tratamientos personalizados, asesoramiento especializado y productos de alta calidad para ayudarle a verse y sentirse increíble.                        </p>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div className="h-32 w-32 mx-auto mb-6">
@@ -24,10 +23,9 @@ export function ServiceLanding() {
                                 <img src="/img/Iconos/worker.png" alt="" className="w-full h-full object-contain" />
                             </button>
                         </div>
-                        <h4 className="text-2xl font-semibold text-gray-800 mb-4">Entrepreneurs</h4>
+                        <h4 className="text-2xl font-semibold text-gray-800 mb-4">Emprendedores</h4>
                         <p className="text-gray-600">
-                            We support passionate entrepreneurs looking to stand out in the beauty industry. Join our network to access resources, training, and opportunities that will help you grow your business.
-                        </p>
+                        Apoyamos a emprendedores apasionados que buscan destacarse en la industria de la belleza. Únase a nuestra red para acceder a recursos, capacitación y oportunidades que lo ayudarán a hacer crecer su negocio.                        </p>
                     </div>
                     <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div className="h-32 w-32 mx-auto mb-6">
@@ -35,10 +33,9 @@ export function ServiceLanding() {
                                 <img src="/img/Iconos/dollar.png" alt="" className="w-full h-full object-contain" />
                             </button>
                         </div>
-                        <h4 className="text-2xl font-semibold text-gray-800 mb-4">Pricing</h4>
+                        <h4 className="text-2xl font-semibold text-gray-800 mb-4">Precios</h4>
                         <p className="text-gray-600">
-                            We offer competitive and affordable plans so that everyone can enjoy our products and services. Check out our pricing list and discover how you can start your journey toward radiant beauty without breaking the bank.
-                        </p>
+                        Ofrecemos planes competitivos y asequibles para que todos puedan disfrutar de nuestros productos y servicios. Consulta nuestra lista de precios y descubre cómo puedes comenzar tu viaje hacia una belleza radiante sin gastar una fortuna.                        </p>
                     </div>
                 </div>
             </div>

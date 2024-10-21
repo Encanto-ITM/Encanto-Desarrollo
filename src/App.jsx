@@ -34,13 +34,14 @@ export function App() {
                 <Route path="/loginem" element={<LoginEm />} />
                 <Route path="/resetpassword" element={<ResetPassword />} />
                 <Route path="/landing" element={<Landing />} />
+                <Route path="/results" element={<Results />}/>
+                <Route path="/results/:id" element={<Results />}/>
                 
                 <Route path="/home" element={<PrivateRoute element={<Home />} />} />
                 <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />} />
                 <Route path="/order/:id" element={<PrivateRoute element={<Order />} />} />
                 <Route path="/confirmation/:id" element={<PrivateRoute element={<Confirmation />} />} />
-                <Route path="/results" element={<PrivateRoute element={<Results />} />} />
-                <Route path="/results/:id" element={<PrivateRoute element={<Results />} />} />
+               
                 
                 <Route path="/aboutus" element={<AboutUs />} />
             </Routes>

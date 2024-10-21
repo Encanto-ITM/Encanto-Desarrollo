@@ -68,7 +68,7 @@ export function Nav() {
           <a onClick={handleServiceClick}>Servicios</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
-          <a href="/aboutus">Acerca de nosotros</a>
+          <a href="/aboutus">Nosotros</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
           <a href="#">Contactanos</a>
