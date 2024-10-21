@@ -78,7 +78,7 @@ export default function ServicesContainer() {
     ];
 
     return (
-        <div className="overflow-y-auto h-[48rem]">
+        <div className="overflow-y-auto h-[48rem] hidenscroll">
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {services.map(service => (
                     <div key={service.id} className="flex-shrink-0">
@@ -88,4 +88,5 @@ export default function ServicesContainer() {
             </div>
         </div>
     );
+    
 }

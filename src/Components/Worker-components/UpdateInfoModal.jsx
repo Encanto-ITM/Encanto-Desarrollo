@@ -67,10 +67,10 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                     <button onClick={onClose} className="absolute top-2 right-2 text-red-500 font-bold">
                         X
                     </button>
-                    <h2 className="text-xl font-bold mb-4">Update Information</h2>
+                    <h2 className="text-xl font-bold mb-4">Actualizar Información</h2>
 
                     <div>
-                        <label className="block text-sm font-medium">Profession</label>
+                        <label className="block text-sm font-medium">Profesion</label>
                         <select
                             value={profession}
                             onChange={(e) => setProfession(e.target.value)}
@@ -85,7 +85,7 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Address</label>
+                        <label className="block text-sm font-medium">Dirección</label>
                         <input
                             type="text"
                             value={address}
@@ -95,7 +95,7 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Description</label>
+                        <label className="block text-sm font-medium">Descripción</label>
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
@@ -104,7 +104,7 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                     </div>
 
                     <div className="flex justify-center mt-6">
-                        <GenericButton onClick={handleSave} placeholder="Save Changes" />
+                        <GenericButton onClick={handleSave} placeholder="Guardar cambios" />
                     </div>
                 </div>
             </div>

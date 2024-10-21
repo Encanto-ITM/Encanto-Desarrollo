@@ -18,6 +18,13 @@ h3{
   font-size: 0.875rem;
 }
 
+.hidenscroll {
+  scrollbar-width: none; 
+}
+
+.hidenscroll::-webkit-scrollbar {
+  display: none; 
+}
 
 .slide-left-enter {
   transform: translateX(-100%); 
