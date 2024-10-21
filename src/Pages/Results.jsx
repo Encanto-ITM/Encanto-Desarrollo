@@ -12,7 +12,15 @@ export function Results() {
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null); 
     const [searchTerm, setSearchTerm] = useState(''); 
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) {
+            setIsAuthenticated(true);
+        }
+    }, []);
+    
     useEffect(() => {
         const fetchServices = async () => {
             setLoading(true);
@@ -23,6 +31,7 @@ export function Results() {
                 const data = await response.json();
                 setServices(data.data); 
             } catch (err) {
+                console.error(err);
                 setError(<p className="text-center">No se han encontrado servicios que coincidan con su búsqueda.</p>); 
             } finally {
                 setLoading(false); 
@@ -37,9 +46,13 @@ export function Results() {
     );
 
     const handleOrder = (id) => {
-        navigate(`/order/${id}`); 
+        if (isAuthenticated) {
+            navigate(`/order/${id}`); 
+        } else {
+            navigate(`/login`);
+        }
     };
-
+    
     return (
         <div>
             <Nav />
@@ -73,7 +86,7 @@ export function Results() {
                         ))}
                     </div>
                 ) : (
-                    null
+                    !loading && <p className="text-center"></p> 
                 )}
             </div>
             <Footer />

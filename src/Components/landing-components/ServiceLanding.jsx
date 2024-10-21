@@ -12,7 +12,7 @@ export function ServiceLanding() {
                                 <img src="/img/Iconos/customer-service.png" alt="" className="w-full h-full object-contain" />
                             </button>
                         </div>
-                        <a href="/results"><h4 className="text-2xl font-semibold text-gray-800 mb-4">Servicios</h4></a>
+                        <a href="/results/4"><h4 className="text-2xl font-semibold text-gray-800 mb-4">Servicios</h4></a>
                         
                         <p className="text-gray-600">
                         Descubra nuestros servicios diseñados para realzar su belleza y bienestar. Ofrecemos tratamientos personalizados, asesoramiento especializado y productos de alta calidad para ayudarle a verse y sentirse increíble.                        </p>

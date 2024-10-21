@@ -49,7 +49,7 @@ export function NavLanding(){
             isMenuOpen ? 'fixed inset-0 bg-purple flex justify-center items-center flex-col text-center' : 'hidden'
           }`}
         >
-          <li className="transition duration-500 hover:scale-110"><a href="/results">Servicios</a></li>
+          <li className="transition duration-500 hover:scale-110"><a href="/results/4">Servicios</a></li>
           <li className="transition duration-500 hover:scale-110"><a href="/aboutus">Nosotros</a></li>
           <li className="transition duration-500 hover:scale-110"><a href="#info">Contactanos</a></li>
           <button

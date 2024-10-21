@@ -77,8 +77,11 @@ export function Order() {
                         <div className="w-full md:w-1/2">
                             <ServiceCard serviceName={service.name} imgName="identificador" />
                         </div>
-                        <div className="w-full md:w-1/2">
-                            <ServiceCard serviceName={service.considerations} imgName="identificador"/>
+                        <div className="flex flex-col items-center bg-white p-12 drop-shadow-md rounded-xl gap-2 min-h-[300px] justify-center"> 
+                           <h2 className='text-purple text-center text-2xl font-semibold'>Consideraciones</h2>
+                            <h2 className="text-purple text-center text-xl font-semibold">
+                                {service.considerations}
+                            </h2>
                         </div>
                         <div className="w-full md:w-1/2">
                             <ServiceCard serviceName={service.aprox_time} imgName="identificador" />
@@ -94,13 +97,14 @@ export function Order() {
                 
                 <div className="flex justify-center mt-6 mb-20">
                     <button  
-                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-16 w-/4 h-12 rounded-xl" 
+                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white px-28 py-7 w-1/3 h-10 rounded-xl" 
                         onClick={handleOrder}
                         disabled={loading || !selectedTime} 
                     >
                         Completar Orden
                     </button>
                 </div>
+
 
             </div>
             <Footer />
