@@ -4,6 +4,7 @@ import Login from './Pages/Login';
 import LoginEm from './Pages/LoginEm';
 import ResetPassword from './Pages/ResetPassword.jsx';
 import Landing from './Pages/Landing';
+import { Confirmation } from './Pages/Confirmation';
 import { Results } from './Pages/Results';
 import { Home } from './Pages/Home';
 import { WorkerProfile } from './Pages/WorkerProfile';
@@ -37,6 +38,7 @@ export function App() {
                 <Route path="/home" element={<PrivateRoute element={<Home />} />} />
                 <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />} />
                 <Route path="/order/:id" element={<PrivateRoute element={<Order />} />} />
+                <Route path="/confirmation/:id" element={<PrivateRoute element={<Confirmation />} />} />
                 <Route path="/results" element={<PrivateRoute element={<Results />} />} />
                 <Route path="/results/:id" element={<PrivateRoute element={<Results />} />} />
                 

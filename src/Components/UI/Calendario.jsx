@@ -3,8 +3,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDateTimePicker } from '@mui/x-date-pickers/StaticDateTimePicker';
 import { Box } from '@mui/material';
+import dayjs from 'dayjs';
 
-export function Calendario() {
+export function Calendario({ onTimeSelect }) {
+  const [selectedDate, setSelectedDate] = React.useState(dayjs()); 
+
+  const handleDateChange = (newValue) => {
+    setSelectedDate(newValue); // Actualiza el estado con la nueva fecha
+    if (onTimeSelect) {
+        onTimeSelect(newValue); 
+    }
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box 
@@ -21,6 +31,8 @@ export function Calendario() {
         }}
       >
         <StaticDateTimePicker 
+          value={selectedDate} 
+          onChange={handleDateChange} 
           orientation="landscape" 
           sx={{
             width: '100%',

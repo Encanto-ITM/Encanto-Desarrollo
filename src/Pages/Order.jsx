@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; 
 import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
 import ServiceCard from '../Components/UI/ServiceCard.jsx';
 import { Calendario } from '../Components/UI/Calendario.jsx';
+import dayjs from 'dayjs';
 
 export function Order() {
     const { id } = useParams(); 
+    const navigate = useNavigate(); 
     const [service, setService] = useState(null); 
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(null); 
 
     useEffect(() => {
         const fetchService = async () => {
@@ -21,12 +24,7 @@ export function Order() {
                     throw new Error('No existe un servicio para esta categoría');
                 }
                 const data = await response.json();
-
-                if (data) {
-                    setService(data); 
-                } else {
-                    throw new Error('La respuesta no contiene un servicio');
-                }
+                setService(data); 
             } catch (err) {
                 setError(err.message); 
             } finally {
@@ -37,8 +35,14 @@ export function Order() {
         fetchService();
     }, [id]); 
 
-    const handleOrder = (id) => {
-        // Lógica para completar la orden
+    const handleOrder = () => {
+        if (service && selectedTime) {
+            navigate(`/confirmation/${service.id}`, { state: { service, selectedTime } });
+        }
+    };
+
+    const handleDateChange = (newValue) => {
+        setSelectedTime(newValue);
     };
 
     return (
@@ -63,7 +67,7 @@ export function Order() {
                 {service && (
                     <div className="flex flex-col md:flex-row gap-4 mb-4">
                         <div className="w-full h-[77%] bg-purple flex items-center justify-center p-4 rounded-xl">
-                            <Calendario />
+                            <Calendario onTimeSelect={handleDateChange} /> 
                         </div>
                     </div>
                 )}
@@ -87,9 +91,9 @@ export function Order() {
                 
                 <div className="flex justify-center mt-6 mb-20">
                     <button  
-                        className=" font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/2 h-10 rounded-xl"
-                        onClick={() => handleOrder(service.id)}
-                        disabled={loading} 
+                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/2 h-10 rounded-xl"
+                        onClick={handleOrder}
+                        disabled={loading || !selectedTime} 
                     >
                         Completar Orden
                     </button>
@@ -99,4 +103,3 @@ export function Order() {
         </>
     );
 }
-
