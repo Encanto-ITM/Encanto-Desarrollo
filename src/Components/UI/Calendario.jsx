@@ -9,7 +9,7 @@ export function Calendario({ onTimeSelect }) {
   const [selectedDate, setSelectedDate] = React.useState(dayjs()); 
 
   const handleDateChange = (newValue) => {
-    setSelectedDate(newValue); // Actualiza el estado con la nueva fecha
+    setSelectedDate(newValue); 
     if (onTimeSelect) {
         onTimeSelect(newValue); 
     }

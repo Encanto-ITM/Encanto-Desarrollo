@@ -3,24 +3,23 @@ export default function Footer() {
         <footer className="bg-[#494949] text-white p-12" id="footer">
             <div className="container mx-auto flex flex-col md:flex-row">
                 <div className="w-full md:w-1/2 lg:w-1/3 mb-4">
-                    <h2 className="text-lg font-semibold mb-2">Services</h2>
+                    <h2 className="text-lg font-semibold mb-2">Servicios</h2>
                     <ul>
-                        <li><a href="#discover" className="hover:underline">Discover</a></li>
-                        <li><a href="#services-nearby" className="hover:underline">Services Nearby</a></li>
-                        <li><a href="#all-services" className="hover:underline">All Services</a></li>
+                        <li><a href="#discover" className="hover:underline">Descubre</a></li>
+                        <li><a href="#all-services" className="hover:underline">Todos los servicioss</a></li>
                     </ul>
                 </div>
 
                 <div className="w-full md:w-1/2 lg:w-1/3 mb-4">
-                    <h2 className="text-lg font-semibold mb-2">Company</h2>
+                    <h2 className="text-lg font-semibold mb-2">Compañia</h2>
                     <ul>
-                        <li><a href="/aboutus" className="hover:underline">About Us</a></li>
-                        <li><a href="#careers" className="hover:underline">Careers</a></li>
+                        <li><a href="/aboutus" className="hover:underline">Acerca de nosotros</a></li>
+                        <li><a href="#careers" className="hover:underline">Carreras</a></li>
                     </ul>
                 </div>
 
                 <div className="w-full lg:w-1/3 mb-4">
-                    <h2 className="text-lg font-semibold mb-2">Follow Us</h2>
+                    <h2 className="text-lg font-semibold mb-2">Siguenos</h2>
                     <ul>
                         <li><a href="https://facebook.com" className="hover:underline">Facebook</a></li>
                         <li><a href="https://twitter.com" className="hover:underline">Twitter</a></li>

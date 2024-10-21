@@ -3,7 +3,7 @@ export function Search({ searchTerm, setSearchTerm }) {
         <div className="text-center mb-12 py-16 relative">
             <div className="relative z-10">
                 <h1 className="text-6xl font-bold text-gray-800 mb-16">
-                    Book trusted <span className='text-purple'>services</span><br /> for you!
+                    Reserva servicios <span className='text-purple font-italic'>confibales</span><br /> para ti!
                 </h1>
 
                 <div className="mt-6 flex justify-center">

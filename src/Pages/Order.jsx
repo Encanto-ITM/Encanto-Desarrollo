@@ -48,7 +48,7 @@ export function Order() {
     return (
         <>
             <Nav />
-            <div className='p-4 max-w-2xl mx-auto'>
+            <div className='flex flex-col items-center p-4 max-w-2xl mx-auto'>
                 <div className="text-center w-full p-4 font-bold">
                     <h1 className="text-2xl md:text-4xl text-gray-800">
                         Reserva tu cita para obtener <br />
@@ -73,9 +73,12 @@ export function Order() {
                 )}
 
                 {service && (
-                    <div className="flex flex-row gap-6">
+                    <div className="flex flex-row gap-6 justify-center">
                         <div className="w-full md:w-1/2">
                             <ServiceCard serviceName={service.name} imgName="identificador" />
+                        </div>
+                        <div className="w-full md:w-1/2">
+                            <ServiceCard serviceName={service.considerations} imgName="identificador"/>
                         </div>
                         <div className="w-full md:w-1/2">
                             <ServiceCard serviceName={service.aprox_time} imgName="identificador" />
@@ -91,15 +94,17 @@ export function Order() {
                 
                 <div className="flex justify-center mt-6 mb-20">
                     <button  
-                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/2 h-10 rounded-xl"
+                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-16 w-/4 h-12 rounded-xl" 
                         onClick={handleOrder}
                         disabled={loading || !selectedTime} 
                     >
                         Completar Orden
                     </button>
                 </div>
+
             </div>
             <Footer />
         </>
     );
 }
+
