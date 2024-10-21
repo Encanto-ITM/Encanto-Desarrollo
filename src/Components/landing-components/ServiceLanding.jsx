@@ -2,7 +2,7 @@ export function ServiceLanding() {
     return (
         <section className="py-16 bg-gray-100" id="services">
             <div className="container mx-auto text-center">
-                <h3 className="text-4xl font-bold mb-6 text-gray-800">Nuetsros Servicios</h3>
+                <h3 className="text-4xl font-bold mb-6 text-gray-800">Nuestros Servicios</h3>
                 <p className="mb-16 max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed p-4">
                 Descubra nuestra gama de servicios diseñados para realzar su belleza y bienestar. Ofrecemos tratamientos personalizados y asesoramiento especializado para ayudarle a alcanzar sus objetivos de belleza. Experimente la diferencia con nuestras ofertas de alta calidad diseñadas especialmente para usted.                </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-4">

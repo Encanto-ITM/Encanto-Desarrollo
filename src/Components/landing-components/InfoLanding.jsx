@@ -22,7 +22,7 @@ export function InfoLanding() {
                 Miles de personas ya han transformado sus rutinas de belleza con nosotros. Únase a ellos y experimente la diferencia.                </p>
                
                 <button className="bg-white text-purple font-bold py-3 px-8 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300 mt-8">
-                    Aprende mas
+                    Aprende más
                 </button>
             </div>
         </div>

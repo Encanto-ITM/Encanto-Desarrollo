@@ -27,7 +27,7 @@ const handleClick = () => {
                                     <p>{service.price}</p>
                                 </div>
                                 <div className="flex justify-center">
-                                    <GenericButton white placeholder="Encuentra mas" onClick={() => handleClick()} />
+                                    <GenericButton white placeholder="Encuentra más" onClick={() => handleClick()} />
                                 </div>  
                             </div>
                         ))

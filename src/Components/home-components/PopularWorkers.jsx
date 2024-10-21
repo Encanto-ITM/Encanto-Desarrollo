@@ -73,7 +73,7 @@ export function PopularWorkers({ workers }) {
                                                 <div className="rounded-full bg-purple p-1">
                                                     <ChevronRight className="text-white" />
                                                 </div>
-                                                <span className="ml-2 text-purple">Averigua mas</span>
+                                                <span className="ml-2 text-purple">Averigua más</span>
                                             </button>
                                         </div>
                                     </div>
