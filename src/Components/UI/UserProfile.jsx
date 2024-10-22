@@ -39,11 +39,13 @@ export default function UserProfile({ open, onClose }) {
 
     return (
         <Modal open={open} onClose={onClose}>
-            <div className="fixed inset-0 flex items-start justify-end p-4 pt-20"> {/* Mismo estilo que el modal de edición */}
+            <div className="fixed inset-0 flex items-start justify-end p-4 pt-20">
                 <div className="bg-purple text-white max-w-lg w-full rounded-lg p-6 relative shadow-lg overflow-y-auto" style={{ maxHeight: '90vh' }}>
                     <button onClick={onClose} className="absolute top-4 right-4 text-white text-lg">X</button>
                     <div className='flex flex-col items-center text-center'>
-                        <ImageUploader /> 
+                        <div className="w-full h-full bg-gray-300 flex items-center justify-center rounded-full border-2 border-gray-300">
+                        <img className="w-32 h-32 rounded-full mx-auto" src={userData.profilephoto || '/img/Death Note.jpg'} alt={`${userData.name} ${userData.lastname}`} />
+                        </div>
                         <h2 className="text-2xl font-bold mt-4">{userData.name}</h2>
                         <h3 className="text-xl font-semibold mb-2">{userData.lastname}</h3>
                         <p className="text-sm mb-2">{userData.email}</p>
