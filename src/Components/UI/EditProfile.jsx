@@ -4,7 +4,6 @@ import Modal from '@mui/material/Modal';
 import ImageUploader from './ImageUploader';
 import SignInputs from './SignInputs';
 
-
 export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
@@ -88,45 +87,49 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
   return (
     <Modal open={open} onClose={onClose}>
       <div className="fixed inset-0 flex items-start justify-end p-4 pt-20">
-        <div className="bg-purple text-white max-w-sm rounded-lg p-6 relative w-full shadow-lg">
+        <div className="bg-purple text-white max-w-lg w-full rounded-lg p-6 relative shadow-lg overflow-y-auto" style={{ maxHeight: '90vh' }}>
           <button onClick={onClose} className="absolute top-4 right-4 text-white text-lg">X</button>
           <h2 className="text-2xl font-bold text-center mb-4">Editar Perfil</h2>
           <ImageUploader onImageChange={handleImageChange} />
-          <div className='flex flex-col items-center gap-4 mt-4 text-black'> 
-            <SignInputs 
-              placeholder={"Nombre"} 
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <SignInputs 
-              placeholder={"Apellido"} 
-              value={lastname}
-              onChange={(e) => setLastname(e.target.value)}
-            />
-            <SignInputs 
-              placeholder={"Correo Electrónico"} 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <SignInputs 
-              placeholder={"Descripción"} 
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <SignInputs 
-              type="password" 
-              placeholder={"Contraseña Vieja"} 
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
-            />
-            <SignInputs 
-              type="password" 
-              placeholder={"Nueva Contraseña"} 
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-1 mt-4 text-black'> 
+            <div className="flex flex-col items-center justify-center gap-3 mt-2">
+              <SignInputs 
+                placeholder={"Nombre"} 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <SignInputs 
+                placeholder={"Apellido"} 
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
+              />
+              <SignInputs 
+                placeholder={"Correo Electrónico"} 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col items-center justify-center gap-3 mt-2">
+              <SignInputs 
+                placeholder={"Descripción"} 
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <SignInputs 
+                type="password" 
+                placeholder={"Contraseña Vieja"} 
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+              />
+              <SignInputs 
+                type="password" 
+                placeholder={"Nueva Contraseña"} 
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-10">
             <button 
               onClick={handleUpdate}
               className={`bg-white text-purple rounded-lg w-full py-3 hover:bg-gray-200 transition duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}

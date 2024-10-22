@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import UserProfile from '../UI/UserProfile';
 import { fetchUserData } from '../hooks/userData';
 
@@ -8,7 +8,7 @@ export function Nav() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const [isImageLoading, setIsImageLoading] = useState(true); 
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const navigate = useNavigate(); 
 
   const openModal = (e) => {
     e.preventDefault();
@@ -36,13 +36,13 @@ export function Nav() {
 
   const handleServiceClick = (event) => {
     event.preventDefault(); 
-    navigate(`/results`); 
+    navigate(`/results/1`); 
   };
 
   return (
     <nav className="bg-purple text-white px-8 py-1 flex justify-between items-center relative z-20">
       <div className="flex items-center">
-        <a>
+        <a href='/home'>
           <img
             src="/img/Logo-Landing.png"
             alt="TuLook Logo"
@@ -65,13 +65,13 @@ export function Nav() {
 
       <ul className={menuClasses}>
         <li className="transition duration-500 hover:scale-110">
-          <a onClick={handleServiceClick}>Services</a>
+          <a onClick={handleServiceClick}>Servicios</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
-          <a href="/aboutus">About Us</a>
+          <a href="/aboutus">Nosotros</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
-          <a href="#">Contact Us</a>
+          <a href="#">Contactanos</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
           <a href="#" onClick={openModal} className="flex items-center justify-center focus:outline-none gap-4">

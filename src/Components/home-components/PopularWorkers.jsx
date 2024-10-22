@@ -40,7 +40,7 @@ export function PopularWorkers({ workers }) {
         <section className="py-12 bg-gray-100">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-                    Know Some Workers
+                    Conoce nuestros colaboradores
                 </h2>
 
                 {workers && workers.length > 0 ? (
@@ -73,7 +73,7 @@ export function PopularWorkers({ workers }) {
                                                 <div className="rounded-full bg-purple p-1">
                                                     <ChevronRight className="text-white" />
                                                 </div>
-                                                <span className="ml-2 text-purple">Find out more</span>
+                                                <span className="ml-2 text-purple">Averigua más</span>
                                             </button>
                                         </div>
                                     </div>
