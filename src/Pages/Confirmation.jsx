@@ -10,7 +10,7 @@ export function Confirmation() {
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
-    const formattedDate = selectedTime ? dayjs(selectedTime.$d).format('HH:mm : DD/MM/YYYY') : 'Fecha no disponible';
+    const formattedDate = selectedTime ? dayjs(selectedTime.$d).format('DD/MM/YYYY : HH:mm') : 'Fecha no disponible';
 
     const handleOrder = async () => {
         try {
@@ -28,9 +28,9 @@ export function Confirmation() {
                 })
             });
     
-            if (!response.ok) {
-                throw new Error('Failed to create appointment');
-            }
+                if (!response.ok) {
+                    throw new Error('Failed to create appointment');
+                }
     
             const data = await response.json();
             setSubmitted(true); 
@@ -63,7 +63,13 @@ export function Confirmation() {
                     <p>No hay información de servicio disponible.</p>
                 )}
 
+                {message && (
+                    <div className="mt-4 text-center text-red-600">
+                        {message}
+                    </div>
+                )}
                 <div className="flex justify-center mt-6 mb-20">
+                    
                     <button  
                         className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/2 h-10 rounded-xl"
                         onClick={handleOrder}
@@ -71,13 +77,10 @@ export function Confirmation() {
                     >
                         Completar Orden
                     </button>
+                    
                 </div>
 
-                {message && (
-                    <div className="mt-4 text-center text-red-600">
-                        {message}
-                    </div>
-                )}
+                
             </div>
             <Footer />
         </div>

@@ -99,13 +99,20 @@ export function Order() {
 
                 {warningMessage && <p className="text-center text-red-500 mb-4">{warningMessage}</p>} 
 
-                <div className="flex justify-center mt-6 mb-20">
+                <div className="flex justify-center mt-6 mb-20 gap-4">
                     <button  
                         className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white px-10 py-4 rounded-xl" 
                         onClick={handleOrder}
                         disabled={loading} 
                     >
                         Completar Orden
+                    </button>
+                    <button  
+                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white px-10 py-4 rounded-xl" 
+                        onClick={handleOrder}
+                        disabled={loading} 
+                    >
+                        Agregar al carrito
                     </button>
                 </div>
             </div>
