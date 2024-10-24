@@ -28,6 +28,7 @@ export function Calendario({ onTimeSelect }) {
           borderRadius: '10px',
           overflow: 'hidden', 
           bgcolor: 'background.paper', 
+          marginBottom: '15px',
         }}
       >
         <StaticDateTimePicker 

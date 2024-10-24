@@ -6,12 +6,43 @@ import { useState } from 'react';
 
 export function Confirmation() {
     const location = useLocation();
-    const { service } = location.state || {};
+    const { service, selectedTime } = location.state || {};
     const [message, setMessage] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
-    const handleOrder = () => {
-        setMessage('Registrese por favor');
+    const formattedDate = selectedTime ? dayjs(selectedTime.$d).format('HH:mm : DD/MM/YYYY') : 'Fecha no disponible';
+
+    const handleOrder = async () => {
+        try {
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/appointments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    service_id: service.id,
+                    owner_id: service.owner_id,
+                    date: formattedDate, 
+                    price: service.price,
+                    location: service.details,
+                })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to create appointment');
+            }
+    
+            const data = await response.json();
+            setSubmitted(true); 
+            setMessage('Reserva completada con éxito!'); 
+            
+        } catch (error) {
+
+            setMessage('Error al completar la reserva. Intente nuevamente.'); 
+        }
     };
+    
+
 
     return (
         <div>
@@ -26,7 +57,7 @@ export function Confirmation() {
                         <p>Duración aproximada: {service.aprox_time}</p>
                         <p>Detalles: {service.details}</p>
                         <p>Consideraciones: {service.considerations}</p>
-                        <p>Fecha: {dayjs(service.date).format('DD/MM/YYYY')}</p>
+                        <p>Hora seleccionada: {formattedDate}</p> 
                     </div>
                 ) : (
                     <p>No hay información de servicio disponible.</p>
@@ -36,6 +67,7 @@ export function Confirmation() {
                     <button  
                         className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/2 h-10 rounded-xl"
                         onClick={handleOrder}
+                        disabled={submitted} 
                     >
                         Completar Orden
                     </button>
