@@ -1,3 +1,4 @@
+// CartHistory.js
 import React from 'react';
 import { useCart } from './CartContext';
 import { useNavigate } from 'react-router-dom';
@@ -6,15 +7,20 @@ export function CartHistory() {
     const { cart, history, removeFromCart } = useCart();
     const navigate = useNavigate();
 
-    // Filtra los elementos de tipo "ADD" y que existan en el carrito actual.
-    const addedItems = history.filter(action => action.type === 'ADD' && cart.some(item => item.id === action.item.id));
+    // Filtrar los elementos que se han agregado al carrito
+    const addedItems = history.filter(action => 
+        action.type === 'ADD' && cart.some(item => item.id === action.item.id)
+    );
 
     const handleConfirmOrder = (item) => {
-        navigate(`/confirmation/${item.id}`, { state: { service: item } });
+        // Asegúrate de que el tiempo seleccionado está disponible en el item
+        const selectedTime = item.selectedTime || null; // Si tienes un campo para tiempo seleccionado
+
+        navigate(`/confirmation/${item.id}`, { state: { service: item, selectedTime } });
     };
 
     return (
-        <div className="overflow-y-auto h-[48rem] hidenscroll">
+        <div className="overflow-y-auto h-[48rem] hidenscroll mb-16">
             <div className="container mx-auto">
                 <h2 className="text-2xl font-bold my-8 text-center">Historial del Carrito:</h2>
                 {addedItems.length === 0 ? (
@@ -30,25 +36,25 @@ export function CartHistory() {
                                 />
                                 <h2 className="text-xl font-semibold mt-2">{action.item.name}</h2>
                                 <h2 className="text-xl font-semibold mt-2">₡{action.item.price}</h2>
-                                <p className="text-sm text-gray-600 line-clamp-2">
-                                    {action.item.details || 'Detalles no disponibles'}
-                                </p>
                                 <p className="text-xs mt-2">
                                     {action.timestamp.toLocaleString()} - Agregado
                                 </p>
-                                
-                                <button
-                                    className="mt-4 bg-red-500 text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-red-700"
-                                    onClick={() => removeFromCart(action.item.id)}
-                                >
-                                    Eliminar del Carrito
-                                </button>
-                                
-                                <button
-                                    className="mt-2 bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-purple-700"
+                                {action.item.selectedTime && (
+                                    <p className="text-xs mt-2">
+                                        Hora seleccionada: {new Date(action.item.selectedTime).toLocaleString()}
+                                    </p>
+                                )}
+                                <button 
+                                    className="mt-4 bg-purple text-white rounded-md p-2"
                                     onClick={() => handleConfirmOrder(action.item)}
                                 >
-                                    Confirmar Servicio
+                                    Confirmar Orden
+                                </button>
+                                <button 
+                                    className="mt-4 bg-red-500 text-white rounded-md p-2"
+                                    onClick={() => removeFromCart(action.item.id)}
+                                >
+                                    Eliminar
                                 </button>
                             </div>
                         ))}
