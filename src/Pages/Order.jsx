@@ -49,7 +49,11 @@ export function Order() {
 
     const handleAddToCart = () => {
         if (service) {
-            addToCart(service); 
+            const serviceWithTime = {
+                ...service,
+                selectedTime: selectedTime, // Incluir el tiempo seleccionado
+            };
+            addToCart(serviceWithTime);
             setWarningMessage('Servicio agregado al carrito.');
         }
     };
