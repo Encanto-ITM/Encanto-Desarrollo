@@ -11,6 +11,9 @@ import { WorkerProfile } from './Pages/WorkerProfile';
 import { Order } from './Pages/Order';
 import {List} from './Pages/List';
 import AboutUs from './Pages/AboutUs';
+import { CartProvider } from './Components/Cart/CartContext';
+import CartList from './Pages/CartList';
+
 
 export function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,10 +31,12 @@ export function App() {
 
     return (
         <div>
+            <CartProvider>
             <Routes>
                 <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/landing"} />} />
                 
                 <Route path="/login" element={<Login />} />
+                <Route path="/cartlist" element={<CartList />} />
                 <Route path="/loginem" element={<LoginEm />} />
                 <Route path="/resetpassword" element={<ResetPassword />} />
                 <Route path="/landing" element={<Landing />} />
@@ -46,6 +51,7 @@ export function App() {
                 
                 <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
+            </CartProvider>
         </div>
     );
 }

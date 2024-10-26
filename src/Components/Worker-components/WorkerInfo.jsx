@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import GenericButton from '../UI/GenericButton';
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaTiktok, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import UpdateInfoModal from './UpdateInfoModal';
 import NewServiceModal from './NewServiceModal';
-import { fetchUserData } from '../hooks/userData'; 
-import LoadingSpinner from '../UI/LoadingSpinner'; 
+import { fetchUserData } from '../hooks/userData';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 export function WorkerInfo() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isNewServiceModalOpen, setIsNewServiceModalOpen] = useState(false); 
+    const [isNewServiceModalOpen, setIsNewServiceModalOpen] = useState(false);
     const [workerData, setWorkerData] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);  
+    const [isLoading, setIsLoading] = useState(true);
     const location = useLocation();
     const { worker } = location.state || {};
 
@@ -20,7 +20,7 @@ export function WorkerInfo() {
         const getUserData = async () => {
             const user = await fetchUserData();
             setCurrentUser(user);
-            setIsLoading(false);  
+            setIsLoading(false);
         };
 
         getUserData();
@@ -32,8 +32,8 @@ export function WorkerInfo() {
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-    const openNewServiceModal = () => setIsNewServiceModalOpen(true); 
-    const closeNewServiceModal = () => setIsNewServiceModalOpen(false); 
+    const openNewServiceModal = () => setIsNewServiceModalOpen(true);
+    const closeNewServiceModal = () => setIsNewServiceModalOpen(false);
 
     const handleUpdate = (updatedInfo) => {
         setWorkerData(prevData => ({ ...prevData, ...updatedInfo }));
@@ -41,7 +41,7 @@ export function WorkerInfo() {
     };
 
     if (isLoading) {
-        return <LoadingSpinner />;  
+        return <LoadingSpinner />;
     }
 
     if (!workerData) {
@@ -94,35 +94,119 @@ export function WorkerInfo() {
                             </p>
                         </div>
                     </div>
-                    <div className="mt-6 ">
+                    <div>
                         <p className="text-lg font-semibold">Redes Sociales</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 items-center">
+                        <div className="grid grid-cols-2 gap-4 mt-4 items-center">
                             <div className="flex items-center gap-2">
                                 <div className="bg-purple text-white p-2 rounded-md">
                                     <FaFacebookF />
                                 </div>
-                                <span className="text-gray-600">{workerData.facebook || 'No se ha registrado'}</span>
+                                {workerData.facebook ? (
+                                    <a
+                                        href={`https://www.facebook.com/${workerData.facebook}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-600 "
+                                    >
+                                        {workerData.facebook}
+                                    </a>
+                                ) : (
+                                    <span className="text-gray-500">No registrado</span>
+                                )}
                             </div>
+
                             <div className="flex items-center gap-2">
                                 <div className="bg-purple text-white p-2 rounded-md">
                                     <FaWhatsapp />
                                 </div>
-                                <span className="text-gray-600">{workerData.whatsapp || 'No se ha registrado'}</span>
+                                {workerData.whatsapp ? (
+                                    <a
+                                        href={`https://wa.me/${workerData.whatsapp}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-600 "
+                                    >
+                                        {workerData.whatsapp}
+                                    </a>
+                                ) : (
+                                    <span className="text-gray-500">No registrado</span>
+                                )}
                             </div>
+
                             <div className="flex items-center gap-2">
                                 <div className="bg-purple text-white p-2 rounded-md">
                                     <FaInstagram />
                                 </div>
-                                <span className="text-gray-600">{workerData.instagram || 'No se ha registrado'}</span>
+                                {workerData.instagram ? (
+                                    <a
+                                        href={`https://www.instagram.com/${workerData.instagram}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-600 "
+                                    >
+                                        {workerData.instagram}
+                                    </a>
+                                ) : (
+                                    <span className="text-gray-500">No registrado</span>
+                                )}
                             </div>
+
                             <div className="flex items-center gap-2">
                                 <div className="bg-purple text-white p-2 rounded-md">
                                     <FaTwitter />
                                 </div>
-                                <span className="text-gray-600">{workerData.twitter || 'No se ha registrado'}</span>
+                                {workerData.x ? (
+                                    <a
+                                        href={`https://twitter.com/${workerData.x}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-600 "
+                                    >
+                                        {workerData.x}
+                                    </a>
+                                ) : (
+                                    <span className="text-gray-500">No registrado</span>
+                                )}
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                <div className="bg-purple text-white p-2 rounded-md">
+                                    <FaTiktok />
+                                </div>
+                                {workerData.tiktok ? (
+                                    <a
+                                        href={`https://www.tiktok.com/@${workerData.tiktok}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-600 "
+                                    >
+                                        {workerData.tiktok}
+                                    </a>
+                                ) : (
+                                    <span className="text-gray-500">No registrado</span>
+                                )}
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                <div className="bg-purple text-white p-2 rounded-md">
+                                    <FaLinkedinIn />
+                                </div>
+                                {workerData.linkedin ? (
+                                    <a
+                                        href={`https://www.linkedin.com/in/${workerData.linkedin}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-600"
+                                    >
+                                        {workerData.linkedin}
+                                    </a>
+                                ) : (
+                                    <span className="text-gray-500">No registrado</span>
+                                )}
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
