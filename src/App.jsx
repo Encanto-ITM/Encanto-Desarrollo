@@ -9,6 +9,7 @@ import { Results } from './Pages/Results';
 import { Home } from './Pages/Home';
 import { WorkerProfile } from './Pages/WorkerProfile';
 import { Order } from './Pages/Order';
+import {List} from './Pages/List';
 import AboutUs from './Pages/AboutUs';
 
 export function App() {
@@ -41,7 +42,7 @@ export function App() {
                 <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />} />
                 <Route path="/order/:id" element={<PrivateRoute element={<Order />} />} />
                 <Route path="/confirmation/:id" element={<PrivateRoute element={<Confirmation />} />} />
-               
+                <Route path="/list/:id" element={<PrivateRoute element={<List/>} />} />
                 
                 <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
