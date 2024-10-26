@@ -1,18 +1,38 @@
 import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'; // Importa useNavigate
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { fetchUserData } from '../Components/hooks/userData.js';
+import { useState, useEffect } from 'react';
 
 export function Confirmation() {
     const location = useLocation();
+    const navigate = useNavigate(); // Crea la instancia de navigate
     const { service, selectedTime } = location.state || {};
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [user, setUser] = useState(null); 
+    const formattedDate = selectedTime ? dayjs(selectedTime.$d).format('YYYY-MM-DD HH:mm:ss') : 'Fecha no disponible';
 
-    const formattedDate = selectedTime ? dayjs(selectedTime.$d).format('DD/MM/YYYY : HH:mm') : 'Fecha no disponible';
-
+    useEffect(() => {
+        const getUserData = async () => {
+            try {
+                const userData = await fetchUserData();
+                setUser(userData);
+            } catch (error) {
+                setMessage('Error al obtener los datos del usuario.');
+            }
+        };
+        
+        getUserData();
+    }, []);
+    
     const handleOrder = async () => {
+        if (!user) {
+            setMessage('Los datos del usuario no están disponibles.');
+            return;
+        }
+        console.log('Datos del usuario:', user);
         try {
             const response = await fetch('https://tulookapiv2.vercel.app/api/api/appointments', {
                 method: 'POST',
@@ -22,27 +42,25 @@ export function Confirmation() {
                 body: JSON.stringify({
                     service_id: service.id,
                     owner_id: service.owner_id,
+                    applicant: user.id, 
                     date: formattedDate, 
-                    price: service.price,
+                    total: service.price,
                     location: service.details,
                 })
             });
     
-                if (!response.ok) {
-                    throw new Error('Failed to create appointment');
-                }
+            if (!response.ok) {
+                throw new Error('Failed to create appointment');
+            }
     
             const data = await response.json();
             setSubmitted(true); 
-            setMessage('Reserva completada con éxito!'); 
+            navigate(`/list/${user.id}`); 
             
         } catch (error) {
-
             setMessage('Error al completar la reserva. Intente nuevamente.'); 
         }
     };
-    
-
 
     return (
         <div>
@@ -69,7 +87,6 @@ export function Confirmation() {
                     </div>
                 )}
                 <div className="flex justify-center mt-6 mb-20">
-                    
                     <button  
                         className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/2 h-10 rounded-xl"
                         onClick={handleOrder}
@@ -77,10 +94,7 @@ export function Confirmation() {
                     >
                         Completar Orden
                     </button>
-                    
                 </div>
-
-                
             </div>
             <Footer />
         </div>

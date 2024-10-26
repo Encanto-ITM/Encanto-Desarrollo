@@ -37,36 +37,48 @@ export default function UserProfile({ open, onClose }) {
         navigate(`/workerprofile/${userData.id}`, { state: { worker: userData } });
     };
 
+    const handleOrders= () => {
+        navigate(`/list/${userData.id}`);
+        onClose();
+    }
+
+
     return (
         <Modal open={open} onClose={onClose}>
             <div className="fixed inset-0 flex items-start justify-end p-4 pt-20">
                 <div className="bg-purple text-white max-w-lg w-full rounded-lg p-6 relative shadow-lg overflow-y-auto" style={{ maxHeight: '90vh' }}>
                     <button onClick={onClose} className="absolute top-4 right-4 text-white text-lg">X</button>
                     <div className='flex flex-col items-center text-center'>
-                        <div className="w-full h-full bg-gray-300 flex items-center justify-center rounded-full border-2 border-gray-300">
-                        <img className="w-32 h-32 rounded-full mx-auto" src={userData.profilephoto || '/img/Death Note.jpg'} alt={`${userData.name} ${userData.lastname}`} />
+                        <div className="w-1/3 h-full bg-gray-300 flex items-center justify-center rounded-full border-2 border-gray-300">
+                            <img className="w-32 h-32 rounded-full mx-auto" src={userData.profilephoto || '/img/Death Note.jpg'} alt={`${userData.name} ${userData.lastname}`} />
                         </div>
-                        <h2 className="text-2xl font-bold mt-4">{userData.name}</h2>
-                        <h3 className="text-xl font-semibold mb-2">{userData.lastname}</h3>
-                        <p className="text-sm mb-2">{userData.email}</p>
-                        <p className="text-sm mb-6 italic">{userData.description || 'No hay descripción disponible'}</p>
+                            <h2 className="text-2xl font-bold mt-4">{userData.name}</h2>
+                            <h3 className="text-xl font-semibold mb-2">{userData.lastname}</h3>
+                            <p className="text-sm mb-2">{userData.email}</p>
+                            <p className="text-sm mb-6 italic">{userData.description || 'No hay descripción disponible'}</p>
                         <div className="flex justify-center w-full">
                             <button
                                 onClick={openModal}
-                                className="bg-white text-purple rounded-lg w-full py-4 hover:bg-gray-200 transition duration-300 mb-2 text-lg font-semibold">
+                                className="mt-4 text-white rounded-lg w-full py-2 hover:scale-105 transition duration-300 text-lg font-semibold">
                                 Editar
                             </button>
                         </div>
                         {userData.acounttype_id === 3 && ( 
+                            
                             <button
                                 onClick={handleGoToWorkerProfile}
-                                className="bg-gray-700 text-white rounded-lg w-full py-4 hover:bg-gray-600 transition duration-300 mb-2 text-lg font-semibold">
+                                className="text-white rounded-lg w-full py-4 hover:scale-105 transition duration-300 mb-2 text-lg font-semibold">
                                 Ver perfil
                             </button>
                         )}
                         <button
+                                onClick={handleOrders}
+                                className=" text-white rounded-lg w-full py-4 hover:scale-105 transition duration-300 mb-2 text-lg font-semibold">
+                                Ver Ordenes
+                            </button>
+                        <button
                             onClick={logout}
-                            className="mt-4 bg-red-500 text-white rounded-lg w-full py-4 hover:bg-red-600 transition duration-300 text-lg font-semibold">
+                            className=" text-white rounded-lg w-full py-2 hover:scale-105 transition duration-300 text-lg font-semibold">
                             Cerrar Sesión
                         </button>
                     </div>
