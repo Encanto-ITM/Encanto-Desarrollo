@@ -57,21 +57,21 @@ export function List() {
             <Nav />
             <h2 className="text-2xl font-bold text-center py-4 my-4 border-b">Registro de citas</h2>
             <div className="flex justify-center mt-10">
-                <div className="w-full max-w-lg bg-white shadow-lg rounded-lg overflow-hidden mb-10">
-                    <div className="p-6">
-                        {message && <p className="text-red-500 text-center">{message}</p>}
+                <div className="w-full max-w-6xl p-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {message && <p className="text-red-500 text-center col-span-3">{message}</p>}
                         {appointments.length > 0 ? (
                             appointments.map((appointment) => (
-                                <div key={appointment.id} className="mb-4 p-4 border-b last:border-b-0">
+                                <div key={appointment.id} className="bg-white shadow-lg rounded-lg p-4 border">
                                     <p className="font-semibold">ID: <span className="font-normal">{appointment.id}</span></p>
                                     <p className="font-semibold">Estado: <span className="font-normal">{appointment.status}</span></p>
                                     <p className="font-semibold">Total: <span className="font-normal">${appointment.total}</span></p>
-                                    <p className="font-semibold">Ubicación: <span className="font-normal">{appointment.location}</span></p>
+                                    <p className="font-semibold">Detalles: <span className="font-normal">{appointment.location}</span></p>
                                     <p className="font-semibold">Fecha: <span className="font-normal">{appointment.date}</span></p>
                                 </div>
                             ))
                         ) : (
-                            <p className="text-center">No hay citas disponibles.</p>
+                            <p className="text-center col-span-3">No hay citas disponibles.</p>
                         )}
                     </div>
                 </div>
@@ -79,6 +79,7 @@ export function List() {
             <Footer />
         </div>
     );
+    
     
     
 }
