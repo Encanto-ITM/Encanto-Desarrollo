@@ -1,58 +1,65 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ServicesCard({ service, fetchCurrentUser }) {
     const [currentUser, setCurrentUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getCurrentUser = async () => {
-            const user = await fetchCurrentUser(); 
-            setCurrentUser(user);
+            if (fetchCurrentUser) {
+                const user = await fetchCurrentUser();
+                setCurrentUser(user);
+            }
         };
 
         getCurrentUser();
-    }, []);
+    }, [fetchCurrentUser]);
 
     const handleActivate = () => {
-       
         console.log(`Activando el servicio: ${service.name}`);
     };
 
     const handleDeactivate = () => {
-       
         console.log(`Desactivando el servicio: ${service.name}`);
     };
 
-    const isOwner = currentUser && currentUser.id === service.ownerId; 
+    const handleViewMore = () => {
+        navigate(`/service/${service.id}`);
+    };
+
+    const isOwner = currentUser && currentUser.id === service.owner_id;
 
     return (
-        <div className="bg-white shadow-lg rounded-md p-4 flex flex-col h-full">
+        <div
+            className={`shadow-lg rounded-md p-4 flex flex-col h-full ${service.is_active !== 1 ? 'bg-gray-300' : ''}`}
+        >
             <img
-                src={service.imageUrl}
+                src={service.image}
                 alt={service.name}
                 className="w-full h-48 object-cover rounded-t-md"
             />
             <h2 className="text-xl font-semibold mt-2">{service.name}</h2>
-            <p className="text-sm text-gray-600 line-clamp-2">
-                {service.description}
-            </p>
+            <p className="text-sm text-gray-600 line-clamp-2">{service.details}</p>
             {isOwner ? (
                 <div className="flex justify-between mt-4">
                     <button
                         className="bg-green-500 text-white rounded-md px-4 py-2 hover:bg-green-600"
                         onClick={handleActivate}
                     >
-                        Activate
+                        Activar
                     </button>
                     <button
                         className="bg-red-500 text-white rounded-md px-4 py-2 hover:bg-red-600"
                         onClick={handleDeactivate}
                     >
-                        Deactivate
+                        Desactivar
                     </button>
                 </div>
             ) : (
                 <button
-                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-black"
+                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-purple-800"
+                    onClick={handleViewMore}
                 >
                     Ver más
                 </button>

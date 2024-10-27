@@ -9,18 +9,14 @@ import Loading from '../Components/Worker-components/Loading';
 
 export function WorkerProfile() {
     const { id } = useParams(); 
-    console.log("Worker ID from URL:", id); 
-
     const [loading, setLoading] = useState(true); 
 
-   
     useEffect(() => {
         const handleScroll = () => {
             window.scrollTo(0, 0);
             setLoading(false); 
         };
-        
-       
+
         const timeoutId = setTimeout(handleScroll, 100); 
 
         return () => clearTimeout(timeoutId); 
@@ -37,7 +33,7 @@ export function WorkerProfile() {
             <div className='px-8'>
                 <WorkerInfo workerId={id} /> 
                 <div className='py-10'>
-                    <ServicesContainer /> 
+                    <ServicesContainer ownerId={id} /> {/* Pasando el ownerId */}
                 </div>
             </div>
             <Footer />
