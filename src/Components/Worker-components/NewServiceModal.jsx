@@ -9,7 +9,6 @@ export default function NewServiceModal({ open, onClose, worker }) {
         materialList: '',
         details: '',
         schedule: '',
-        mode: '',
         considerations: '',
         aproxTime: '',
         typeServiceId: 9,
@@ -67,7 +66,6 @@ export default function NewServiceModal({ open, onClose, worker }) {
         if (!data.materialList) formErrors.materialList = 'La lista de materiales es requerida.';
         if (!data.details) formErrors.details = 'Los detalles son requeridos.';
         if (!data.schedule) formErrors.schedule = 'El horario es requerido.';
-        if (!data.mode) formErrors.mode = 'El modo es requerido.';
         if (!data.considerations) formErrors.considerations = 'Las consideraciones son requeridas.';
         if (!data.aproxTime) formErrors.aproxTime = 'El tiempo aproximado es requerido.';
         return formErrors;
@@ -88,7 +86,6 @@ export default function NewServiceModal({ open, onClose, worker }) {
             material_list: serviceData.materialList,
             details: serviceData.details,
             schedule: serviceData.schedule,
-            mode: serviceData.mode,
             considerations: serviceData.considerations,
             aprox_time: serviceData.aproxTime,
             type_service_id: serviceData.typeServiceId,
@@ -204,18 +201,6 @@ export default function NewServiceModal({ open, onClose, worker }) {
                                 className="mt-1 p-2 border rounded w-full"
                             />
                             {submitted && errors.schedule && <p className="text-red-500 text-sm mt-1">{errors.schedule}</p>}
-                        </div>
-
-                        <div className="mt-4">
-                            <label className="block text-sm font-medium">Modo</label>
-                            <input
-                                type="text"
-                                name="mode"
-                                value={serviceData.mode}
-                                onChange={handleChange}
-                                className="mt-1 p-2 border rounded w-full"
-                            />
-                            {submitted && errors.mode && <p className="text-red-500 text-sm mt-1">{errors.mode}</p>}
                         </div>
 
                         <div className="mt-4">
