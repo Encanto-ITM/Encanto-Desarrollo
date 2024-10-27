@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import { ShoppingCart } from 'lucide-react'; // Importa el ícono de carrito de compras
 import UserProfile from '../UI/UserProfile';
 import { fetchUserData } from '../hooks/userData';
+import { useCart } from '../Cart/CartContext';
 
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [isImageLoading, setIsImageLoading] = useState(true); 
-  const navigate = useNavigate(); 
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const navigate = useNavigate();
+  const { cart } = useCart();
 
   const openModal = (e) => {
     e.preventDefault();
@@ -35,8 +38,12 @@ export function Nav() {
   }, []);
 
   const handleServiceClick = (event) => {
-    event.preventDefault(); 
-    navigate(`/results/1`); 
+    event.preventDefault();
+    navigate(`/results/1`);
+  };
+
+  const handleCartClick = () => {
+    navigate('/cartlist');
   };
 
   return (
@@ -74,12 +81,24 @@ export function Nav() {
           <a href="#">Contactanos</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
+          <a href="#" onClick={handleCartClick} className="flex items-center justify-center focus:outline-none gap-4">
+            <div className="relative flex items-start">
+              <ShoppingCart className="w-6 h-6" />
+              {cart.length > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs transform translate-x-1 translate-y-1">
+                  {cart.length}
+                </span>
+              )}
+            </div>
+          </a>
+        </li>
+        <li className="transition duration-500 hover:scale-110">
           <a href="#" onClick={openModal} className="flex items-center justify-center focus:outline-none gap-4">
             <div className="flex flex-col items-center">
               <div className="w-10 h-10 overflow-hidden border-2 border-gray-400 rounded-full transition-transform hover:scale-110">
                 {isImageLoading && (
                   <img
-                    src="/img/placeholder.jpg" 
+                    src="/img/placeholder.jpg"
                     className="object-cover w-full h-full"
                     alt="loading"
                   />
@@ -88,8 +107,8 @@ export function Nav() {
                   src={userData?.profilephoto || '/img/Death_Note.jpg'}
                   className={`object-cover w-full h-full ${isImageLoading ? 'hidden' : ''}`}
                   alt="avatar"
-                  onLoad={() => setIsImageLoading(false)} 
-                  onError={() => setIsImageLoading(false)} 
+                  onLoad={() => setIsImageLoading(false)}
+                  onError={() => setIsImageLoading(false)}
                 />
               </div>
             </div>

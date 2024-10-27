@@ -6,12 +6,24 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
     const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
     const [profession, setProfession] = useState('');
+    const [facebook, setFacebook] = useState('');
+    const [instagram, setInstagram] = useState('');
+    const [whatsapp, setWhatsapp] = useState('');
+    const [x, setX] = useState('');
+    const [tiktok, setTiktok] = useState('');
+    const [linkedin, setLinkedin] = useState('');
 
     useEffect(() => {
         if (worker) {
             setAddress(worker.address || '');
             setDescription(worker.description || '');
             setProfession(worker.professions_id || '');
+            setFacebook(worker.facebook || '');
+            setInstagram(worker.instagram || '');
+            setWhatsapp(worker.whatsapp || '');
+            setX(worker.x || '');
+            setTiktok(worker.tiktok || '');
+            setLinkedin(worker.linkedin || '');
         }
     }, [worker, open]);
 
@@ -20,9 +32,15 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
             address,
             description,
             professions_id: profession,
+            facebook,
+            instagram,
+            whatsapp,
+            x,
+            tiktok,
+            linkedin,
         };
 
-        console.log('Updated Info:', updatedInfo);
+        console.log('Datos actualizados:', updatedInfo);
 
         try {
             const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${worker.id}`, {
@@ -33,16 +51,16 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                 body: JSON.stringify(updatedInfo),
             });
 
-            const responseData = await response.json(); 
-            console.log('Response from API:', responseData);
+            const responseData = await response.json();
+            console.log('Respuesta de la API:', responseData);
 
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${responseData.message || 'Error desconocido'}`);
             }
 
             console.log('Información actualizada correctamente');
-            onUpdate(updatedInfo); // Llama a onUpdate con la nueva información
-            onClose(); 
+            onUpdate(updatedInfo);
+            onClose();
         } catch (error) {
             console.error('Error al actualizar la información:', error);
         }
@@ -99,6 +117,66 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Facebook</label>
+                        <input
+                            type="text"
+                            value={facebook}
+                            onChange={(e) => setFacebook(e.target.value)}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Instagram</label>
+                        <input
+                            type="text"
+                            value={instagram}
+                            onChange={(e) => setInstagram(e.target.value)}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Whatsapp</label>
+                        <input
+                            type="text"
+                            value={whatsapp}
+                            onChange={(e) => setWhatsapp(e.target.value)}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">X</label>
+                        <input
+                            type="text"
+                            value={x}
+                            onChange={(e) => setX(e.target.value)}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Tiktok</label>
+                        <input
+                            type="text"
+                            value={tiktok}
+                            onChange={(e) => setTiktok(e.target.value)}
+                            className="mt-1 p-2 border rounded w-full"
+                        />
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium">Linkedin</label>
+                        <input
+                            type="text"
+                            value={linkedin}
+                            onChange={(e) => setLinkedin(e.target.value)}
                             className="mt-1 p-2 border rounded w-full"
                         />
                     </div>
