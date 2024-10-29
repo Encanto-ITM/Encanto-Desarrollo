@@ -138,10 +138,10 @@ export function Service() {
                             </button>
                             {isOwner && (
                                 <div className="flex flex-col sm:flex-row w-full sm:w-auto sm:space-x-4 space-y-4 sm:space-y-0">
-                                    <button onClick={() => setIsEditModalOpen(true)} className="bg-blue-600 text-white text-lg px-6 py-3 rounded-md">Editar Servicio</button>
+                                    <button onClick={() => setIsEditModalOpen(true)} className="bg-purple text-white text-lg px-6 py-3 rounded-md">Editar Servicio</button>
                                     <button 
                                         onClick={() => setIsDeactivateModalOpen(true)} 
-                                        className={`${serviceData.is_active === 1 ? 'bg-red-600' : 'bg-green-600'} text-white text-lg px-6 py-3 rounded-md hover:bg-red-700 transition duration-300`}
+                                        className={`${serviceData.is_active === 1 ? 'bg-red' : 'bg-green'} text-white text-lg px-6 py-3 rounded-md hover:bg-red-700 transition duration-300`}
                                     >
                                         {serviceData.is_active === 1 ? 'Desactivar' : 'Activar'}
                                     </button>
