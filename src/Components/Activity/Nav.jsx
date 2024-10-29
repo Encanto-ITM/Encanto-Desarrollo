@@ -71,7 +71,7 @@ export function Nav() {
       </button>
   
       <ul className={`flex flex-col lg:flex-row text-lg items-center lg:justify-center gap-8 transition-all duration-500 ${isOpen ? 'fixed inset-0 bg-purple flex justify-center items-center flex-col text-center' : 'hidden lg:flex'}`}>
-      <li className="transition duration-500 hover:scale-110">
+      <li className="transition duration-500 hover:scale-110 cursor-pointer">
           <a onClick={handleServiceClick}>Servicios</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
