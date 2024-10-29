@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Search } from "../Components/home-components/Search";
+import { Search } from "../Components/Home-components/Search.jsx";
 import { Nav } from '../Components/Activity/Nav.jsx';
-import { TypeServices } from "../Components/home-components/TypeServices.jsx";
+import { TypeServices } from "../Components/Home-components/TypeServices.jsx";
 import Footer from "../Components/Activity/Footer.jsx";
 
 export function Results() {

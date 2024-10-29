@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react'; // Importa el ícono de carrito de compras
+import { ShoppingCart } from 'lucide-react'; 
 import UserProfile from '../UI/UserProfile';
 import { fetchUserData } from '../hooks/userData';
 import { useCart } from '../Cart/CartContext';
