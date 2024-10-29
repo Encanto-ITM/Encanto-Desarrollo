@@ -7,6 +7,7 @@ const initialState = {
     history: [],
 };
 
+//esto va en un hook, codigo basura en un componente
 const cartReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
@@ -14,7 +15,7 @@ const cartReducer = (state, action) => {
                 item.id === action.payload.id && item.selectedTime === action.payload.selectedTime
             );
             if (existingItem) {
-                return state; // No agregues un servicio duplicado
+                return state; 
             }
             return {
                 ...state,
@@ -25,7 +26,7 @@ const cartReducer = (state, action) => {
             const removedItem = state.cart.find(item => item.id === action.payload);
             const updatedHistory = state.history.filter(action => 
                 !(action.type === 'ADD' && action.item.id === removedItem.id)
-            ); // Eliminar el registro del historial
+            ); 
 
             return {
                 ...state,

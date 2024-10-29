@@ -88,7 +88,7 @@ export function Confirmation() {
                 )}
                 <div className="flex justify-center mt-6 mb-20">
                     <button  
-                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white p-2 w-1/2 h-10 rounded-md"
+                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-105 text-white p-2 w-1/2 h-10 rounded-md"
                         onClick={handleOrder}
                         disabled={submitted} 
                     >

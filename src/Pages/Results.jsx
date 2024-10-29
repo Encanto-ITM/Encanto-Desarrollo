@@ -77,7 +77,7 @@ export function Results() {
                                     {service.details} 
                                 </p>
                                 <button
-                                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-black"
+                                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 ease-in-out hover:scale-[102%] duration-300"
                                     onClick={() => handleOrder(service.id)} 
                                 >
                                     Ordena Ahora

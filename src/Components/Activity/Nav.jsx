@@ -85,7 +85,7 @@ export function Nav() {
             <div className="relative flex items-start">
               <ShoppingCart className="w-6 h-6" />
               {cart.length > 0 && (
-                <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs transform translate-x-1 translate-y-1">
+                <span className="absolute top-0 right-0 bg-red text-white rounded-full w-4 h-4 flex items-center justify-center text-xs transform translate-x-1 translate-y-1">
                   {cart.length}
                 </span>
               )}

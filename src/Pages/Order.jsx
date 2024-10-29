@@ -106,14 +106,14 @@ export function Order() {
     
                 <div className="flex justify-center mt-6 mb-20 gap-4 flex-wrap">
                     <button
-                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white px-10 py-4 rounded-md"
+                        className="font-bold flex items-center justify-center bg-purple transition duration-300 hover:scale-105 text-white px-10 py-4 rounded-md"
                         onClick={handleOrder}
                         disabled={loading}
                     >
                         Completar Orden
                     </button>
                     <button
-                        className="font-bold flex items-center justify-center bg-purple transition duration-500 hover:scale-110 text-white px-10 py-4 rounded-md"
+                        className="font-bold flex items-center justify-center bg-purple transition duration-300 hover:scale-105 text-white px-10 py-4 rounded-md"
                         onClick={handleAddToCart}
                         disabled={loading}
                     >

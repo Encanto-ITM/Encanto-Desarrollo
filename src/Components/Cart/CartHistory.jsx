@@ -7,14 +7,14 @@ export function CartHistory() {
     const { cart, history, removeFromCart } = useCart();
     const navigate = useNavigate();
 
-    // Filtrar los elementos que se han agregado al carrito
+    
     const addedItems = history.filter(action => 
         action.type === 'ADD' && cart.some(item => item.id === action.item.id)
     );
 
     const handleConfirmOrder = (item) => {
-        // Asegúrate de que el tiempo seleccionado está disponible en el item
-        const selectedTime = item.selectedTime || null; // Si tienes un campo para tiempo seleccionado
+        
+        const selectedTime = item.selectedTime || null; 
 
         navigate(`/confirmation/${item.id}`, { state: { service: item, selectedTime } });
     };
@@ -45,13 +45,13 @@ export function CartHistory() {
                                     </p>
                                 )}
                                 <button 
-                                    className="mt-4 bg-purple text-white rounded-md p-2"
+                                    className="mt-4 bg-purple text-white rounded-md p-2 hover:[101%] duration-300"
                                     onClick={() => handleConfirmOrder(action.item)}
                                 >
                                     Confirmar Orden
                                 </button>
                                 <button 
-                                    className="mt-4 bg-red-500 text-white rounded-md p-2"
+                                    className="mt-4 bg-red text-white rounded-md p-2 hover:[101%] duration-300"
                                     onClick={() => removeFromCart(action.item.id)}
                                 >
                                     Eliminar

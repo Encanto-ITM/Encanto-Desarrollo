@@ -56,12 +56,12 @@ export default function UserProfile({ open, onClose }) {
                             </div>
                             <h2 className="text-2xl font-bold mt-4">{userData.name} {userData.lastname}</h2>
                             <div className='flex items-center text-center gap-3'>
-                                <button onClick={openModal} className="rounded mt-4 border-2 bg-blue border-blue text-white p-2">Editar</button>
+                                <button onClick={openModal} className="rounded mt-4 border-2 bg-blue border-blue text-white p-2 hover:scale-105 duration-300">Editar</button>
     
                                 {userData.acounttype_id === 3 && (
-                                    <button onClick={handleGoToWorkerProfile} className="rounded mt-4 border-2 border-blue text-blue p-2">Ver perfil</button>
+                                    <button onClick={handleGoToWorkerProfile} className="rounded mt-4 border-2 border-blue text-blue p-2 hover:scale-105 duration-300">Ver perfil</button>
                                 )}
-                                <button onClick={handleOrders} className="rounded mt-4 border-2 border-blue bg-blue text-white p-2">Ver Ordenes</button>
+                                <button onClick={handleOrders} className="rounded mt-4 border-2 border-blue bg-blue text-white p-2 hover:scale-105 duration-300">Ver Ordenes</button>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@ export default function UserProfile({ open, onClose }) {
                         <p className="text-white text-base mb-3">{userData.description || 'No hay descripción disponible'}</p>
                         <hr className="border-white my-2" /> 
     
-                        <button onClick={logout} className="rounded mt-4 border-2 border-red text-white bg-red p-2">Cerrar Sesión</button>
+                        <button onClick={logout} className="rounded mt-4 border-2 border-red text-white bg-red p-2 hover:scale-105 duration-300">Cerrar Sesión</button>
                     </div>
     
                   
