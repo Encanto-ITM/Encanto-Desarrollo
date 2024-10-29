@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Search } from "../Components/Home-components/Search.jsx";
+import { Search } from "../Components/home-components/Search";
 import { Nav } from '../Components/Activity/Nav.jsx';
-import { TypeServices } from "../Components/Home-components/TypeServices.jsx";
+import { TypeServices } from "../Components/home-components/TypeServices.jsx";
 import Footer from "../Components/Activity/Footer.jsx";
 
 export function Results() {
@@ -63,11 +63,11 @@ export function Results() {
                 {loading && <p className="text-center">Por favor espere...</p>}
                 {error && <p className="text-center text-red-500">{error}</p>}
                 {!loading && !error && filteredServices.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
                         {filteredServices.map(service => (
                             <div key={service.id} className="bg-white shadow-lg rounded-md p-4 flex flex-col">
                                 <img
-                                    src={service.imageUrl} 
+                                    src={/*service.imageUr ||*/ `https://picsum.photos/seed/${service.id}/800/800`} 
                                     alt={`Image of ${service.name}`}
                                     className="w-full h-48 object-cover rounded-t-md"
                                 />
@@ -77,7 +77,7 @@ export function Results() {
                                     {service.details} 
                                 </p>
                                 <button
-                                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 ease-in-out hover:scale-[102%] duration-300"
+                                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-black"
                                     onClick={() => handleOrder(service.id)} 
                                 >
                                     Ordena Ahora

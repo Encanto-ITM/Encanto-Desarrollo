@@ -5,6 +5,30 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+// Componente personalizado para el botón de siguiente
+const CustomNextArrow = ({ onClick }) => {
+    return (
+        <div
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-2 cursor-pointer transition duration-300 hover:bg-gray-700 z-10"
+            onClick={onClick}
+        >
+            <ChevronRight className="w-5 h-5" />
+        </div>
+    );
+};
+
+// Componente personalizado para el botón de anterior
+const CustomPrevArrow = ({ onClick }) => {
+    return (
+        <div
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full p-2 cursor-pointer transition duration-300 hover:bg-gray-700 z-10"
+            onClick={onClick}
+        >
+            <ChevronRight className="w-5 h-5 transform rotate-180" />
+        </div>
+    );
+};
+
 export function PopularWorkers({ workers }) {
     const navigate = useNavigate();
 
@@ -14,6 +38,8 @@ export function PopularWorkers({ workers }) {
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 3,
+        nextArrow: <CustomNextArrow />,
+        prevArrow: <CustomPrevArrow />,
         responsive: [
             {
                 breakpoint: 768,
@@ -33,8 +59,9 @@ export function PopularWorkers({ workers }) {
         }
         console.log("Navigating to worker profile with ID:", worker.id);
         navigate(`/workerprofile/${worker.id}`, { state: { worker } });
-
     };
+
+    const limitedWorkers = workers && workers.length > 0 ? workers.slice(0, 9) : [];
 
     return (
         <section className="py-12 bg-gray-100">
@@ -43,13 +70,13 @@ export function PopularWorkers({ workers }) {
                     Conoce nuestros colaboradores
                 </h2>
 
-                {workers && workers.length > 0 ? (
+                {limitedWorkers.length > 0 ? (
                     <Slider {...settings}>
-                        {workers.map(worker => (
+                        {limitedWorkers.map(worker => (
                             <div key={worker.id} className="relative p-4">
                                 <div className="bg-white shadow-lg overflow-hidden">
                                     <img
-                                        src={worker.profilephoto || 'agregar imagen por defecto'}
+                                        src={/*worker.profilephoto || */`https://picsum.photos/seed/${worker.id}/800/800`}
                                         alt={`${worker.name} ${worker.lastname}`}
                                         className="w-full h-48 object-cover"
                                     />

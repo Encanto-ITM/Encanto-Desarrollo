@@ -213,10 +213,10 @@ export function WorkerInfo() {
                 <div className="flex justify-start mt-6 w-[300px] gap-4">
                     {isOwner && (
                         <>
-                            <GenericButton onClick={openModal} placeholder="Actualizar Info" />
+                            <GenericButton onClick={openModal} placeholder="Actualizar" />
                             <button
                                 onClick={openNewServiceModal}
-                                className="font-bold flex items-center justify-center bg-gray-100 hover:bg-gray-300 text-black p-2 w-[80%] h-10 rounded-xl transition-colors duration-300 mt-3"
+                                className="font-bold flex items-center justify-center bg-white text-black  p-2 h-10 rounded-md transition-transform duration-300 transform hover:scale-105"
                             >
                                 Nuevo Servicio
                             </button>
@@ -229,7 +229,7 @@ export function WorkerInfo() {
                 open={isModalOpen}
                 onClose={closeModal}
                 worker={workerData}
-                onUpdate={handleUpdate} // Se pasa la función aquí
+                onUpdate={handleUpdate}
             />
             <NewServiceModal
                 open={isNewServiceModalOpen}

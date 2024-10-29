@@ -40,8 +40,6 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
             linkedin,
         };
 
-        console.log('Datos actualizados:', updatedInfo);
-
         try {
             const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${worker.id}`, {
                 method: 'PUT',
@@ -52,13 +50,11 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
             });
 
             const responseData = await response.json();
-            console.log('Respuesta de la API:', responseData);
 
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${responseData.message || 'Error desconocido'}`);
             }
 
-            console.log('Información actualizada correctamente');
             onUpdate(updatedInfo);
             onClose();
         } catch (error) {
@@ -81,18 +77,16 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
     return (
         <Modal open={open} onClose={onClose}>
             <div className="fixed inset-0 flex items-center justify-center p-4">
-                <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[80vh] overflow-y-auto relative">
-                    <button onClick={onClose} className="absolute top-2 right-2 text-red-500 font-bold">
-                        X
-                    </button>
-                    <h2 className="text-xl font-bold mb-4">Actualizar Información</h2>
+                <div className="bg-white text-black max-w-lg w-full rounded-lg relative shadow-lg p-6 overflow-y-auto" style={{ maxHeight: '80vh' }}>
+                    <button onClick={onClose} className="absolute top-4 right-4 text-black text-lg">X</button>
+                    <h2 className="text-2xl font-bold mb-4 text-center">Actualizar Información</h2>
 
                     <div>
-                        <label className="block text-sm font-medium">Profesion</label>
+                        <label className="block text-sm font-medium text-black">Profesión</label>
                         <select
                             value={profession}
                             onChange={(e) => setProfession(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         >
                             {Object.entries(professionsMap).map(([id, name]) => (
                                 <option key={id} value={id}>
@@ -103,86 +97,86 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Dirección</label>
+                        <label className="block text-sm font-medium text-black">Dirección</label>
                         <input
                             type="text"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         />
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Descripción</label>
+                        <label className="block text-sm font-medium text-black">Descripción</label>
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         />
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Facebook</label>
+                        <label className="block text-sm font-medium text-black">Facebook</label>
                         <input
                             type="text"
                             value={facebook}
                             onChange={(e) => setFacebook(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         />
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Instagram</label>
+                        <label className="block text-sm font-medium text-black">Instagram</label>
                         <input
                             type="text"
                             value={instagram}
                             onChange={(e) => setInstagram(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         />
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Whatsapp</label>
+                        <label className="block text-sm font-medium text-black">Whatsapp</label>
                         <input
                             type="text"
                             value={whatsapp}
                             onChange={(e) => setWhatsapp(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         />
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">X</label>
+                        <label className="block text-sm font-medium text-black">X</label>
                         <input
                             type="text"
                             value={x}
                             onChange={(e) => setX(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         />
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Tiktok</label>
+                        <label className="block text-sm font-medium text-black">Tiktok</label>
                         <input
                             type="text"
                             value={tiktok}
                             onChange={(e) => setTiktok(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         />
                     </div>
 
                     <div className="mt-4">
-                        <label className="block text-sm font-medium">Linkedin</label>
+                        <label className="block text-sm font-medium text-black">Linkedin</label>
                         <input
                             type="text"
                             value={linkedin}
                             onChange={(e) => setLinkedin(e.target.value)}
-                            className="mt-1 p-2 border rounded w-full"
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
                         />
                     </div>
 
                     <div className="flex justify-center mt-6">
-                        <GenericButton onClick={handleSave} placeholder="Guardar cambios" />
+                        <GenericButton onClick={handleSave} placeholder="Guardar cambios" className="rounded mt-4 border-2  text-white p-2 hover:scale-105 duration-300" />
                     </div>
                 </div>
             </div>
