@@ -33,7 +33,7 @@ export function WorkerProfile() {
             <div className='px-8'>
                 <WorkerInfo workerId={id} /> 
                 <div className='py-10'>
-                    <ServicesContainer ownerId={id} /> {/* Pasando el ownerId */}
+                    <ServicesContainer ownerId={id} /> 
                 </div>
             </div>
             <Footer />
