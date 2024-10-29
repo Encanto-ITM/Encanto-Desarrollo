@@ -1,4 +1,4 @@
-// CartHistory.js
+
 import React from 'react';
 import { useCart } from './CartContext';
 import { useNavigate } from 'react-router-dom';
