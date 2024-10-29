@@ -14,7 +14,10 @@ export default {
         'light-gray': '#75797E',
         'white-gray': '#D3D3D3',
         'red': '#BF4B3A',
-        'blue': "#4281CB"
+        'blue': '#4281CB',
+        'green': '#29702D',
+        'yellow': '#BDAA2D',
+
       },
       fontSize: {
         'xs': '0.75rem',
