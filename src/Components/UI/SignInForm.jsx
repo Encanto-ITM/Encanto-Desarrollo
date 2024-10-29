@@ -109,7 +109,7 @@ export function SignInForm({ onToggleForm }) {
                 </div>
     
                 <h1 className="text-xl font-bold text-center mb-4">Iniciar Sesión</h1>
-                <div className='w-3/4 flex flex-col gap-4'> 
+                <div className='w-3/4 flex flex-col gap-8'> 
                     <SignInputs
                         placeholder={"Correo electrónico"}
                         name="email"

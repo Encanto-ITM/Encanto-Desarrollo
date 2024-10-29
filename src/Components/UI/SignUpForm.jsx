@@ -83,7 +83,7 @@ export function SignUpForm({ onToggleForm }) {
                     />
                 </div>
                 <h1 className="text-xl font-bold text-center mb-4">Registrarse</h1>
-                <div className='w-3/4 flex flex-col gap-4'>
+                <div className='w-3/4 flex flex-col gap-6'>
                 <SignInputs 
                     placeholder="Nombre" 
                     name="name" 
@@ -127,7 +127,7 @@ export function SignUpForm({ onToggleForm }) {
                     type="button" 
                     onClick={handleSubmit} 
                     placeholder="Registrarse" 
-                    className='mt-6 h-12'
+                    className='mt-2 h-12'
                 />
                 </div>
                 <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>

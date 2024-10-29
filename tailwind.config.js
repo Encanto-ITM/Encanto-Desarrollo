@@ -12,6 +12,9 @@ export default {
       colors: {
         'purple': '#2a1d45 ',
         'light-gray': '#75797E',
+        'white-gray': '#D3D3D3',
+        'red': '#BF4B3A',
+        'blue': "#4281CB"
       },
       fontSize: {
         'xs': '0.75rem',
