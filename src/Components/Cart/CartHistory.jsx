@@ -44,18 +44,20 @@ export function CartHistory() {
                                         Hora seleccionada: {new Date(action.item.selectedTime).toLocaleString()}
                                     </p>
                                 )}
+                                <div className='flex gap-4'>
                                 <button 
-                                    className="mt-4 bg-purple text-white rounded-md p-2 hover:[101%] duration-300"
+                                    className="mt-4 border-2 border-purple text-purple rounded-md p-2 hover:[101%] duration-300"
                                     onClick={() => handleConfirmOrder(action.item)}
                                 >
                                     Confirmar Orden
                                 </button>
                                 <button 
-                                    className="mt-4 bg-red text-white rounded-md p-2 hover:[101%] duration-300"
+                                    className="mt-4 border-2 border-red text-red rounded-md p-2 hover:[101%] duration-300"
                                     onClick={() => removeFromCart(action.item.id)}
                                 >
                                     Eliminar
                                 </button>
+                                </div>
                             </div>
                         ))}
                     </div>
