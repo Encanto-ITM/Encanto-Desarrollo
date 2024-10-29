@@ -40,7 +40,10 @@ export default function ServicesCard({ service, fetchCurrentUser }) {
                 className="w-full h-48 object-cover rounded-t-md"
             />
             <h2 className="text-xl font-semibold mt-2">{service.name}</h2>
-            <p className="text-sm text-gray-600 line-clamp-2">{service.details}</p>
+            <p className="text-sm text-gray-600 overflow-hidden whitespace-nowrap text-ellipsis">
+                {service.details}
+                </p>
+
             {isOwner ? (
                 <div className="flex justify-between mt-4">
                     <button
@@ -58,7 +61,7 @@ export default function ServicesCard({ service, fetchCurrentUser }) {
                 </div>
             ) : (
                 <button
-                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-purple-800"
+                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 hover:scale-105 duration-300" 
                     onClick={handleViewMore}
                 >
                     Ver más

@@ -93,7 +93,7 @@ export default function UserProfile({ open, onClose }) {
                                     <button onClick={openModal} className="rounded mt-4 border-2 bg-blue border-blue text-white p-2 hover:scale-105 duration-300">Editar</button>
         
                                     {userData.acounttype_id === 3 && (
-                                        <button onClick={handleGoToWorkerProfile} className="rounded mt-4 border-2 border-blue text-blue p-2 hover:scale-105 duration-300">Ver perfil</button>
+                                        <button onClick={handleGoToWorkerProfile} className="rounded mt-4 border-2 border-blue bg-blue text-white p-2 hover:scale-105 duration-300">Ver perfil</button>
                                     )}
                                     <button onClick={handleOrders} className="rounded mt-4 border-2 border-blue bg-blue text-white p-2 hover:scale-105 duration-300">Ver Ordenes</button>
                                 </div>

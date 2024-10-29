@@ -83,17 +83,16 @@ export function WorkerInfo() {
                             {workerData.description}
                         </p>
                     </div>
+                    <div className="mt-10 w-full max-w-full md:w-[600px]">
+                        <p className="text-lg font-semibold">Dirección</p>
+                            <p className="mt-2 bg-gray-100 rounded-lg text-base font-medium text-gray-700 p-4">
+                                {workerData.address}
+                            </p>
+                    </div>
                 </div>
 
                 <div>
-                    <div className="mb-6">
-                        <p className="text-lg font-semibold">Dirección</p>
-                        <div className="w-full bg-gray-100 border border-gray-300 rounded-lg mt-2 p-1">
-                            <p className="text-md text-gray-700 text-center">
-                                {workerData.address}
-                            </p>
-                        </div>
-                    </div>
+                    
                     <div>
                         <p className="text-lg font-semibold">Redes Sociales</p>
                         <div className="grid grid-cols-2 gap-4 mt-4 items-center">
