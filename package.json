@@ -16,7 +16,7 @@
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
-    "@mui/material": "^6.1.0",
+    "@mui/material": "^6.1.5",
     "@mui/x-date-pickers": "^7.21.0",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
