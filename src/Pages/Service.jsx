@@ -5,9 +5,9 @@ import LoadingSpinner from '../Components/UI/LoadingSpinner';
 import { fetchUserData } from '../Components/hooks/userData';
 import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
-import { EditService } from '../Components/service-components/EditService';
-import { DeactivateService } from '../Components/service-components/DeactivateService';
-import { CommentsService } from '../Components/service-components/CommentsService';
+import { EditService } from '../Components/Service-components/EditService.jsx';
+import { DeactivateService } from '../Components/Service-components/DeactivateService.jsx';
+import { CommentsService } from '../Components/Service-components/CommentsService.jsx';
 
 export function Service() {
     const { id } = useParams();

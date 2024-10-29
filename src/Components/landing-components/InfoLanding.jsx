@@ -1,10 +1,10 @@
 export function InfoLanding() {
     return (
-        <div className="flex flex-col md:flex-row bg-[#EBEBEB] shadow-lg overflow-hidden mb-16 rounded-lg" id="info">
+        <div className="flex flex-col md:flex-row bg-[#EBEBEB] shadow-lg overflow-hidden mb-16 " id="info">
            
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 max-h-[47rem]">
                 <img
-                    src="/img/Register-Mujer.png"
+                    src="/img/Login.jpg"
                     alt="Brilliant Beauty"
                     className="h-full w-full object-cover" 
                 />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react'; // Importa el ícono de carrito de compras
+import { ShoppingCart } from 'lucide-react'; 
 import UserProfile from '../UI/UserProfile';
 import { fetchUserData } from '../hooks/userData';
 import { useCart } from '../Cart/CartContext';
@@ -57,7 +57,7 @@ export function Nav() {
           />
         </a>
       </div>
-
+  
       <button className="block lg:hidden text-white z-30" onClick={toggleMenu}>
         {isOpen ? (
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -69,9 +69,9 @@ export function Nav() {
           </svg>
         )}
       </button>
-
-      <ul className={menuClasses}>
-        <li className="transition duration-500 hover:scale-110">
+  
+      <ul className={`flex flex-col lg:flex-row text-lg items-center lg:justify-center gap-8 transition-all duration-500 ${isOpen ? 'fixed inset-0 bg-purple flex justify-center items-center flex-col text-center' : 'hidden lg:flex'}`}>
+      <li className="transition duration-500 hover:scale-110 cursor-pointer">
           <a onClick={handleServiceClick}>Servicios</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
@@ -115,8 +115,11 @@ export function Nav() {
           </a>
         </li>
       </ul>
-
+  
       <UserProfile open={isModalOpen} onClose={closeModal} />
     </nav>
   );
+  
+
+  
 }

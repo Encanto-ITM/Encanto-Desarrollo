@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '@mui/material/Modal';
 import ImageUploader from './ImageUploader';
-import SignInputs from './SignInputs';
+import EditInput from './EditInputs';
 
 export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
   const [name, setName] = useState('');
@@ -11,20 +10,18 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
   const [description, setDescription] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (open && user) {
-      setName(user.name);
-      setLastname(user.lastname);
-      setEmail(user.email);
-      setDescription(user.description || '');
-      setSelectedImage(null); 
-      setOldPassword(''); 
-      setNewPassword(''); 
+    if (open) {
+      setName('');
+      setLastname('');
+      setEmail('');
+      setDescription('');
+      setOldPassword('');
+      setNewPassword('');
     }
-  }, [open, user]);
+  }, [open]);
 
   const handleImageChange = (image) => {
     setSelectedImage(image); 
@@ -41,7 +38,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
       console.error('Los campos nombre, apellido, correo electrónico y contraseña vieja son obligatorios.');
       return;
     }
-  
+
     const data = {
       name,
       lastname,
@@ -54,7 +51,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
     }
 
     try {
-      setIsLoading(true); 
+      setIsLoading(true);
 
       const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${user.id}`, {
         method: 'PUT',
@@ -64,82 +61,94 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
         },
         body: JSON.stringify(data),
       });
-  
+
       if (!response.ok) {
         const errorMessage = await response.text();
         console.error('Error en la respuesta de la API:', errorMessage);
         throw new Error(`Error al actualizar la información: ${errorMessage}`);
       }
-  
-      const responseBody = await response.json();  
+
+      const responseBody = await response.json();
       console.log('Perfil actualizado desde la API:', responseBody);
-  
+
       onProfileUpdated(responseBody);
-  
-      onClose(); 
+      onClose();
     } catch (error) {
       console.error('Error al actualizar la información:', error);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
 
   return (
     <Modal open={open} onClose={onClose}>
       <div className="fixed inset-0 flex items-start justify-end p-4 pt-20">
-        <div className="bg-purple text-white max-w-lg w-full rounded-lg p-6 relative shadow-lg overflow-y-auto" style={{ maxHeight: '90vh' }}>
-          <button onClick={onClose} className="absolute top-4 right-4 text-white text-lg">X</button>
-          <h2 className="text-2xl font-bold text-center mb-4">Editar Perfil</h2>
-          <ImageUploader onImageChange={handleImageChange} />
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-1 mt-4 text-black'> 
-            <div className="flex flex-col items-center justify-center gap-3 mt-2">
-              <SignInputs 
-                placeholder={"Nombre"} 
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+        <div className="max-w-lg w-full rounded-lg shadow-lg overflow-y-auto" style={{ maxHeight: '90vh' }}>
+          
+          <div className="bg-white text-black rounded-t-lg p-4"> {/* Añadido padding */}
+            <button onClick={onClose} className="absolute top-[5.5rem] right-8 text-black">X</button>
+            <h2 className="text-2xl font-bold text-center mb-4">Editar Perfil</h2>
+            <ImageUploader onImageChange={handleImageChange} />
+          </div>
+          
+          <div className="bg-purple text-white p-6 rounded-b-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4 justify-items-center">
+              <EditInput 
+                label="Nombre" 
+                id="name" 
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
               />
-              <SignInputs 
-                placeholder={"Apellido"} 
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
+              <EditInput 
+                label="Apellido" 
+                id="lastname" 
+                value={lastname} 
+                onChange={(e) => setLastname(e.target.value)} 
               />
-              <SignInputs 
-                placeholder={"Correo Electrónico"} 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+              <EditInput 
+                label="Correo Electrónico" 
+                id="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+              />
+              <EditInput 
+                label="Descripción" 
+                id="description" 
+                value={description} 
+                onChange={(e) => setDescription(e.target.value)} 
+              />
+              <EditInput 
+                label="Contraseña Vieja" 
+                id="oldPassword" 
+                type="password" 
+                value={oldPassword} 
+                onChange={(e) => setOldPassword(e.target.value)} 
+              />
+              <EditInput 
+                label="Nueva Contraseña" 
+                id="newPassword" 
+                type="password" 
+                value={newPassword} 
+                onChange={(e) => setNewPassword(e.target.value)} 
               />
             </div>
-            <div className="flex flex-col items-center justify-center gap-3 mt-2">
-              <SignInputs 
-                placeholder={"Descripción"} 
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-              <SignInputs 
-                type="password" 
-                placeholder={"Contraseña Vieja"} 
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-              />
-              <SignInputs 
-                type="password" 
-                placeholder={"Nueva Contraseña"} 
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
+  
+            <div className="flex justify-center mt-6">
+              <button 
+                onClick={handleUpdate}
+                className={`rounded mt-4 border-2 bg-blue border-blue text-white p-2 w-3/4 mb-8 hover:scale-105 duration-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={isLoading} 
+              >
+                {isLoading ? 'Actualizando...' : 'Editar'}
+              </button>
             </div>
           </div>
-          <div className="flex justify-center mt-10">
-            <button 
-              onClick={handleUpdate}
-              className={`bg-white text-purple rounded-lg w-full py-3 hover:bg-gray-200 transition duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-              disabled={isLoading} 
-            >
-              {isLoading ? 'Actualizando...' : 'Editar'}
-            </button>
-          </div>
+          
         </div>
       </div>
     </Modal>
   );
+  
+  
+  
 }

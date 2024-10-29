@@ -34,7 +34,7 @@ export function TypeServices() {
                 <div key={service.id} className="flex flex-col items-center space-y-2 m-4 transition duration-500 hover:scale-110 w-24 sm:w-32 lg:w-40 lg:mx-6">
                     <div 
                         onClick={() => handleServiceClick(service.id)} 
-                        className="w-16 h-16 rounded-full flex items-center justify-center bg-gray-200 cursor-pointer"
+                        className="w-16 h-16 rounded-full flex items-center justify-cente cursor-pointer"
                     >
                         <img src={img[index]} alt={service.name} className="w-full h-full object-contain" />
                     </div>
