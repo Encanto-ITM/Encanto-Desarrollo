@@ -26,9 +26,9 @@ export function CartHistory() {
                 {addedItems.length === 0 ? (
                     <p className="text-center">No hay historial de acciones en el carrito.</p>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {addedItems.map((action, index) => (
-                            <div key={index} className="bg-white shadow-lg rounded-md p-4 flex flex-col">
+                            <div key={index} className="bg-white shadow-lg rounded-lg p-4 border">
                                 <img
                                     src={action.item.imageUrl || '/img/placeholder.jpg'}
                                     alt={`Imagen de ${action.item.name}`}
@@ -44,16 +44,16 @@ export function CartHistory() {
                                         Hora seleccionada: {new Date(action.item.selectedTime).toLocaleString()}
                                     </p>
                                 )}
-                              <div className='flex gap-4'>
+                                <div className="flex gap-4 mt-4">
                                     <button 
-                                        className="mt-4 border-2 border-purple text-purple rounded-md p-2 transition-transform duration-300 transform hover:scale-105"
+                                        className="text-purple border-2 border-purple px-4 py-2 rounded hover:scale-105 duration-500"
                                         onClick={() => handleConfirmOrder(action.item)}
                                         aria-label="Confirmar Orden"
                                     >
-                                        Confirmar Orden
+                                        Ordenar
                                     </button>
                                     <button 
-                                        className="mt-4 border-2 border-red text-red rounded-md p-2 transition-transform duration-300 transform hover:scale-105"
+                                        className="text-red border-2 border-red px-4 py-2 rounded hover:scale-105 duration-500"
                                         onClick={() => removeFromCart(action.item.id)}
                                         aria-label="Eliminar del Carrito"
                                     >
@@ -67,4 +67,5 @@ export function CartHistory() {
             </div>
         </div>
     );
+    
 }
