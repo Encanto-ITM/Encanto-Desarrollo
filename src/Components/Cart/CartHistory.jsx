@@ -44,19 +44,21 @@ export function CartHistory() {
                                         Hora seleccionada: {new Date(action.item.selectedTime).toLocaleString()}
                                     </p>
                                 )}
-                                <div className='flex gap-4'>
-                                <button 
-                                    className="mt-4 border-2 border-purple text-purple rounded-md p-2 hover:[101%] duration-300"
-                                    onClick={() => handleConfirmOrder(action.item)}
-                                >
-                                    Confirmar Orden
-                                </button>
-                                <button 
-                                    className="mt-4 border-2 border-red text-red rounded-md p-2 hover:[101%] duration-300"
-                                    onClick={() => removeFromCart(action.item.id)}
-                                >
-                                    Eliminar
-                                </button>
+                              <div className='flex gap-4'>
+                                    <button 
+                                        className="mt-4 border-2 border-purple text-purple rounded-md p-2 transition-transform duration-300 transform hover:scale-105"
+                                        onClick={() => handleConfirmOrder(action.item)}
+                                        aria-label="Confirmar Orden"
+                                    >
+                                        Confirmar Orden
+                                    </button>
+                                    <button 
+                                        className="mt-4 border-2 border-red text-red rounded-md p-2 transition-transform duration-300 transform hover:scale-105"
+                                        onClick={() => removeFromCart(action.item.id)}
+                                        aria-label="Eliminar del Carrito"
+                                    >
+                                        Eliminar
+                                    </button>
                                 </div>
                             </div>
                         ))}
