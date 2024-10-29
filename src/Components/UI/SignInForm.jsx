@@ -89,16 +89,17 @@ export function SignInForm({ onToggleForm }) {
     };
 
     return (
-        <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8">
-            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
+        <section className="flex flex-col md:flex-row w-full h-screen">
+            <div className="flex w-full md:w-1/2 h-full overflow-hidden hidden md:block">
                 <img
-                    src="/img/Login-Hombre.png"
-                    className="w-full h-full object-cover rounded-bl-[40px] rounded-tl-[40px]"
+                    src="/img/Login.jpg"
+                    className="w-full h-full object-cover"
                     alt="Login Hombre"
                     loading="lazy"
                 />
             </div>
-            <div className="flex flex-col w-full lg:w-1/2 bg-white gap-6 p-6 place-items-center rounded-tr-[40px] rounded-br-[40px] shadow-lg flex-grow Forms">
+    
+            <div className="flex flex-col w-full md:w-1/2 h-full bg-white gap-4 p-12 place-items-center">
                 <div className="h-32 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
                     <img
                         src="/img/identificador.png"
@@ -106,41 +107,53 @@ export function SignInForm({ onToggleForm }) {
                         alt="identificador"
                     />
                 </div>
+    
                 <h1 className="text-xl font-bold text-center mb-4">Iniciar Sesión</h1>
-
-                <SignInputs
-                    placeholder={"Correo electrónico"}
-                    name="email"
-                    type="email"
-                    onChange={handleChange}
-                />
-                <SignInputs
-                    placeholder={"Contraseña"}
-                    name="password"
-                    type="password"
-                    onChange={handleChange}
-                />
-
+                <div className='w-3/4 flex flex-col gap-4'> 
+                    <SignInputs
+                        placeholder={"Correo electrónico"}
+                        name="email"
+                        type="email"
+                        onChange={handleChange}
+                        className="" 
+                    />
+                    <SignInputs
+                        placeholder={"Contraseña"}
+                        name="password"
+                        type="password"
+                        onChange={handleChange}
+                        className="" 
+                    />
+                </div>
                 {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-
-                <a href="/resetpassword" className="text-gray-500 hover:underline text-center">
-                    Olvidé mi contraseña
-                </a>
-
+    
+                
+                <div className='w-3/5 flex flex-col gap-4'> 
                 <GenericButton
                     type="button"
                     onClick={handleSubmit}
                     placeholder="Iniciar Sesión"
+                    className="mt-6 h-12" 
                 />
+                </div>
+                <a href="/resetpassword" className="text-black hover:underline text-center cursor-pointer">
+                    Olvidé mi contraseña
+                </a>
 
-                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
+                <div 
+                    onClick={onToggleForm} 
+                    className="text-black hover:underline text-center cursor-pointer" 
+                    role='button'
+                >
                     Regístrate
                 </div>
-
-                <a href="/loginem?form=signin" className="text-purple hover:underline text-center">
-                    Login Emprendedor
-                </a>
+                
             </div>
         </section>
     );
+    
+    
+    
+
+    
 }

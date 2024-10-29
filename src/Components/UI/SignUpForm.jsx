@@ -73,8 +73,8 @@ export function SignUpForm({ onToggleForm }) {
     };
 
     return (
-        <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8 overflow-hidden">
-            <div className="flex flex-col w-full lg:w-1/2 bg-white gap-4 p-6 place-items-center rounded-tl-[40px] rounded-bl-[40px] shadow-lg flex-grow Forms">
+        <section className="flex flex-col md:flex-row w-full h-screen max-w-none overflow-hidden">
+            <div className="flex flex-col w-full bg-white gap-4 p-6 place-items-center shadow-lg flex-grow">
                 <div className="h-32 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
                     <img
                         src="/img/identificador.png"
@@ -83,7 +83,7 @@ export function SignUpForm({ onToggleForm }) {
                     />
                 </div>
                 <h1 className="text-xl font-bold text-center mb-4">Registrarse</h1>
-                
+                <div className='w-3/4 flex flex-col gap-4'>
                 <SignInputs 
                     placeholder="Nombre" 
                     name="name" 
@@ -121,25 +121,29 @@ export function SignUpForm({ onToggleForm }) {
                     onChange={handleChange} 
                 />
                 {submitted && errors.password_confirmation && <p className="text-red-500 text-sm">{errors.password_confirmation}</p>}
-                
+                </div>
+                <div className='w-3/5 flex flex-col gap-4'> 
                 <GenericButton 
                     type="button" 
                     onClick={handleSubmit} 
                     placeholder="Registrarse" 
+                    className='mt-6 h-12'
                 />
-
+                </div>
                 <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
                     Iniciar Sesión
                 </div>
             </div>
-            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
+            
+            <div className="flex w-full max-h-screen overflow-hidden flex-grow hidden md:block">
                 <img
-                    src="/img/Register-Mujer.png"
-                    className="w-full h-full object-cover rounded-tr-[40px] rounded-br-[40px]"
+                    src="/img/Register.jpg"
+                    className="w-full h-full object-cover"
                     alt="Register Mujer"
                     loading="lazy"
                 />
             </div>
         </section>
     );
+    
     }
