@@ -99,7 +99,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
             </div>
             
             <div className="bg-purple text-white p-4 rounded-b-lg"> 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 justify-items-center">
                 <EditInput label="Nombre" id="name" value={name} onChange={(e) => setName(e.target.value)} />
                 <EditInput label="Apellido" id="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
                 <EditInput label="Correo Electrónico" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
