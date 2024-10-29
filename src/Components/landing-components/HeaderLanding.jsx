@@ -17,7 +17,7 @@ export function HeaderLanding() {
                 Únete a nuestra comunidad y descubre cómo nuestros productos pueden realzar tu belleza.
                 </p>
                 <button
-                    className="bg-purple text-white px-12 py-3 rounded-lg hover:bg-purple-800 text-[clamp(1rem,_1.25rem,_1.50rem)] transition duration-500 ease-in-out hover:bg-[#482d74] transform hover:-translate-y-1 hover:scale-110"
+                    className="bg-purple text-white px-12 py-3 rounded-lg hover:bg-purple-800 text-[clamp(1rem,_1.25rem,_1.50rem)] transition duration-500 ease-in-out hover:scale-105"
                     onClick={handleSignUpClick}
                 >
                     Registrate
