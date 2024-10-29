@@ -11,6 +11,9 @@ import { WorkerProfile } from './Pages/WorkerProfile';
 import { Order } from './Pages/Order';
 import {List} from './Pages/List';
 import AboutUs from './Pages/AboutUs';
+import { CartProvider } from './Components/Cart/CartContext';
+import CartList from './Pages/CartList';
+import { Service } from './Pages/Service';
 
 export function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,10 +31,12 @@ export function App() {
 
     return (
         <div>
+            <CartProvider>
             <Routes>
                 <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/landing"} />} />
                 
                 <Route path="/login" element={<Login />} />
+                <Route path="/cartlist" element={<CartList />} />
                 <Route path="/loginem" element={<LoginEm />} />
                 <Route path="/resetpassword" element={<ResetPassword />} />
                 <Route path="/landing" element={<Landing />} />
@@ -42,10 +47,12 @@ export function App() {
                 <Route path="/workerprofile/:id" element={<PrivateRoute element={<WorkerProfile />} />} />
                 <Route path="/order/:id" element={<PrivateRoute element={<Order />} />} />
                 <Route path="/confirmation/:id" element={<PrivateRoute element={<Confirmation />} />} />
+                <Route path="/service/:id" element={<Service />} />
                 <Route path="/list/:id" element={<PrivateRoute element={<List/>} />} />
                 
                 <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
+            </CartProvider>
         </div>
     );
 }

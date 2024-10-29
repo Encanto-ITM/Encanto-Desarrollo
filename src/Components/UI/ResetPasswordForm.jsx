@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import GenericButton from './GenericButton'; 
 import SignInputsEm from './SignInputsEm'; 
-import { sha256 } from 'js-sha256'; 
 
 export function ResetPasswordForm() {
     const [formData, setFormData] = useState({
         email: '',
-        newPassword: '',
-        confirmPassword: '',
     });
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -20,17 +17,13 @@ export function ResetPasswordForm() {
 
     const validateForm = () => {
         let errors = '';
-        if (!formData.email) errors += "El correo electrónico es requerido. ";
-        if (!formData.newPassword) errors += "La nueva contraseña es requerida. ";
-        if (formData.newPassword !== formData.confirmPassword) errors += "Las contraseñas no coinciden.";
+        if (!formData.email) errors += "El correo electrónico es requerido.";
         return errors;
     };
 
     const resetForm = () => {
         setFormData({
             email: '',
-            newPassword: '',
-            confirmPassword: '',
         });
         setError('');
         setSubmitted(false); 
@@ -51,11 +44,9 @@ export function ResetPasswordForm() {
         try {
             const formDataToSubmit = {
                 email: formData.email,
-                password: sha256(formData.newPassword),
-                password_confirmation: sha256(formData.confirmPassword),
             };
 
-            const response = await fetch('http://127.0.0.1:8000/api/users/update-password', {
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/auth/recover-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,15 +56,15 @@ export function ResetPasswordForm() {
 
             const responseText = await response.text();
             if (!response.ok) {
-                throw new Error(responseText || 'Error al restablecer la contraseña');
+                throw new Error(responseText || 'Error al enviar el correo de recuperación');
             }
 
             const data = JSON.parse(responseText);
-            setSuccessMessage('Contraseña restablecida con éxito. Puedes iniciar sesión ahora.');
+            setSuccessMessage(data.message || 'Se ha enviado un correo de recuperación.');
             resetForm(); // Limpiar el formulario aquí
         } catch (error) {
-            console.error('Error en la solicitud de restablecimiento de contraseña:', error);
-            setError('Hubo un error al restablecer la contraseña. Inténtalo más tarde.');
+            console.error('Error en la solicitud de recuperación de contraseña:', error);
+            setError('Correo de recuperación incorrecto.');
         }
     };
 
@@ -95,28 +86,13 @@ export function ResetPasswordForm() {
                     name="email"
                     type="email"
                     onChange={handleChange}
-                    value={formData.email} // Asegúrate de vincular el valor
-                />
-                <SignInputsEm
-                    placeholder="Nueva Contraseña"
-                    name="newPassword"
-                    type="password"
-                    onChange={handleChange}
-                    value={formData.newPassword} // Asegúrate de vincular el valor
-                />
-                <SignInputsEm
-                    placeholder="Confirmar Contraseña"
-                    name="confirmPassword"
-                    type="password"
-                    onChange={handleChange}
-                    value={formData.confirmPassword} // Asegúrate de vincular el valor
+                    value={formData.email}
                 />
                 <GenericButton
                     type="button"
                     onClick={handleSubmit}
                     placeholder="Restablecer Contraseña"
                 />
-
                 <a href="/login?form=signin" className="text-purple hover:underline text-center">
                     Login Usuario
                 </a>

@@ -1,13 +1,13 @@
 import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'; 
 import dayjs from 'dayjs';
 import { fetchUserData } from '../Components/hooks/userData.js';
 import { useState, useEffect } from 'react';
 
 export function Confirmation() {
     const location = useLocation();
-    const navigate = useNavigate(); // Crea la instancia de navigate
+    const navigate = useNavigate(); 
     const { service, selectedTime } = location.state || {};
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);

@@ -48,7 +48,73 @@ export function List() {
             setAppointments(data.data);
         } catch (error) {
             console.error(error);
-            
+            setMessage('Error al cargar las citas.');
+        }
+    };
+
+    const handleAccept = async (appointmentId) => {
+        try {
+            const appointment = appointments.find(app => app.id === appointmentId);
+            const updatedData = {
+                service_id: appointment.service_id,
+                owner_id: appointment.owner_id,
+                applicant: user.id,
+                date: appointment.date,
+                status: 'Aceptado',
+                total: appointment.total,
+                location: appointment.location,
+            };
+
+            const response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${appointmentId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al aceptar la cita');
+            }
+
+            setMessage('Cita aceptada con éxito.');
+            getList(); 
+        } catch (error) {
+            console.error('Error al aceptar la cita:', error);
+            setMessage('Error al aceptar la cita.');
+        }
+    };
+
+    const handleCancel = async (appointmentId) => {
+        try {
+            const appointment = appointments.find(app => app.id === appointmentId);
+            const updatedData = {
+                service_id: appointment.service_id,
+                owner_id: appointment.owner_id,
+                applicant: user.id,
+                date: appointment.date,
+                status: 'Cancelado',
+                total: appointment.total,
+                location: appointment.location,
+            };
+
+            const response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${appointmentId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cancelar la cita');
+            }
+
+            setMessage('Cita cancelada con éxito.');
+            getList();
+        } catch (error) {
+            console.error('Error al cancelar la cita:', error);
+            setMessage('Error al cancelar la cita.');
         }
     };
 
@@ -68,6 +134,20 @@ export function List() {
                                     <p className="font-semibold">Total: <span className="font-normal">${appointment.total}</span></p>
                                     <p className="font-semibold">Detalles: <span className="font-normal">{appointment.location}</span></p>
                                     <p className="font-semibold">Fecha: <span className="font-normal">{appointment.date}</span></p>
+                                    <div className="flex justify-between mt-4">
+                                        <button
+                                            className="bg-green-500 text-white px-4 py-2 rounded"
+                                            onClick={() => handleAccept(appointment.id)}
+                                        >
+                                            Aceptar
+                                        </button>
+                                        <button
+                                            className="bg-red-500 text-white px-4 py-2 rounded"
+                                            onClick={() => handleCancel(appointment.id)}
+                                        >
+                                            Cancelar
+                                        </button>
+                                    </div>
                                 </div>
                             ))
                         ) : (
@@ -79,8 +159,4 @@ export function List() {
             <Footer />
         </div>
     );
-    
-    
-    
 }
-
