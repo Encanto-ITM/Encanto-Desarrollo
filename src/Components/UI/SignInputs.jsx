@@ -26,7 +26,7 @@ export default function SignInputs({ type, name, onChange, placeholder, classNam
       >
         {placeholder}
       </label>
-      <style jsx>{`
+      <style>{`
         input:focus + label,
         input:not(:placeholder-shown) + label {
           transform: translate(0px, -55px) scale(0.85);

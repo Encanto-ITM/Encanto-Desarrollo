@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   background: #EBEBEB;
 }
 
@@ -10,11 +10,11 @@ h1 {
   font-size: 40px;
 }
 
-h2{
+h2 {
   font-size: 1rem;
 }
 
-h3{
+h3 {
   font-size: 0.875rem;
 }
 
@@ -27,7 +27,7 @@ h3{
 }
 
 .slide-left-enter {
-  transform: translateX(-100%); 
+  transform: translateX(-100%);
   opacity: 0;
 }
 .slide-left-enter-active {
@@ -40,14 +40,13 @@ h3{
   opacity: 1;
 }
 .slide-left-exit-active {
-  transform: translateX(100%); 
-
+  transform: translateX(-100%); /* Cambiado a -100% para salir hacia la izquierda */
+  opacity: 0;
   transition: transform 300ms ease-in-out, opacity 300ms ease-in-out; 
 }
 
-
 .slide-right-enter {
-  transform: translateX(100%); 
+  transform: translateX(100%);
   opacity: 0;
 }
 .slide-right-enter-active {
@@ -60,7 +59,7 @@ h3{
   opacity: 1;
 }
 .slide-right-exit-active {
-  transform: translateX(-100%); 
+  transform: translateX(100%); /* Cambiado a 100% para salir hacia la derecha */
   opacity: 0;
   transition: transform 300ms ease-in-out, opacity 300ms ease-in-out; 
 }
@@ -77,24 +76,23 @@ h3{
   display: none; 
 }
 
-
-.fc-header-toolbar{
+.fc-header-toolbar {
   @apply bg-purple;
   @apply text-purple;
   @apply p-4;
   margin: 0;
 }
 
-.fc-button-primary:hover{
+.fc-button-primary:hover {
   @apply text-purple !important;
   @apply text-white !important;
 }
 
-.fc-button-active{
+.fc-button-active {
   @apply text-purple !important;
 }
 
-.fc .fc-toolbar-title{
+.fc .fc-toolbar-title {
   @apply text-[clamp(1.1em,_1.5vw,_1.75em)]; 
   @apply text-white;
 }
@@ -103,5 +101,4 @@ h3{
   .Forms {
     border-radius: 40px;
   }
-
 }

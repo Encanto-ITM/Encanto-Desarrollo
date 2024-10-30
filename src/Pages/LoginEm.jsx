@@ -2,9 +2,13 @@ import { CSSTransition } from 'react-transition-group';
 import { SignInFormEm } from '../Components/UI/SignInFormEm';
 import { SignUpFormEm } from '../Components/UI/SignUpFormEm';
 import { useLogin } from '../Components/hooks/useLogin';
+import { useRef } from 'react';
 
 export default function LoginEm() {
     const { showSignIn, toggleForm, initialLoad } = useLogin();
+
+    const signInRef = useRef(null);
+    const signUpRef = useRef(null);
 
     return (
         <div className="relative bg-gray-200 min-h-screen flex items-center justify-center p-4 overflow-hidden">
@@ -15,8 +19,9 @@ export default function LoginEm() {
                     timeout={600}
                     classNames="slide-left"
                     unmountOnExit
+                    nodeRef={signInRef} // Asegúrate de pasar el nodeRef aquí
                 >
-                    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                    <div ref={signInRef} className="absolute inset-0 flex items-center justify-center overflow-hidden">
                         <SignInFormEm onToggleForm={toggleForm} />
                     </div>
                 </CSSTransition>
@@ -26,8 +31,9 @@ export default function LoginEm() {
                     timeout={600}
                     classNames="slide-right"
                     unmountOnExit
+                    nodeRef={signUpRef} // Asegúrate de pasar el nodeRef aquí
                 >
-                    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                    <div ref={signUpRef} className="absolute inset-0 flex items-center justify-center overflow-hidden">
                         <SignUpFormEm onToggleForm={toggleForm} />
                     </div>
                 </CSSTransition>
