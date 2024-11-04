@@ -65,23 +65,25 @@ export function Results() {
                 {!loading && !error && filteredServices.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
                         {filteredServices.map(service => (
-                            <div key={service.id} className="bg-white shadow-lg rounded-md p-4 flex flex-col">
+                            <div key={service.id} className="bg-white shadow-lg rounded-md flex flex-col">
                                 <img
                                     src={/*service.imageUr ||*/ `https://picsum.photos/seed/${service.id}/800/800`} 
                                     alt={`Image of ${service.name}`}
                                     className="w-full h-48 object-cover rounded-t-md"
                                 />
+                                <div className='p-4'>
                                 <h2 className="text-xl font-semibold mt-2">{service.name}</h2>
                                 <h2 className="text-xl font-semibold mt-2">₡{service.price}</h2>
                                 <p className="text-sm text-gray-600 line-clamp-2">
                                     {service.details} 
                                 </p>
                                 <button
-                                    className="mt-4 bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-black"
+                                    className="mt-4 w-full bg-purple text-white rounded-md px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-black"
                                     onClick={() => handleOrder(service.id)} 
                                 >
                                     Ordena Ahora
                                 </button>
+                                </div>
                             </div>
                         ))}
                     </div>
