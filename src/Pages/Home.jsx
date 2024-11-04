@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Search } from "../Components/home-components/Search.jsx";
-import { TypeServices } from "../Components/home-componentsTypeServices.jsx";
+import { TypeServices } from "../Components/home-components/TypeServices.jsx";
 import { PopularServices } from "../Components/home-components/PopularServices.jsx";
 import { PopularWorkers } from "../Components/home-components/PopularWorkers.jsx";
 import { Nav } from '../Components/Activity/Nav.jsx';
