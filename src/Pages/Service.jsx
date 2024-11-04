@@ -8,6 +8,7 @@ import Footer from '../Components/Activity/Footer.jsx';
 import { EditService } from '../Components/service-components/EditService.jsx';
 import { DeactivateService } from '../Components/service-components/DeactivateService.jsx';
 import { CommentsService } from '../Components/service-components/CommentsService.jsx';
+import { ViewComments } from '../Components/service-components/ViewComments.jsx';
 
 export function Service() {
     const { id } = useParams();
@@ -76,13 +77,13 @@ export function Service() {
         setIsDeactivateModalOpen(false);
     };
 
-    if (loading || loadingOwner) return <LoadingSpinner />;
-    if (error) return <div className="text-red-600">{error}</div>;
-    if (!serviceData) return <div>No se encontró el servicio.</div>;
-
     const handleCommentSubmit = (commentData) => {
         setComments((prevComments) => [...prevComments, commentData]);
     };
+
+    if (loading || loadingOwner) return <LoadingSpinner />;
+    if (error) return <div className="text-red-600">{error}</div>;
+    if (!serviceData) return <div>No se encontró el servicio.</div>;
 
     return (
         <>
@@ -113,21 +114,12 @@ export function Service() {
                             <p className="text-lg"><strong>Consideraciones:</strong> {serviceData.considerations}</p>
                         </div>
 
-                        <CommentsService onSubmitComment={handleCommentSubmit} />
+                        <CommentsService serviceId={serviceData.id} userId={currentUser ? currentUser.id : null} onSubmitComment={handleCommentSubmit} />
 
                         <div className="mt-6">
-                            <h3 className="text-2xl font-semibold text-blue-600 mb-4">Comentarios</h3>
-                            {comments.length > 0 ? (
-                                comments.map((comment, index) => (
-                                    <div key={index} className="p-4 border-b border-gray-300">
-                                        <p className="text-lg">{comment.comment}</p>
-                                        <p className="text-yellow-400">{"★".repeat(comment.rating)}{"☆".repeat(5 - comment.rating)}</p>
-                                    </div>
-                                ))
-                            ) : (
-                                <p className="text-gray-500">No hay comentarios aún.</p>
-                            )}
+                            <ViewComments serviceId={serviceData.id} />
                         </div>
+                        
 
                         <div className="flex flex-col sm:flex-row justify-between sm:space-x-4 mt-8 space-y-4 sm:space-y-0">
                             <button
