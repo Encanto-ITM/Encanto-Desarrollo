@@ -10,7 +10,7 @@ export function ViewComments({ userId, serviceId }) {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`https://tulookapiv2.vercel.app/api/api/comments/${userId}/service`);
+        const response = await fetch(`https://tulookapiv2.vercel.app/api/api/comments/${serviceId}/service`);
         if (!response.ok) {
           throw new Error(`Error al obtener los comentarios: ${response.statusText}`);
         }

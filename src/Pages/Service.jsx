@@ -124,7 +124,7 @@ export function Service() {
                         <div className="flex flex-col sm:flex-row justify-between sm:space-x-4 mt-8 space-y-4 sm:space-y-0">
                             <button
                                 onClick={() => navigate(-1)}
-                                className="w-full sm:w-auto bg-gray-400 text-white text-lg px-6 py-3 rounded-md hover:bg-gray-500 transition duration-300"
+                                className="w-full sm:w-auto bg-purple text-white text-lg px-6 py-3 rounded-md hover:scale-105 transition duration-300"
                             >
                                 Volver
                             </button>
