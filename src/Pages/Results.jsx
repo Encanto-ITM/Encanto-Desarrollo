@@ -46,11 +46,11 @@ export function Results() {
     );
 
     const handleOrder = (id) => {
-        if (isAuthenticated) {
+        //if (isAuthenticated) {
             navigate(`/order/${id}`); 
-        } else {
-            navigate(`/login`);
-        }
+       // } else {
+         //   navigate(`/login`);
+       // }
     };
     
     return (

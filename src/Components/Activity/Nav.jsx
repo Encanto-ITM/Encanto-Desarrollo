@@ -51,7 +51,7 @@ export function Nav() {
   };
 
   const handleLogoClick = () => {
-    navigate('/'); // Redirige a '/home' sin recargar la página
+    navigate('/home'); 
   };
 
   return (

@@ -29,7 +29,7 @@ export function App() {
         <div>
             <CartProvider>
                 <Routes>
-                    <Route path="/" element={<Navigate to={isAuthenticated ? "/home" : "/landing"} />} />
+                    <Route path="/" element={<Landing />} />
                     
                     <Route path="/login" element={<Login />} />
                     <Route path="/cartlist" element={<CartList />} />
