@@ -51,7 +51,7 @@ export function ViewComments({ userId, serviceId }) {
               </p>
             </div>
             <button
-              className="bg-blue-500 text-white py-1 px-3 rounded-lg ml-4 hover:bg-blue-600"
+              className="bg-purple text-white py-1 px-3 rounded-lg ml-4 hover:bg-blue-600"
               onClick={() => handleEditClick(comment)}
             >
               Editar
