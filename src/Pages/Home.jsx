@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Search } from "../Components/Home-components/Search.jsx";
-import { TypeServices } from "../Components/Home-components/TypeServices.jsx";
-import { PopularServices } from "../Components/Home-components/PopularServices.jsx";
-import { PopularWorkers } from "../Components/Home-components/PopularWorkers.jsx";
+import { Search } from "../Components/home-components/Search.jsx";
+import { TypeServices } from "../Components/home-components/TypeServices.jsx";
+import { PopularServices } from "../Components/home-components/PopularServices.jsx";
+import { PopularWorkers } from "../Components/home-components/PopularWorkers.jsx";
 import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
 
