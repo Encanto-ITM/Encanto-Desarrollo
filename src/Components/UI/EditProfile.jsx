@@ -112,7 +112,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
                   <EditInput label="Número de Contacto" id="contactNumber" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} />
                 </div>
 
-                <div className="flex flex-col md:flex-row mt-14 mb-7 md:space-y-0 md:space-x-4">
+                <div className="flex flex-col md:flex-row mt-10 mb-11 md:space-y-0 md:space-x-4">
                   <button
                     onClick={handleUpdate}
                     className={`rounded border-2 bg-blue border-blue text-white p-2 hover:scale-105 duration-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : 'w-full md:w-1/2'}`}
