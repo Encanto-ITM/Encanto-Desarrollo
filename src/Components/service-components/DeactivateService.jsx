@@ -42,7 +42,7 @@ export function DeactivateService({ service, isOpen, onClose, onConfirm }) {
                     <div className="flex justify-end mt-4">
                         <button 
                             onClick={handleToggleActive} 
-                            className={`${service.is_active === 1 ? 'bg-red-600' : 'bg-green-600'} text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-300 mr-2`}
+                            className={`${service.is_active === 1 ? 'bg-red' : 'bg-green'} text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-300 mr-2`}
                         >
                             {service.is_active === 1 ? 'Confirmar Desactivación' : 'Confirmar Activación'}
                         </button>
