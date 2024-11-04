@@ -99,7 +99,7 @@ export default function ChangePassword({ open, onClose, user, onPasswordUpdated 
                 <EditInput label="Confirmar Contraseña" id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
               </div>
 
-              <div className="flex justify-center mt-8">
+              <div className="flex justify-center mt-14 mb-5">
                 <button
                   onClick={handleUpdatePassword}
                   className={`rounded mt-2 border-2 bg-blue border-blue text-white p-2 w-3/4 my-8 hover:scale-105 duration-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}

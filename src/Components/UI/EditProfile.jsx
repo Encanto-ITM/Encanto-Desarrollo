@@ -105,14 +105,14 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
               </div>
 
               <div className="bg-purple text-white p-4 rounded-b-lg">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 justify-items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 justify-items-center">
                   <EditInput label="Nombre" id="name" value={name} onChange={(e) => setName(e.target.value)} />
                   <EditInput label="Apellido" id="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
                   <EditInput label="Descripción" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
                   <EditInput label="Número de Contacto" id="contactNumber" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} />
                 </div>
 
-                <div className="flex flex-col md:flex-row mt-8 mb-4 md:space-y-0 md:space-x-4">
+                <div className="flex flex-col md:flex-row mt-14 mb-7 md:space-y-0 md:space-x-4">
                   <button
                     onClick={handleUpdate}
                     className={`rounded border-2 bg-blue border-blue text-white p-2 hover:scale-105 duration-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : 'w-full md:w-1/2'}`}
