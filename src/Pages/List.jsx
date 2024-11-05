@@ -7,8 +7,9 @@ export function List() {
     const [appointments, setAppointments] = useState([]);
     const [message, setMessage] = useState('');
     const [user, setUser] = useState(null);
-    const [selectedStatus, setSelectedStatus] = useState(''); 
+    const [selectedStatus, setSelectedStatus] = useState('');
 
+    
     useEffect(() => {
         const getUserData = async () => {
             try {
@@ -20,7 +21,7 @@ export function List() {
         };
 
         getUserData();
-    }, []);
+    }, []);  
 
     useEffect(() => {
         if (user) {
@@ -112,7 +113,7 @@ export function List() {
             }
 
             setMessage('Cita cancelada con éxito.');
-            getList();
+            getList(); 
         } catch (error) {
             console.error('Error al cancelar la cita:', error);
             setMessage('Error al cancelar la cita.');
@@ -123,7 +124,6 @@ export function List() {
         setSelectedStatus(status);
     };
 
-    
     const filteredAppointments = selectedStatus
         ? appointments.filter(appointment => appointment.status === selectedStatus)
         : appointments;
@@ -133,7 +133,7 @@ export function List() {
             <Nav />
             <h2 className="text-2xl font-bold text-center py-4 my-4 border-b">Listado de citas</h2>
 
-           
+        
             <div className="flex justify-center gap-4">
                 <button onClick={() => filterAppointmentsByStatus('Aceptado')} className="hover:text-green">
                     Aprobado
@@ -159,24 +159,29 @@ export function List() {
                         {filteredAppointments.length > 0 ? (
                             filteredAppointments.map((appointment) => (
                                 <div key={appointment.id} className="bg-white shadow-lg rounded-lg p-4 border">
-                                    <p className="font-semibold">Nombre: <span className="font-normal">{appointment.service_name}</span></p>
+                                    <p className="font-semibold text-center">{appointment.service_name}</p>
+                                    <div className='line bg-purple h-1'></div>
                                     <p className="font-semibold">Estado: <span className="font-normal">{appointment.status}</span></p>
                                     <p className="font-semibold">Total: <span className="font-normal">${appointment.total}</span></p>
                                     <p className="font-semibold">Detalles: <span className="font-normal">{appointment.location}</span></p>
                                     <p className="font-semibold">Fecha: <span className="font-normal">{appointment.date}</span></p>
                                     <div className="flex gap-4 mt-4">
-                                        <button
-                                            className="text-green border-2 border-green px-4 py-2 rounded hover:scale-105 duration-500"
-                                            onClick={() => handleAccept(appointment.id)}
-                                        >
-                                            Aceptar
-                                        </button>
-                                        <button
-                                            className="text-red border-2 border-red px-4 py-2 rounded hover:scale-105 duration-500"
-                                            onClick={() => handleCancel(appointment.id)}
-                                        >
-                                            Cancelar
-                                        </button>
+                                        {user.acounttype_id === 3 && (
+                                            <>
+                                            <button
+                                                className="text-green border-2 border-green px-4 py-2 rounded hover:scale-105 duration-500"
+                                                onClick={() => handleAccept(appointment.id)}
+                                            >
+                                                Aceptar
+                                            </button>
+                                            <button
+                                                className="text-red border-2 border-red px-4 py-2 rounded hover:scale-105 duration-500"
+                                                onClick={() => handleCancel(appointment.id)}
+                                            >
+                                                Cancelar
+                                            </button>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             ))
@@ -186,7 +191,8 @@ export function List() {
                     </div>
                 </div>
             </div>
-            <div className='mt-40'>
+
+            <div className="mt-40">
                 <Footer />
             </div>
         </div>

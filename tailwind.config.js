@@ -10,7 +10,7 @@ export default {
         'serif': ['Roboto Serif', 'serif'],
       },
       colors: {
-        'purple': '#2a1d45 ',
+        'purple': '#2a1d45',
         'light-gray': '#75797E',
         'white-gray': '#D3D3D3',
         'red': '#8A2C2A',

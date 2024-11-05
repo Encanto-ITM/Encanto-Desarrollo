@@ -87,7 +87,6 @@ export function SignInForm({ onToggleForm }) {
             setError(error.message || 'Hubo un error con el servidor. Inténtalo más tarde.');
         }
     };
-
     return (
         <section className="flex flex-col md:flex-row w-full h-screen">
             <div className="flex w-full md:w-1/2 h-full overflow-hidden hidden md:block">
@@ -99,7 +98,9 @@ export function SignInForm({ onToggleForm }) {
                 />
             </div>
     
-            <div className="flex flex-col w-full md:w-1/2 h-full bg-white gap-4 p-12 place-items-center overflow-y-auto">
+          
+            <div className="flex flex-col w-full md:w-1/2 h-screen bg-white gap-4 p-12 place-items-center">
+                
                 <div className="h-32 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
                     <img
                         src="/img/identificador.png"
@@ -126,8 +127,7 @@ export function SignInForm({ onToggleForm }) {
                     />
                 </div>
                 {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-
-
+    
                 <div className='w-3/5 flex flex-col gap-4'> 
                     <GenericButton
                         type="button"
@@ -136,13 +136,15 @@ export function SignInForm({ onToggleForm }) {
                         className="mt-6 h-12" 
                     />
                 </div>
-                <a href="/resetpassword" className="text-black hover:underline text-center cursor-pointer">
+                
+              
+                <a href="/resetpassword" className="text-black hover:underline text-center cursor-pointer mt-2">
                     Olvidé mi contraseña
                 </a>
-                <br />
-
-                <div className="text-black text-center">
-                    <h2 className="mb-4 text-lg font-bold">Regístrate</h2>
+    
+                
+                <div className="text-black text-center mt-2">
+                    <h2 className="mb-2 text-lg font-bold">Regístrate</h2>
                     <div className="flex items-center justify-center gap-8">
                         <div 
                             onClick={() => onToggleForm('user')} 
@@ -168,11 +170,11 @@ export function SignInForm({ onToggleForm }) {
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     );
-
+    
+    
 
 
 }

@@ -11,9 +11,11 @@ export function Calendario({ onTimeSelect }) {
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 600);
 
   const handleDateChange = (newValue) => {
-    setSelectedDate(newValue);
-    if (onTimeSelect) {
-      onTimeSelect(newValue);
+    if (newValue && !newValue.isSame(selectedDate)) {
+      setSelectedDate(newValue);
+      if (onTimeSelect) {
+        onTimeSelect(newValue);
+      }
     }
   };
 
@@ -48,6 +50,7 @@ export function Calendario({ onTimeSelect }) {
           <MobileDateTimePicker
             value={selectedDate}
             onChange={handleDateChange}
+            disableCloseOnSelect
             sx={{
               width: '100%',
               height: '100%',
@@ -58,6 +61,7 @@ export function Calendario({ onTimeSelect }) {
             value={selectedDate}
             onChange={handleDateChange}
             orientation="landscape"
+            disableCloseOnSelect
             sx={{
               width: '100%',
               height: '100%',
