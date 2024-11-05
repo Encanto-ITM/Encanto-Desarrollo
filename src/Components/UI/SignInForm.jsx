@@ -9,7 +9,7 @@ export function SignInForm({ onToggleForm }) {
     const [accountTypes, setAccountTypes] = useState([]);
     const navigate = useNavigate();
 
-    
+
     useEffect(() => {
         const fetchAccountTypes = async () => {
             try {
@@ -73,7 +73,7 @@ export function SignInForm({ onToggleForm }) {
 
             const result = await response.json();
 
-          
+
             localStorage.setItem('token', result.token);
             localStorage.setItem('email', formData.email);
             //localStorage.setItem('userId', result.user.id);
@@ -99,7 +99,7 @@ export function SignInForm({ onToggleForm }) {
                 />
             </div>
     
-            <div className="flex flex-col w-full md:w-1/2 h-full bg-white gap-4 p-12 place-items-center">
+            <div className="flex flex-col w-full md:w-1/2 h-full bg-white gap-4 p-12 place-items-center overflow-y-auto">
                 <div className="h-32 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
                     <img
                         src="/img/identificador.png"
@@ -126,34 +126,53 @@ export function SignInForm({ onToggleForm }) {
                     />
                 </div>
                 {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-    
-                
+
+
                 <div className='w-3/5 flex flex-col gap-4'> 
-                <GenericButton
-                    type="button"
-                    onClick={handleSubmit}
-                    placeholder="Iniciar Sesión"
-                    className="mt-6 h-12" 
-                />
+                    <GenericButton
+                        type="button"
+                        onClick={handleSubmit}
+                        placeholder="Iniciar Sesión"
+                        className="mt-6 h-12" 
+                    />
                 </div>
                 <a href="/resetpassword" className="text-black hover:underline text-center cursor-pointer">
                     Olvidé mi contraseña
                 </a>
+                <br />
 
-                <div 
-                    onClick={onToggleForm} 
-                    className="text-black hover:underline text-center cursor-pointer" 
-                    role='button'
-                >
-                    Regístrate
+                <div className="text-black text-center">
+                    <h2 className="mb-4 text-lg font-bold">Regístrate</h2>
+                    <div className="flex items-center justify-center gap-8">
+                        <div 
+                            onClick={() => onToggleForm('user')} 
+                            className="flex flex-col items-center cursor-pointer transition-transform transform hover:scale-105 hover:bg-[rgba(42,29,69,0.3)] p-2 rounded"
+                        >
+                            <img 
+                                src="/img/Iconos/Usuario_2.png" 
+                                alt="Usuario" 
+                                className="w-12 h-12 transition-transform transform hover:scale-110" 
+                            />
+                            <span className="mt-2">Usuario</span>
+                        </div>
+                        <div 
+                            onClick={() => onToggleForm('emprendedor')} 
+                            className="flex flex-col items-center cursor-pointer transition-transform transform hover:scale-105 hover:bg-[rgba(42,29,69,0.3)] p-2 rounded"
+                        >
+                            <img 
+                                src="/img/Iconos/Emprendedor.png" 
+                                alt="Emprendedor" 
+                                className="w-12 h-12 transition-transform transform hover:scale-110" 
+                            />
+                            <span className="mt-2">Emprendedor</span>
+                        </div>
+                    </div>
                 </div>
-                
+
             </div>
         </section>
     );
-    
-    
-    
 
-    
+
+
 }

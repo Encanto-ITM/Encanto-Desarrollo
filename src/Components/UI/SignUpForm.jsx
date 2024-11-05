@@ -74,7 +74,7 @@ export function SignUpForm({ onToggleForm }) {
 
     return (
         <section className="flex flex-col md:flex-row w-full h-screen max-w-none overflow-hidden">
-            <div className="flex flex-col w-full bg-white gap-4 p-6 place-items-center shadow-lg flex-grow">
+            <div className="flex flex-col w-full bg-white gap-4 p-6 place-items-center shadow-lg flex-grow overflow-y-auto">
                 <div className="h-32 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
                     <img
                         src="/img/identificador.png"

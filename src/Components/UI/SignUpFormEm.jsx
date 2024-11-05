@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import SignInputsEm from './SignInputsEm'; 
+import SignInputs from './SignInputs'; 
 import GenericButton from './GenericButton'; 
-import { sha256 } from 'js-sha256'; 
-
 
 export function SignUpFormEm({ onToggleForm }) {
-    
+
     const [formData, setFormData] = useState({
         name: '',
         lastname: '',
@@ -19,7 +17,7 @@ export function SignUpFormEm({ onToggleForm }) {
         professions_id: '',
     });
 
-   
+
     const [professions, setProfessions] = useState([]);
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
@@ -31,10 +29,10 @@ export function SignUpFormEm({ onToggleForm }) {
                 const response = await fetch('https://tulookapiv2.vercel.app/api/api/professions');
                 const data = await response.json();
 
-               
+
                 if (Array.isArray(data)) {
                     const filteredProfessions = data.filter(
-                        profession => ![1, 7, 8].includes(profession.id) 
+                        profession => ![1, 2].includes(profession.id) 
                     );
                     setProfessions(filteredProfessions); 
                 } else {
@@ -49,24 +47,20 @@ export function SignUpFormEm({ onToggleForm }) {
         fetchProfessions(); 
     }, []); 
 
-   
+
     const handleChange = (e) => {
         const { name, value } = e.target; 
         setFormData({ ...formData, [name]: value }); 
     };
 
-    const handleProfessionChange = (e) => {
-        setFormData({ ...formData, professions_id: e.target.value }); 
-    };
 
-  
     const validateForm = (data) => {
         let formErrors = {};
         if (!data.name) formErrors.name = "El nombre es requerido.";
         if (!data.lastname) formErrors.lastname = "El apellido es requerido.";
         if (!data.email) formErrors.email = "El correo electrónico es requerido.";
         if (!data.contact_number) formErrors.contact_number = "El número de contacto es requerido.";
-        if (data.contact_number.length < 8) formErrors.contact_number = "El número de contacto debe tener al menos 10 dígitos.";
+        if (data.contact_number.length < 10) formErrors.contact_number = "El número de contacto debe tener al menos 10 dígitos.";
         if (!data.password) formErrors.password = "La contraseña es requerida.";
         if (data.password !== data.password_confirmation) {
             formErrors.password_confirmation = "Las contraseñas no coinciden."; 
@@ -75,7 +69,7 @@ export function SignUpFormEm({ onToggleForm }) {
         return formErrors; 
     };
 
-  
+
     const handleSubmit = (e) => {
         e.preventDefault(); 
         setSubmitted(true); 
@@ -87,10 +81,7 @@ export function SignUpFormEm({ onToggleForm }) {
             return;
         }
 
-     
-        const formDataToSubmit = {
-            ...formData,
-        };
+        const formDataToSubmit = { ...formData };
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit); 
        
@@ -112,7 +103,7 @@ export function SignUpFormEm({ onToggleForm }) {
         });
     };
 
-    
+
     const resetForm = () => {
         console.log("Resetting form..."); 
         setFormData({
@@ -131,10 +122,10 @@ export function SignUpFormEm({ onToggleForm }) {
         setSubmitted(false); 
     };
 
- 
+
     return (
-        <section className="flex flex-col md:flex-row w-full max-w-4xl mx-auto p-8 overflow-hidden" style={{ transform: 'scale(0.8)', transformOrigin: 'center' }}>
-            <div className="flex flex-col w-full lg:w-1/2 bg-white gap-4 p-6 place-items-center rounded-tl-[40px] rounded-bl-[40px] shadow-lg flex-grow Forms">
+        <section className="flex flex-col md:flex-row w-full h-screen max-w-none overflow-hidden">
+            <div className="flex flex-col w-full bg-white gap-4 p-6 place-items-center shadow-lg flex-grow overflow-y-auto" style={{ maxHeight: '100vh' }}>
                 <div className="h-32 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
                     <img
                         src="/img/identificador.png"
@@ -143,112 +134,109 @@ export function SignUpFormEm({ onToggleForm }) {
                     />
                 </div>
                 <h1 className="text-xl font-bold text-center mb-4">Registrarse</h1>
-
                 
                 {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
-
-             
-                <SignInputsEm 
-                    placeholder="Nombre" 
-                    name="name" 
-                    onChange={handleChange} 
-                    value={formData.name} 
-                />
-                {submitted && errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-
-                <SignInputsEm 
-                    placeholder="Apellido" 
-                    name="lastname"
-                    onChange={handleChange} 
-                    value={formData.lastname} 
-                />
-                {submitted && errors.lastname && <p className="text-red-500 text-sm">{errors.lastname}</p>}
-
-                <SignInputsEm 
-                    placeholder="Correo electrónico" 
-                    name="email" 
-                    type="email"
-                    onChange={handleChange} 
-                    value={formData.email} 
-                />
-                {submitted && errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-
-                <SignInputsEm 
-                    placeholder="Número de contacto" 
-                    name="contact_number" 
-                    onChange={handleChange} 
-                    value={formData.contact_number} 
-                />
-                {submitted && errors.contact_number && <p className="text-red-500 text-sm">{errors.contact_number}</p>}
-
-                <div className="w-[80%]">
-                    <select 
-                        name="contact_public" 
+                <div className='w-3/4 flex flex-col gap-6'>
+                    <SignInputs 
+                        placeholder="Nombre" 
+                        name="name" 
                         onChange={handleChange} 
-                        value={formData.contact_public} 
-                        className="flex border-2 border-black text-center w-full h-10 rounded-xl hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    >
-                        <option value="0">Contacto Público No</option>
-                        <option value="1">Contacto Público Sí</option>
-                    </select>
+                    />
+                    {submitted && errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                    
+                    <SignInputs 
+                        placeholder="Apellido" 
+                        name="lastname"
+                        onChange={handleChange} 
+                    />
+                    {submitted && errors.lastname && <p className="text-red-500 text-sm">{errors.lastname}</p>}
+                    
+                    <SignInputs
+                        placeholder="Correo electrónico" 
+                        name="email" 
+                        type="email"
+                        onChange={handleChange} 
+                    />
+                    {submitted && errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                    
+                    <SignInputs 
+                        placeholder="Número de contacto" 
+                        name="contact_number" 
+                        onChange={handleChange} 
+                    />
+                    {submitted && errors.contact_number && <p className="text-red-500 text-sm">{errors.contact_number}</p>}
+                    
+                    <div className="w-full">
+                        <select 
+                            name="contact_public" 
+                            onChange={handleChange} 
+                            value={formData.contact_public} 
+                            className="border-2 border-black text-center w-full h-12 rounded-md shadow-sm transition duration-300 ease-in-out hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            style={{ fontSize: '0.75rem' }}
+                        >
+                            <option value="0">Contacto Público No</option>
+                            <option value="1">Contacto Público Sí</option>
+                        </select>
+                    </div>
+    
+                    <SignInputs 
+                        placeholder="Contraseña" 
+                        name="password" 
+                        type="password" 
+                        onChange={handleChange} 
+                    />
+                    {submitted && errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+    
+                    <SignInputs
+                        placeholder="Confirmar contraseña" 
+                        name="password_confirmation" 
+                        type="password" 
+                        onChange={handleChange} 
+                    />
+                    {submitted && errors.password_confirmation && <p className="text-red-500 text-sm">{errors.password_confirmation}</p>}
+                    
+                    <div className="w-full">
+                        <select 
+                            name="professions_id" 
+                            onChange={handleChange} 
+                            value={formData.professions_id} 
+                            className="border-2 border-black text-center w-full h-12 rounded-md shadow-sm transition duration-300 ease-in-out hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            style={{ fontSize: '0.75rem' }}
+                        >
+                            <option value="">Selecciona una profesión</option>
+                            {Array.isArray(professions) && professions.length > 0 ? (
+                                professions.map((profession) => (
+                                    <option key={profession.id} value={profession.id}>
+                                        {profession.profession}
+                                    </option>
+                                ))
+                            ) : (
+                                <option value="">No hay profesiones disponibles</option>
+                            )}
+                        </select>
+                        {submitted && errors.professions_id && <p className="text-red-500 text-sm">{errors.professions_id}</p>}
+                    </div>
                 </div>
-
-                <SignInputsEm 
-                    placeholder="Contraseña" 
-                    name="password" 
-                    type="password" 
-                    onChange={handleChange} 
-                    value={formData.password} 
-                />
-                {submitted && errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-
-                <SignInputsEm 
-                    placeholder="Confirmar contraseña" 
-                    name="password_confirmation" 
-                    type="password" 
-                    onChange={handleChange} 
-                    value={formData.password_confirmation} 
-                />
-                {submitted && errors.password_confirmation && <p className="text-red-500 text-sm">{errors.password_confirmation}</p>}
-
-                <div className="w-[80%]">
-                    <select 
-                        name="professions_id" 
-                        id="professions" 
-                        onChange={handleProfessionChange} 
-                        value={formData.professions_id} 
-                        className="flex border-2 border-black text-center w-full h-10 rounded-xl hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    >
-                        <option value="">Selecciona una profesión</option>
-                        {Array.isArray(professions) && professions.length > 0 ? (
-                            professions.map((profession) => (
-                                <option key={profession.id} value={profession.id}>
-                                    {profession.profession}
-                                </option>
-                            ))
-                        ) : (
-                            <option value="">No hay profesiones disponibles</option>
-                        )}
-                    </select>
-                    {submitted && errors.professions_id && <p className="text-red-500 text-sm">{errors.professions_id}</p>}
+    
+                <div className='w-3/5 flex flex-col gap-4'> 
+                    <GenericButton 
+                        type="button" 
+                        onClick={handleSubmit} 
+                        placeholder="Registrarse" 
+                        className='mt-2 h-12'
+                    />
                 </div>
-
-                <GenericButton 
-                    type="button" 
-                    onClick={handleSubmit} 
-                    placeholder="Registrarse" 
-                />
-
-               
+    
                 <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
                     Iniciar Sesión
                 </div>
             </div>
-            <div className="flex w-full lg:w-1/2 min-h-full overflow-hidden flex-grow hidden md:block">
+            
+            <div className="flex w-full max-h-screen overflow-hidden flex-grow hidden md:block">
                 <img
-                    src="/img/Register-Hombre.png"
-                    className="w-full h-full object-cover rounded-tr-[40px] rounded-br-[40px]"
-                    alt="Register Hombre"
+                    src="/img/RegisterE.png"
+                    className="w-full h-full object-cover"
+                    alt="Register Em"
                     loading="lazy"
                 />
             </div>

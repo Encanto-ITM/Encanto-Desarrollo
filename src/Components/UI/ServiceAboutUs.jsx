@@ -2,12 +2,14 @@ export function ServiceAboutUs(){
     return (
         <section className="py-16 bg-gray-100">
             <div className="container mx-auto text-center">
-            <h3 className="text-4xl font-bold mb-12 text-gray-800">Quiénes Somos</h3>
-            <p className="mb-12 max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed text-center text-justify">
-                Somos un equipo de compañeros de carrera de Informatica y Tecnología Multimedia de la Universidad de Costa Rica. Nuestro Proyecto TuLook llegó producto de un curso de carrera en el cuál se propusieron ideas para desarrollar como equipo. La idea de esta Aplicación nos llamó la atención y como equipo se propusieron ideas entre todos, las cuáles fueron enriqueciendo el proyecto.
-                Hemos creado TuLook para ti, para que te acompañe en tú camino hacia la belleza al alcance de un click como nuestro lema lo menciona, con esta App tendrás la facilidad de tener cualquier servicio de belleza y salud con solo buscar en nuestra Aplicación.
-            </p>
-            <br />
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-1 px-6">
+                <h3 className="text-4xl font-bold mb-12 text-gray-800">Quiénes Somos</h3>
+                <p className="mb-12 max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed text-center text-justify">
+                    Somos un equipo de compañeros de carrera de Informatica y Tecnología Multimedia de la Universidad de Costa Rica. Nuestro Proyecto TuLook llegó producto de un curso de carrera en el cuál se propusieron ideas para desarrollar como equipo. La idea de esta Aplicación nos llamó la atención y como equipo se propusieron ideas entre todos, las cuáles fueron enriqueciendo el proyecto.
+                    Hemos creado TuLook para ti, para que te acompañe en tú camino hacia la belleza al alcance de un click como nuestro lema lo menciona, con esta App tendrás la facilidad de tener cualquier servicio de belleza y salud con solo buscar en nuestra Aplicación.
+                </p>
+                <br />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-4">
                 <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <img 

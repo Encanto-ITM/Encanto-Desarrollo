@@ -35,7 +35,7 @@ export function List() {
         }
         try {
             let response;
-            if (user.account_type === 3) {
+            if (user.account_type == 3) {
                 response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${user.id}/owner`);
             } else {
                 response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${user.id}/client`);
@@ -53,7 +53,72 @@ export function List() {
         }
     };
 
-  
+    const handleAccept = async (appointmentId) => {
+        try {
+            const appointment = appointments.find(app => app.id === appointmentId);
+            const updatedData = {
+                service_id: appointment.service_id,
+                owner_id: appointment.owner_id,
+                applicant: user.id,
+                date: appointment.date,
+                status: 'Aceptado',
+                total: appointment.total,
+                location: appointment.location,
+            };
+
+            const response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${appointmentId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al aceptar la cita');
+            }
+
+            setMessage('Cita aceptada con éxito.');
+            getList(); 
+        } catch (error) {
+            console.error('Error al aceptar la cita:', error);
+            setMessage('Error al aceptar la cita.');
+        }
+    };
+
+    const handleCancel = async (appointmentId) => {
+        try {
+            const appointment = appointments.find(app => app.id === appointmentId);
+            const updatedData = {
+                service_id: appointment.service_id,
+                owner_id: appointment.owner_id,
+                applicant: user.id,
+                date: appointment.date,
+                status: 'Cancelado',
+                total: appointment.total,
+                location: appointment.location,
+            };
+
+            const response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${appointmentId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cancelar la cita');
+            }
+
+            setMessage('Cita cancelada con éxito.');
+            getList();
+        } catch (error) {
+            console.error('Error al cancelar la cita:', error);
+            setMessage('Error al cancelar la cita.');
+        }
+    };
+
     const filterAppointmentsByStatus = (status) => {
         setSelectedStatus(status);
     };
