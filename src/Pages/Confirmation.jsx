@@ -70,12 +70,14 @@ export function Confirmation() {
                 
                 {service ? (
                     <div className="mt-4 border p-4 rounded-lg shadow-lg">
-                        <h2 className="text-xl font-semibold">{service.name}</h2>
-                        <p>Precio: ₡{service.price}</p>
-                        <p>Duración aproximada: {service.aprox_time}</p>
-                        <p>Detalles: {service.details}</p>
-                        <p>Consideraciones: {service.considerations}</p>
-                        <p>Hora seleccionada: {formattedDate}</p> 
+                        <p className="font-semibold text-center">{service.name}</p>
+                            <div className='line bg-purple h-1'></div>
+                            <p className="font-semibold">Duracion: <span className="font-normal">{service.aprox_time}</span></p>
+                            <p className="font-semibold">Total: <span className="font-normal">₡{service.price}</span></p>
+                            <p className="font-semibold">Consideraciones: <span className="font-normal">{service.considerations}</span></p>
+                            <p className="font-semibold">Detalles: <span className="font-normal">{service.details}</span></p>
+                            <p className="font-semibold">Fecha: <span className="font-normal">{formattedDate}</span></p>
+                                    
                     </div>
                 ) : (
                     <p>No hay información de servicio disponible.</p>
