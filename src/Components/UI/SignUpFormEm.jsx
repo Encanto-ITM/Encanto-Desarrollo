@@ -227,7 +227,7 @@ export function SignUpFormEm({ onToggleForm }) {
                     />
                 </div>
     
-                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
+                <div onClick={onToggleForm} className="text-[#007bff] hover:underline text-center cursor-pointer" role='button'>
                     Iniciar Sesión
                 </div>
             </div>

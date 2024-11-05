@@ -130,7 +130,7 @@ export function SignUpForm({ onToggleForm }) {
                     className='mt-2 h-12'
                 />
                 </div>
-                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
+                <div onClick={onToggleForm} className="text-[#007bff] hover:underline text-center cursor-pointer" role='button'>
                     Iniciar Sesión
                 </div>
             </div>

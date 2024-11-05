@@ -40,6 +40,8 @@ export function PopularWorkers({ workers }) {
         slidesToScroll: 3,
         nextArrow: <CustomNextArrow />,
         prevArrow: <CustomPrevArrow />,
+        autoplay: true,           // Activar autoplay
+        autoplaySpeed: 5000,      // Cambiar cada 5 segundos (5000 ms)
         responsive: [
             {
                 breakpoint: 768,

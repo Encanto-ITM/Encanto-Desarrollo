@@ -6,7 +6,7 @@ export default function Footer() {
                     <h2 className="text-lg font-semibold mb-2">Servicios</h2>
                     <ul>
                         <li><a href="#discover" className="hover:underline">Descubre</a></li>
-                        <li><a href="#all-services" className="hover:underline">Todos los servicioss</a></li>
+                        <li><a href="#all-services" className="hover:underline">Todos los servicios</a></li>
                     </ul>
                 </div>
 

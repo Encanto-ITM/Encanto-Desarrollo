@@ -48,7 +48,7 @@ export function ResetPasswordForm() {
 
             const data = await response.json();
             setSuccessMessage(data.message || 'Se ha enviado un correo de recuperación.');
-            setFormData({ email: '' }); // Limpiar el formulario
+            setFormData({ email: '' }); 
         } catch (error) {
             console.error('Error en la solicitud de recuperación de contraseña:', error);
             setErrors({ email: 'Correo de recuperación incorrecto.' });
@@ -83,7 +83,7 @@ export function ResetPasswordForm() {
                     placeholder="Restablecer Contraseña"
                     className='mt-2 h-12'
                 />
-                <a href="/login?form=signin" className="text-purple hover:underline text-center">
+                <a href="/login?form=signin" className="text-[#007bff] hover:underline text-center">
                     Iniciar Sesión
                 </a>
             </div>
