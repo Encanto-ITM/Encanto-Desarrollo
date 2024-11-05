@@ -138,7 +138,7 @@ export function SignInForm({ onToggleForm }) {
                 </div>
                 
               
-                <a href="/resetpassword" className="text-[#007bff] hover:underline text-center cursor-pointer">
+                <a href="/resetpassword" className="text-black hover:underline text-center cursor-pointer">
                     Olvidé mi contraseña
                 </a>
     

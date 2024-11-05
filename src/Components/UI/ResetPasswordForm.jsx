@@ -83,7 +83,7 @@ export function ResetPasswordForm() {
                     placeholder="Restablecer Contraseña"
                     className='mt-2 h-12'
                 />
-                <a href="/login?form=signin" className="text-[#007bff] hover:underline text-center">
+                <a href="/login?form=signin" className="text-black hover:underline text-center">
                     Iniciar Sesión
                 </a>
             </div>
