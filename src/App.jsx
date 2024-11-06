@@ -31,6 +31,7 @@ export function App() {
                     <Route path="/results" element={<Results />} />
                     <Route path="/results/:id" element={<Results />} />
                     <Route path="/aboutus" element={<AboutUs />} />
+                    <Route path="/contactus" element={<ContactUs />} />
 
                     
                     <Route path="/home" element={<Home />} />
