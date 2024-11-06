@@ -7,7 +7,6 @@ const initialState = {
     history: [],
 };
 
-//esto va en un hook, codigo basura en un componente
 const cartReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':

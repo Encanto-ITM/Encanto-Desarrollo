@@ -17,10 +17,10 @@ export function ProfileHeader() {
         alt="header photo"
       />
 
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg shadow-md text-center w-80 h-72">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 bg-white p-8 rounded-lg shadow-md text-center w-80 h-72">
         <img
-          className="w-32 h-32 rounded-full mx-auto"
-          src={/*worker.profilephoto ||*/ 'https://picsum.photos/800/800'}
+          className="w-32 h-32 rounded-full mx-auto border border-gray-300"
+          src={worker.profilephoto || 'https://picsum.photos/800/800'}
           alt={`${worker.name} ${worker.lastname}`}
         />
         <h2 className="text-xl font-semibold mt-4">{worker.name} {worker.lastname}</h2>

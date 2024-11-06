@@ -9,6 +9,7 @@ import { EditService } from '../Components/service-components/EditService.jsx';
 import { DeactivateService } from '../Components/service-components/DeactivateService.jsx';
 import { CommentsService } from '../Components/service-components/CommentsService.jsx';
 import { ViewComments } from '../Components/service-components/ViewComments.jsx';
+import { NavLanding } from "../Components/landing-components/NavLanding";
 
 export function Service() {
     const { id } = useParams();
@@ -85,9 +86,16 @@ export function Service() {
     if (error) return <div className="text-red-600">{error}</div>;
     if (!serviceData) return <div>No se encontró el servicio.</div>;
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    setIsLoggedIn(!!email);
+  }, []);
+
     return (
         <>
-            <Nav />
+            {isLoggedIn ? <Nav /> : <NavLanding />}
             <div className="p-8 bg-gray-100 min-h-screen">
                 <h1 className="text-5xl font-bold text-center text-blue-700 mb-8">Servicio</h1>
 

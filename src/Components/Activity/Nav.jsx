@@ -111,7 +111,7 @@ export function Nav() {
                   />
                 )}
                 <img
-                  src={/*userData?.profilephoto || */'https://picsum.photos/800/400'}
+                  src={userData?.profilephoto || '/img/placeholder.jpg'}
                   className={`object-cover w-full h-full ${isImageLoading ? 'hidden' : ''}`}
                   alt="avatar"
                   onLoad={() => setIsImageLoading(false)}
