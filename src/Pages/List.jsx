@@ -175,7 +175,7 @@ export function List() {
                                         <p className="font-semibold">Detalles: <span className="font-normal">{appointment.location}</span></p>
                                         <p className="font-semibold">Fecha: <span className="font-normal">{appointment.date}</span></p>
                                         <div className="flex gap-4 mt-4">
-                                            {user.account_type === 3 && (
+                                            {user.acounttype_id === 3 && (
                                                 <>
                                                 <button
                                                     className="text-green border-2 border-green px-4 py-2 rounded hover:scale-105 duration-500"
