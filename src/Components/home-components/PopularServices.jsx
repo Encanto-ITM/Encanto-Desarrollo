@@ -21,8 +21,8 @@ export function PopularServices() {
         <div className="w-full mt-24">
             <section className="p-10">
                 <div className="text-center p-8">
-                    <h2 className="text-3xl font-bold text-white mb-4 max-w-[94rem]">Servicios populares</h2>
-                    <h3 className="text-3xl font-bold text-white mb-8 max-w-[94rem]">Una selección de nuestros mejores servicios</h3>
+                    <h2 className="text-3xl font-bold text-white mb-4 max-w-[94rem] m-auto">Servicios populares</h2>
+                    <h3 className="text-3xl font-bold text-white mb-8 max-w-[94rem] m-auto">Una selección de nuestros mejores servicios</h3>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center p-10">
                     {popularServices.length > 0 ? (

@@ -50,6 +50,10 @@ export function Nav() {
     navigate('/cartlist');
   };
 
+  const handleContactClick = () => {
+    navigate('/contactus');
+  };
+
   const handleLogoClick = () => {
     navigate('/home'); 
   };
@@ -85,7 +89,7 @@ export function Nav() {
         <a onClick={handleAboutClick}>Nosotros</a>
         </li>
         <li className="transition duration-500 hover:scale-110 cursor-pointer">
-          <a href="#">Contáctanos</a>
+          <a onClick={handleContactClick}>Contáctanos</a>
         </li>
         <li className="transition duration-500 hover:scale-110">
           <a href="#" onClick={handleCartClick} className="flex items-center justify-center focus:outline-none gap-4">

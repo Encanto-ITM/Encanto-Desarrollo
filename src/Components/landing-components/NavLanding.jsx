@@ -48,7 +48,7 @@ export function NavLanding() {
       >
         <li className="transition duration-500 hover:scale-110"><a href="/results/4">Servicios</a></li>
         <li className="transition duration-500 hover:scale-110"><a href="/aboutus">Nosotros</a></li>
-        <li className="transition duration-500 hover:scale-110"><a href="#info">Contactanos</a></li>
+        <li className="transition duration-500 hover:scale-110"><a href="/contactus">Contactanos</a></li>
         <li className="transition duration-500 hover:scale-110">
           <a href="#" onClick={handleCartClick} className="flex items-center justify-center focus:outline-none gap-4">
             <div className="relative flex items-start">

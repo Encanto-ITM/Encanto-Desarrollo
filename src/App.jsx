@@ -14,6 +14,7 @@ import AboutUs from './Pages/AboutUs';
 import { CartProvider } from './Components/Cart/CartContext';
 import CartList from './Pages/CartList';
 import { Service } from './Pages/Service';
+import { ContactUs } from './Pages/ContactUs';
 import ProtectedRoute from './Components/Activity/ProtectedRoute'; 
 
 export function App() {
@@ -40,7 +41,7 @@ export function App() {
                     <Route path="/results" element={<Results />} />
                     <Route path="/results/:id" element={<Results />} />
                     <Route path="/aboutus" element={<AboutUs />} />
-
+                    <Route path="/contactus" element={<ContactUs />} />
                    
                     <Route 
                         path="/home" 
