@@ -44,7 +44,6 @@ export function ViewComments({ userId, serviceId }) {
         comments.map((comment, index) => (
           <div key={index} className="p-4 border-b border-gray-300 flex justify-between items-start">
             <div className="flex-1">
-              <p className="text-lg font-semibold">{comment.user_name}:</p>
               <p className="text-lg">{comment.comment}</p>
               <p className="text-yellow-400">
                 {"★".repeat(comment.rate)}{"☆".repeat(5 - comment.rate)}
@@ -63,7 +62,7 @@ export function ViewComments({ userId, serviceId }) {
       )}
       {editingComment && (
         <div className="mt-6">
-          <h3 className="text-2xl font-semibold text-blue-600 mb-4">Editar Comentario</h3>
+          <h3 className="text-2xl font-semibold text-blue mb-4">Editar Comentario</h3>
           <CommentsService 
             serviceId={serviceId} 
             userId={userId} 
