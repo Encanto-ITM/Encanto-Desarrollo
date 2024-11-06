@@ -92,17 +92,17 @@ export default function ChangePassword({ open, onClose, user, onPasswordUpdated 
             </div>
 
             <div className="bg-purple text-white p-4 rounded-b-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 justify-items-center">
                 <EditInput label="Email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <EditInput label="Contraseña Anterior" id="oldPassword" type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
                 <EditInput label="Nueva Contraseña" id="newPassword" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                 <EditInput label="Confirmar Contraseña" id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
               </div>
 
-              <div className="flex justify-center mt-14 mb-5">
+              <div className="flex justify-center mt-14 mb-6">
                 <button
                   onClick={handleUpdatePassword}
-                  className={`rounded mt-2 border-2 bg-blue border-blue text-white p-2 w-3/4 my-8 hover:scale-105 duration-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`rounded mt-2 border-2 bg-white text-purple  p-2 w-3/4 my-8 hover:scale-105 duration-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                   disabled={isLoading}
                 >
                   {isLoading ? 'Actualizando...' : 'Actualizar Contraseña'}

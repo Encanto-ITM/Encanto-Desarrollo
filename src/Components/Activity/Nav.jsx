@@ -81,10 +81,10 @@ export function Nav() {
         <li className="transition duration-500 hover:scale-110 cursor-pointer">
           <a onClick={handleServiceClick}>Servicios</a>
         </li>
-        <li className="transition duration-500 hover:scale-110">
+        <li className="transition duration-500 hover:scale-110 cursor-pointer">
         <a onClick={handleAboutClick}>Nosotros</a>
         </li>
-        <li className="transition duration-500 hover:scale-110">
+        <li className="transition duration-500 hover:scale-110 cursor-pointer">
           <a href="#">Contáctanos</a>
         </li>
         <li className="transition duration-500 hover:scale-110">

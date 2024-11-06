@@ -115,14 +115,14 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
                 <div className="flex flex-col md:flex-row mt-10 mb-16 md:space-y-0 md:space-x-4">
                   <button
                     onClick={handleUpdate}
-                    className={`rounded border-2 bg-blue border-blue text-white p-2 hover:scale-105 duration-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : 'w-full md:w-1/2'}`}
+                    className={`rounded border-2 bg-white text-purple p-2 hover:scale-105 duration-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : 'w-full md:w-1/2'}`}
                     disabled={isLoading}
                   >
-                    {isLoading ? 'Actualizando...' : 'Editar'}
+                    {isLoading ? 'Actualizando...' : 'Confirmar Editar'}
                   </button>
                   <button
                     onClick={handleChangePassword}
-                    className="rounded border-2 bg-green border-green mt-4 text-white p-2 hover:scale-105 duration-500 w-full md:w-1/2"
+                    className="rounded border-2 bg-white text-purple mt-4 p-2 hover:scale-105 duration-500 w-full md:w-1/2"
                   >
                     Cambiar Contraseña
                   </button>
