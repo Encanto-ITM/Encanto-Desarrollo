@@ -24,8 +24,15 @@ export function TypeServices() {
         '/img/Iconos/Otros.png',
     ];
 
-    const handleServiceClick = (id) => {
-        navigate(`/results/${id}`);
+    const handleServiceClick = (id, name) => {
+        // Si el nombre del servicio es "Otros", pasamos los tres IDs
+        if (name === 'Otros') {
+            // Navegar a una ruta especial con los tres IDs
+            navigate(`/results/otros?ids=5,8,9`);
+        } else {
+            // Si no es "Otros", simplemente pasamos el ID normal
+            navigate(`/results/${id}`);
+        }
     };
 
     return (
@@ -33,7 +40,7 @@ export function TypeServices() {
             {services.map((service, index) => (
                 <div key={service.id} className="flex flex-col items-center space-y-2 m-4 transition duration-500 hover:scale-110 w-24 sm:w-32 lg:w-40 lg:mx-6">
                     <div 
-                        onClick={() => handleServiceClick(service.id)} 
+                        onClick={() => handleServiceClick(service.id, service.name)} 
                         className="w-16 h-16 rounded-full flex items-center justify-cente cursor-pointer"
                     >
                         <img src={img[index]} alt={service.name} className="w-full h-full object-contain" />
@@ -44,7 +51,3 @@ export function TypeServices() {
         </div>
     );
 }
-
-
-
-
