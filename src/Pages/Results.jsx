@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Nav } from '../Components/Activity/Nav.jsx';
 import { TypeServices } from "../Components/home-components/TypeServices.jsx";
 import { Search } from '../Components/home-components/Search.jsx';
@@ -8,6 +8,7 @@ import Footer from "../Components/activity/Footer.jsx";
 export function Results() {
     const { id } = useParams(); 
     const navigate = useNavigate(); 
+    const location = useLocation();
     const [services, setServices] = useState([]); 
     const [loading, setLoading] = useState(true); 
     const [error, setError] = useState(null); 
@@ -26,31 +27,53 @@ export function Results() {
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`https://tulookapiv2.vercel.app/api/api/services/${id}/filtertype`); 
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-                setServices(data.data); 
+                let url = '';
+                const queryParams = new URLSearchParams(location.search);
+                const ids = queryParams.get('ids'); 
+        
+                if (ids) {
+
+                    const idsArray = ids.split(',');
+                    const fetchRequests = idsArray.map((id) =>
+                        fetch(`https://tulookapiv2.vercel.app/api/api/services/${id}/filtertype`)
+                            .then((res) => res.json())
+                            .then((data) => {
+                                return data.data || [];  
+                            })
+                            .catch((err) => {
+                                console.error(`Error fetching ID ${id}: `, err);
+                                return []; 
+                            })
+                    );
+        
+               
+                    const results = await Promise.all(fetchRequests);   
+                    const combinedResults = results.flat();
+                    setServices(combinedResults);
+                } else {
+                    const response = await fetch(`https://tulookapiv2.vercel.app/api/api/services/${id}/filtertype`);
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    const data = await response.json();
+                    setServices(data.data || []); 
+                }
             } catch (err) {
                 console.error(err);
-                setError(<p className="text-center text-gray-500 mt-6">No se han encontrado servicios que coincidan con su búsqueda.</p>); 
+                setError(<p className="text-center text-gray-500 mt-6">No se han encontrado servicios que coincidan con su búsqueda.</p>);
             } finally {
-                setLoading(false); 
+                setLoading(false);
             }
         };
+        
 
         fetchServices();
-    }, [id]); 
+    }, [id, location.search]); 
 
     const filteredServices = services.filter(service =>
         service.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     const handleOrder = (id) => {
-        //if (isAuthenticated) {
-            navigate(`/order/${id}`); 
-       // } else {
-         //   navigate(`/login`);
-       // }
+        navigate(`/order/${id}`); 
     };
     
     return (
@@ -107,5 +130,4 @@ export function Results() {
             <Footer />
         </div>
     );
-    
 }
