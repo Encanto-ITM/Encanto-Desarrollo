@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Nav } from '../Components/Activity/Nav.jsx';
 import { TypeServices } from "../Components/home-components/TypeServices.jsx";
-import { Search } from '../Components/Home-components/Search.jsx';
+import { Search } from '../Components/home-components/Search.jsx';
 import Footer from "../Components/Activity/Footer.jsx";
 import { NavLanding } from "../Components/landing-components/NavLanding";
 
