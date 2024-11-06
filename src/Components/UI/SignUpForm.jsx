@@ -2,46 +2,59 @@ import React, { useState } from 'react';
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 
-
-export function SignUpForm({ onToggleForm }) { 
+export function SignUpForm({ onToggleForm }) {
     const [formData, setFormData] = useState({
         name: '',
         lastname: '',
         email: '',
-        password: ''
-       
+        password: '',
+        password_confirmation: ''
     });
 
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
 
+   
     const handleChange = (e) => {
         const { name, value } = e.target;
-        let newValue = value;
+        setFormData({ ...formData, [name]: value });
 
-        setFormData({ ...formData, [name]: newValue });
+      
+        const formErrors = validateForm({ ...formData, [name]: value });
+        setErrors(formErrors);
     };
 
+  
     const validateForm = (data) => {
         let formErrors = {};
+
         if (!data.name) formErrors.name = "El nombre es requerido.";
         if (!data.lastname) formErrors.lastname = "El apellido es requerido.";
         if (!data.email) formErrors.email = "El correo electrónico es requerido.";
         if (!data.password) formErrors.password = "La contraseña es requerida.";
+        if (!data.password_confirmation) formErrors.password_confirmation = "Confirmar la contraseña es requerido.";
+
+        if (data.password && data.password.length < 8) {
+            formErrors.password = "La contraseña debe tener al menos 8 caracteres.";
+        }
+
         if (data.password !== data.password_confirmation) {
             formErrors.password_confirmation = "Las contraseñas no coinciden.";
         }
+
         return formErrors;
     };
 
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true);
 
         const formErrors = validateForm(formData);
+        setErrors(formErrors);
+
         if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-            return;
+            return; 
         }
 
         const { password_confirmation, ...formDataToSubmit } = formData;
@@ -57,20 +70,21 @@ export function SignUpForm({ onToggleForm }) {
         })
         .then(response => {
             if (response.ok) {
-                return response.json(); 
+                return response.json();
             } else {
                 throw new Error('Error al registrarse.');
             }
         })
         .then(data => {
             console.log('Éxito:', data);
-          
             onToggleForm();
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     };
+
+    const isFormValid = Object.keys(errors).length === 0;
 
     return (
         <section className="flex flex-col md:flex-row w-full h-screen max-w-none overflow-hidden">
@@ -83,54 +97,57 @@ export function SignUpForm({ onToggleForm }) {
                     />
                 </div>
                 <h1 className="text-xl font-bold text-center mb-4">Registrarse</h1>
-                <div className='w-3/4 flex flex-col gap-6'>
-                <SignInputs 
-                    placeholder="Nombre" 
-                    name="name" 
-                    onChange={handleChange} 
-                />
-                {submitted && errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                
-                <SignInputs 
-                    placeholder="Apellido" 
-                    name="lastname"
-                    onChange={handleChange} 
-                />
-                {submitted && errors.lastname && <p className="text-red-500 text-sm">{errors.lastname}</p>}
-                
-                <SignInputs 
-                    placeholder="Correo electrónico" 
-                    name="email" 
-                    type="email"
-                    onChange={handleChange} 
-                />
-                {submitted && errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-                
-                <SignInputs 
-                    placeholder="Contraseña" 
-                    name="password" 
-                    type="password" 
-                    onChange={handleChange} 
-                />
-                {submitted && errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-                
-                <SignInputs 
-                    placeholder="Confirmar contraseña" 
-                    name="password_confirmation" 
-                    type="password" 
-                    onChange={handleChange} 
-                />
-                {submitted && errors.password_confirmation && <p className="text-red-500 text-sm">{errors.password_confirmation}</p>}
+                <div className="w-3/4 flex flex-col gap-6">
+                    <SignInputs 
+                        placeholder="Nombre" 
+                        name="name" 
+                        onChange={handleChange} 
+                    />
+                    
+                    <SignInputs 
+                        placeholder="Apellido" 
+                        name="lastname"
+                        onChange={handleChange} 
+                    />
+                    
+                    <SignInputs 
+                        placeholder="Correo electrónico" 
+                        name="email" 
+                        type="email"
+                        onChange={handleChange} 
+                    />
+                   
+                    <SignInputs 
+                        placeholder="Contraseña" 
+                        name="password" 
+                        type="password" 
+                        onChange={handleChange} 
+                    />
+                    
+                    <SignInputs 
+                        placeholder="Confirmar contraseña" 
+                        name="password_confirmation" 
+                        type="password" 
+                        onChange={handleChange} 
+                    />
+                    <div className='flex flex-col'>
+                        {submitted && errors.name && <p className="text-red text-sm mt-1">{errors.name}</p>}
+                        {submitted && errors.lastname && <p className="text-red text-sm">{errors.lastname}</p>}
+                        {submitted && errors.email && <p className="text-red text-sm">{errors.email}</p>}
+                        {submitted && errors.password && <p className="text-red text-sm">{errors.password}</p>}
+                        {submitted && errors.password_confirmation && <p className="text-red text-sm">{errors.password_confirmation}</p>}
+                    </div>
                 </div>
-                <div className='w-3/5 flex flex-col gap-4'> 
-                <GenericButton 
-                    type="button" 
-                    onClick={handleSubmit} 
-                    placeholder="Registrarse" 
-                    className='mt-2 h-12'
-                />
+                <div className="w-3/5 flex flex-col gap-4">
+                    <GenericButton 
+                        type="button" 
+                        onClick={handleSubmit} 
+                        placeholder="Registrarse" 
+                        className="mt-2 h-12"
+                        disabled={!isFormValid}
+                    />
                 </div>
-                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role='button'>
+                <div onClick={onToggleForm} className="text-black hover:underline text-center cursor-pointer" role="button">
                     Iniciar Sesión
                 </div>
             </div>
@@ -145,5 +162,4 @@ export function SignUpForm({ onToggleForm }) {
             </div>
         </section>
     );
-    
-    }
+} 

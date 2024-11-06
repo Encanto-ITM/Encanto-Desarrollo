@@ -3,7 +3,6 @@ import SignInputs from './SignInputs';
 import GenericButton from './GenericButton'; 
 
 export function SignUpFormEm({ onToggleForm }) {
-
     const [formData, setFormData] = useState({
         name: '',
         lastname: '',
@@ -17,7 +16,6 @@ export function SignUpFormEm({ onToggleForm }) {
         professions_id: '',
     });
 
-
     const [professions, setProfessions] = useState([]);
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
@@ -28,8 +26,7 @@ export function SignUpFormEm({ onToggleForm }) {
             try {
                 const response = await fetch('https://tulookapiv2.vercel.app/api/api/professions');
                 const data = await response.json();
-
-
+                
                 if (Array.isArray(data)) {
                     const filteredProfessions = data.filter(
                         profession => ![1, 2].includes(profession.id) 
@@ -37,7 +34,7 @@ export function SignUpFormEm({ onToggleForm }) {
                     setProfessions(filteredProfessions); 
                 } else {
                     console.error('La respuesta no contiene un arreglo de profesiones:', data);
-                    setProfessions([]);
+                    setProfessions([]); 
                 }
             } catch (error) {
                 console.error('Error al cargar las profesiones:', error); 
@@ -47,12 +44,14 @@ export function SignUpFormEm({ onToggleForm }) {
         fetchProfessions(); 
     }, []); 
 
-
     const handleChange = (e) => {
         const { name, value } = e.target; 
-        setFormData({ ...formData, [name]: value }); 
-    };
+        setFormData({ ...formData, [name]: value });
 
+        // Validar el formulario mientras el usuario escribe
+        const formErrors = validateForm({ ...formData, [name]: value });
+        setErrors(formErrors);
+    };
 
     const validateForm = (data) => {
         let formErrors = {};
@@ -60,15 +59,12 @@ export function SignUpFormEm({ onToggleForm }) {
         if (!data.lastname) formErrors.lastname = "El apellido es requerido.";
         if (!data.email) formErrors.email = "El correo electrónico es requerido.";
         if (!data.contact_number) formErrors.contact_number = "El número de contacto es requerido.";
-        if (data.contact_number.length < 10) formErrors.contact_number = "El número de contacto debe tener al menos 10 dígitos.";
+        if (data.contact_number && data.contact_number.length < 8) formErrors.contact_number = "El número de contacto debe tener al menos 8 dígitos.";
         if (!data.password) formErrors.password = "La contraseña es requerida.";
-        if (data.password !== data.password_confirmation) {
-            formErrors.password_confirmation = "Las contraseñas no coinciden."; 
-        }
+        if (data.password !== data.password_confirmation) formErrors.password_confirmation = "Las contraseñas no coinciden."; 
         if (!data.professions_id) formErrors.professions_id = "La profesión es requerida.";
         return formErrors; 
     };
-
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
@@ -103,7 +99,6 @@ export function SignUpFormEm({ onToggleForm }) {
         });
     };
 
-
     const resetForm = () => {
         console.log("Resetting form..."); 
         setFormData({
@@ -122,6 +117,7 @@ export function SignUpFormEm({ onToggleForm }) {
         setSubmitted(false); 
     };
 
+    const isFormValid = Object.keys(errors).length === 0;
 
     return (
         <section className="flex flex-col md:flex-row w-full h-screen max-w-none overflow-hidden">
@@ -135,21 +131,21 @@ export function SignUpFormEm({ onToggleForm }) {
                 </div>
                 <h1 className="text-xl font-bold text-center mb-4">Registrarse</h1>
                 
-                {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
+                {successMessage && <p className="text-green text-sm">{successMessage}</p>}
                 <div className='w-3/4 flex flex-col gap-6'>
                     <SignInputs 
                         placeholder="Nombre" 
                         name="name" 
                         onChange={handleChange} 
                     />
-                    {submitted && errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                    {submitted && errors.name && <p className="text-red text-sm mt-1">{errors.name}</p>}
                     
                     <SignInputs 
                         placeholder="Apellido" 
                         name="lastname"
                         onChange={handleChange} 
                     />
-                    {submitted && errors.lastname && <p className="text-red-500 text-sm">{errors.lastname}</p>}
+                    {submitted && errors.lastname && <p className="text-red text-sm">{errors.lastname}</p>}
                     
                     <SignInputs
                         placeholder="Correo electrónico" 
@@ -157,14 +153,14 @@ export function SignUpFormEm({ onToggleForm }) {
                         type="email"
                         onChange={handleChange} 
                     />
-                    {submitted && errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                    {submitted && errors.email && <p className="text-red text-sm">{errors.email}</p>}
                     
                     <SignInputs 
                         placeholder="Número de contacto" 
                         name="contact_number" 
                         onChange={handleChange} 
                     />
-                    {submitted && errors.contact_number && <p className="text-red-500 text-sm">{errors.contact_number}</p>}
+                    {submitted && errors.contact_number && <p className="text-red text-sm">{errors.contact_number}</p>}
                     
                     <div className="w-full">
                         <select 
@@ -185,7 +181,7 @@ export function SignUpFormEm({ onToggleForm }) {
                         type="password" 
                         onChange={handleChange} 
                     />
-                    {submitted && errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                    {submitted && errors.password && <p className="text-red text-sm">{errors.password}</p>}
     
                     <SignInputs
                         placeholder="Confirmar contraseña" 
@@ -193,7 +189,7 @@ export function SignUpFormEm({ onToggleForm }) {
                         type="password" 
                         onChange={handleChange} 
                     />
-                    {submitted && errors.password_confirmation && <p className="text-red-500 text-sm">{errors.password_confirmation}</p>}
+                    {submitted && errors.password_confirmation && <p className="text-red text-sm">{errors.password_confirmation}</p>}
                     
                     <div className="w-full">
                         <select 
@@ -214,7 +210,7 @@ export function SignUpFormEm({ onToggleForm }) {
                                 <option value="">No hay profesiones disponibles</option>
                             )}
                         </select>
-                        {submitted && errors.professions_id && <p className="text-red-500 text-sm">{errors.professions_id}</p>}
+                        {submitted && errors.professions_id && <p className="text-red text-sm">{errors.professions_id}</p>}
                     </div>
                 </div>
     
@@ -224,6 +220,7 @@ export function SignUpFormEm({ onToggleForm }) {
                         onClick={handleSubmit} 
                         placeholder="Registrarse" 
                         className='mt-2 h-12'
+                        disabled={!isFormValid} 
                     />
                 </div>
     

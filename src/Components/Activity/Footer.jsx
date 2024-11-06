@@ -14,7 +14,7 @@ export default function Footer() {
                     <h2 className="text-lg font-semibold mb-2">Compañia</h2>
                     <ul>
                         <li><a href="/aboutus" className="hover:underline">Acerca de nosotros</a></li>
-                        <li><a href="#careers" className="hover:underline">Carreras</a></li>
+                        <li><a href="#careers" className="hover:underline">Contactanos</a></li>
                     </ul>
                 </div>
 
@@ -30,7 +30,7 @@ export default function Footer() {
             </div>
 
             <div className="text-center mt-6">
-                <p className="text-sm">© 2023 YourLook. All rights reserved.</p>
+                <p className="text-sm">© 2023 TuLook. Todos los derechos reservados.</p>
             </div>
         </footer>
     );

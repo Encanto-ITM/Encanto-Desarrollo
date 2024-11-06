@@ -67,7 +67,7 @@ export function Results() {
                 />
             </div>
             <TypeServices />
-            <div className="p-6">
+            <div className="p-6 mb-20">
                 <h1 className="text-2xl font-bold text-center mb-4 mt-8">Resultados de Búsqueda:</h1>
                 
                 {loading && <p className="text-center text-gray-500 mt-6">Por favor espere...</p>}
