@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
+import { Eye, EyeOff } from 'lucide-react'; // Importar iconos de Lucide
 
 export function SignUpForm({ onToggleForm }) {
     const [formData, setFormData] = useState({
@@ -13,18 +14,17 @@ export function SignUpForm({ onToggleForm }) {
 
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
+    const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseñas
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Estado para mostrar/ocultar confirmación de contraseña
 
-   
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
 
-      
         const formErrors = validateForm({ ...formData, [name]: value });
         setErrors(formErrors);
     };
 
-  
     const validateForm = (data) => {
         let formErrors = {};
 
@@ -45,7 +45,6 @@ export function SignUpForm({ onToggleForm }) {
         return formErrors;
     };
 
-    
     const handleSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true);
@@ -101,35 +100,57 @@ export function SignUpForm({ onToggleForm }) {
                     <SignInputs 
                         placeholder="Nombre" 
                         name="name" 
+                        value={formData.name} 
                         onChange={handleChange} 
+                        error={errors.name}
                     />
-                    
                     <SignInputs 
                         placeholder="Apellido" 
-                        name="lastname"
+                        name="lastname" 
+                        value={formData.lastname} 
                         onChange={handleChange} 
+                        error={errors.lastname}
                     />
-                    
                     <SignInputs 
                         placeholder="Correo electrónico" 
                         name="email" 
+                        value={formData.email} 
                         type="email"
                         onChange={handleChange} 
+                        error={errors.email}
                     />
-                   
-                    <SignInputs 
-                        placeholder="Contraseña" 
-                        name="password" 
-                        type="password" 
-                        onChange={handleChange} 
-                    />
-                    
-                    <SignInputs 
-                        placeholder="Confirmar contraseña" 
-                        name="password_confirmation" 
-                        type="password" 
-                        onChange={handleChange} 
-                    />
+                    <div className="relative flex flex-col">
+                        <SignInputs 
+                            placeholder="Contraseña" 
+                            name="password" 
+                            value={formData.password} 
+                            type={showPassword ? 'text' : 'password'} 
+                            onChange={handleChange} 
+                            error={errors.password}
+                        />
+                        <div 
+                            onClick={() => setShowPassword(!showPassword)} 
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                        >
+                            {showPassword ?  <Eye />: <EyeOff />}
+                        </div>
+                    </div>
+                    <div className="relative flex flex-col">
+                        <SignInputs 
+                            placeholder="Confirmar contraseña" 
+                            name="password_confirmation" 
+                            value={formData.password_confirmation} 
+                            type={showConfirmPassword ? 'text' : 'password'} 
+                            onChange={handleChange} 
+                            error={errors.password_confirmation}
+                        />
+                        <div 
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)} 
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                        >
+                            {showConfirmPassword ? <Eye /> : <EyeOff />}
+                        </div>
+                    </div>
                     <div className='flex flex-col'>
                         {submitted && errors.name && <p className="text-red text-sm mt-1">{errors.name}</p>}
                         {submitted && errors.lastname && <p className="text-red text-sm">{errors.lastname}</p>}
@@ -162,4 +183,4 @@ export function SignUpForm({ onToggleForm }) {
             </div>
         </section>
     );
-} 
+}

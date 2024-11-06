@@ -6,6 +6,7 @@ import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
 import ServicesContainer from '../Components/Worker-components/ServicesContainer.jsx'; 
 import Loading from '../Components/Worker-components/Loading'; 
+import { NavLanding } from "../Components/landing-components/NavLanding";
 
 export function WorkerProfile() {
     const { id } = useParams(); 
@@ -26,9 +27,17 @@ export function WorkerProfile() {
         return <Loading />; 
     }
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    setIsLoggedIn(!!email);
+  }, []);
+
+
     return (
         <div className="mx-auto">
-            <Nav />
+            {isLoggedIn ? <Nav /> : <NavLanding />}
             <ProfileHeader workerId={id} /> 
             <div className='px-8'>
                 <WorkerInfo workerId={id} /> 

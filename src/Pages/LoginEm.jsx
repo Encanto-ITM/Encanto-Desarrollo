@@ -19,7 +19,7 @@ export default function LoginEm() {
                     timeout={600}
                     classNames="slide-left"
                     unmountOnExit
-                    nodeRef={signInRef} // Asegúrate de pasar el nodeRef aquí
+                    nodeRef={signInRef}
                 >
                     <div ref={signInRef} className="absolute inset-0 flex items-center justify-center overflow-hidden">
                         <SignInFormEm onToggleForm={toggleForm} />
@@ -31,7 +31,7 @@ export default function LoginEm() {
                     timeout={600}
                     classNames="slide-right"
                     unmountOnExit
-                    nodeRef={signUpRef} // Asegúrate de pasar el nodeRef aquí
+                    nodeRef={signUpRef} 
                 >
                     <div ref={signUpRef} className="absolute inset-0 flex items-center justify-center overflow-hidden">
                         <SignUpFormEm onToggleForm={toggleForm} />

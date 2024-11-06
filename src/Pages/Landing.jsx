@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Importa React y useState
+import React, { useState } from 'react'; 
 import { HeaderLanding } from "../Components/landing-components/HeaderLanding.jsx";
 import { InfoLanding } from "../Components/landing-components/InfoLanding.jsx";
 import { NavLanding } from "../Components/landing-components/NavLanding.jsx";

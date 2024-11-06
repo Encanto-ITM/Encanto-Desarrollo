@@ -1,23 +1,31 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from './CartContext';
 import { useNavigate } from 'react-router-dom';
+import LoginModal from '../UI/LoginModal';  
 
 export function CartHistory() {
     const { cart, history, removeFromCart } = useCart();
     const navigate = useNavigate();
-
     
-    const addedItems = history.filter(action => 
+    const [isAuthenticated, setIsAuthenticated] = useState(false); 
+    const [showModal, setShowModal] = useState(false); 
+
+    const addedItems = history.filter(action =>
         action.type === 'ADD' && cart.some(item => item.id === action.item.id)
     );
 
     const handleConfirmOrder = (item) => {
-        
-        const selectedTime = item.selectedTime || null; 
+        if (!isAuthenticated) {
+            setShowModal(true); 
+            return;
+        }
 
+        const selectedTime = item.selectedTime || null;
         navigate(`/confirmation/${item.id}`, { state: { service: item, selectedTime } });
     };
+
+    const closeModal = () => setShowModal(false); 
+
     return (
         <div className="min-h-screen bg-gray-100 overflow-y-auto h-[48rem] hidenscroll mb-16">
             <div className="container mx-auto">
@@ -46,14 +54,14 @@ export function CartHistory() {
                                             </p>
                                         )}
                                         <div className="flex gap-4 mt-4">
-                                            <button 
+                                            <button
                                                 className="text-purple border-2 border-purple px-4 py-2 rounded hover:scale-105 duration-500"
                                                 onClick={() => handleConfirmOrder(action.item)}
                                                 aria-label="Confirmar Orden"
                                             >
                                                 Ordenar
                                             </button>
-                                            <button 
+                                            <button
                                                 className="text-red border-2 border-red px-4 py-2 rounded hover:scale-105 duration-500"
                                                 onClick={() => removeFromCart(action.item.id)}
                                                 aria-label="Eliminar del Carrito"
@@ -68,8 +76,13 @@ export function CartHistory() {
                     </div>
                 )}
             </div>
+
+            {showModal && (
+                <LoginModal 
+                    onLoginClick={() => setIsAuthenticated(true)} 
+                    onCancelClick={closeModal}
+                />
+            )}
         </div>
     );
-    
-    
 }

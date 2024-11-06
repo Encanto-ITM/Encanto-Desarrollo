@@ -4,6 +4,7 @@ import { Nav } from '../Components/Activity/Nav.jsx';
 import { TypeServices } from "../Components/home-components/TypeServices.jsx";
 import { Search } from '../Components/Home-components/Search.jsx';
 import Footer from "../Components/Activity/Footer.jsx";
+import { NavLanding } from "../Components/landing-components/NavLanding";
 
 export function Results() {
     const { id } = useParams(); 
@@ -52,10 +53,17 @@ export function Results() {
          //   navigate(`/login`);
        // }
     };
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    setIsLoggedIn(!!email);
+  }, []);
     
     return (
         <div>
-            <Nav />
+           {isLoggedIn ? <Nav /> : <NavLanding />}
             <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <div className="flex justify-center mb-6 px-20 sm:px-10 md:px-20 ">
                 <input

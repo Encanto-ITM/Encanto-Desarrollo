@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
-export default function SignInputs({ type, name, onChange, placeholder, className = "" }) {
+export default function SignInputs({ type, name, value, onChange, placeholder, className = "" }) {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null); 
 
@@ -8,12 +8,19 @@ export default function SignInputs({ type, name, onChange, placeholder, classNam
     inputRef.current.focus();
   };
 
+  useEffect(() => {
+    if (value) {
+      setIsFocused(true); 
+    }
+  }, [value]);
+
   return (
     <div className="relative flex flex-col items-center">
       <input 
         ref={inputRef} 
         type={type}
         name={name}
+        value={value}
         onChange={onChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
@@ -22,7 +29,7 @@ export default function SignInputs({ type, name, onChange, placeholder, classNam
       />
       <label
         onClick={handleLabelClick} 
-        className={`absolute top-8 transition-transform duration-500 ${isFocused || placeholder ? '-translate-y-5 scale-75 top-2' : 'top-1/2 transform -translate-y-1/2 scale-100 cursor-pointer'}`}
+        className={`absolute top-8 transition-transform duration-500 ${isFocused || value ? '-translate-y-5 scale-75 top-2' : 'top-1/2 transform -translate-y-1/2 scale-100 cursor-pointer'}`}
       >
         {placeholder}
       </label>

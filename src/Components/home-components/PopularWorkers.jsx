@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-// Componente personalizado para el botón de siguiente
+
 const CustomNextArrow = ({ onClick }) => {
     return (
         <div
@@ -17,7 +17,7 @@ const CustomNextArrow = ({ onClick }) => {
     );
 };
 
-// Componente personalizado para el botón de anterior
+
 const CustomPrevArrow = ({ onClick }) => {
     return (
         <div
@@ -78,7 +78,7 @@ export function PopularWorkers({ workers }) {
                             <div key={worker.id} className="relative p-4">
                                 <div className="bg-white shadow-lg overflow-hidden">
                                     <img
-                                        src={/*worker.profilephoto || */`https://picsum.photos/seed/${worker.id}/800/800`}
+                                        src={worker.profilephoto || `https://picsum.photos/seed/${worker.id}/800/800`}
                                         alt={`${worker.name} ${worker.lastname}`}
                                         className="w-full h-48 object-cover"
                                     />
