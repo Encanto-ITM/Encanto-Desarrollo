@@ -13,8 +13,9 @@ export function ContactUs() {
 
     return (
         <div className="min-h-screen bg-gray-200 max-sm:w-full max-sm:flex max-sm:flex-col relative">
-            {isLoggedIn ? <Nav /> : <NavLanding />}
-            
+              <div className={`sticky top-0 z-30`}>
+                {isLoggedIn ? <Nav /> : <NavLanding />}
+            </div>
             <div className="grid grid-cols-2 max-sm:grid-cols-1 relative z-10 mb-16">
                 <div className='flex flex-col items-start justify-center p-8 md:p-16 mx-auto max-w-3xl max-sm:p-4'>
                     <h1 className='text-[clamp(3rem,_3.50rem,_4rem)] font-bold text-purple mb-4 leading-tight'>

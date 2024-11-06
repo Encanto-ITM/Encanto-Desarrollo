@@ -1,12 +1,15 @@
 export default function Footer() {
+   
+   const randomNumber = Math.floor(Math.random() * 7) + 1;
+   
     return (
         <footer className="bg-[#494949] text-white p-12" id="footer">
             <div className="container mx-auto flex flex-col md:flex-row">
                 <div className="w-full md:w-1/2 lg:w-1/3 mb-4">
                     <h2 className="text-lg font-semibold mb-2">Servicios</h2>
                     <ul>
-                        <li><a href="#discover" className="hover:underline">Descubre</a></li>
-                        <li><a href="#all-services" className="hover:underline">Todos los servicios</a></li>
+                        <li><a href={"/results/"+randomNumber+""} className="hover:underline">Descubre</a></li>
+                        <li><a href="/results" className="hover:underline">Todos los servicios</a></li>
                     </ul>
                 </div>
 
