@@ -10,9 +10,15 @@ import { NavLanding } from "../Components/landing-components/NavLanding";
 
 export function WorkerProfile() {
     const { id } = useParams(); 
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
+        
+        const email = localStorage.getItem('email');
+        setIsLoggedIn(!!email); 
+
+        
         const handleScroll = () => {
             window.scrollTo(0, 0);
             setLoading(false); 
@@ -21,19 +27,12 @@ export function WorkerProfile() {
         const timeoutId = setTimeout(handleScroll, 100); 
 
         return () => clearTimeout(timeoutId); 
-    }, []);
+    }, []); 
 
+    
     if (loading) {
-        return <Loading />; 
+        return <Loading />;
     }
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const email = localStorage.getItem('email');
-    setIsLoggedIn(!!email);
-  }, []);
-
 
     return (
         <div className="mx-auto">

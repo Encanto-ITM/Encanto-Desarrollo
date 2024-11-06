@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';  
 import { Eye, EyeOff } from 'lucide-react';  // Importa los íconos de Lucide
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
@@ -36,7 +36,7 @@ export function SignInForm({ onToggleForm }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevData => ({ ...prevData, [name]: value }));
-
+        
         if (name === 'email') setEmailError('');
         if (name === 'password') setPasswordError('');
     };
@@ -83,8 +83,8 @@ export function SignInForm({ onToggleForm }) {
                 } else {
                     throw new Error('Error en la solicitud de login.');
                 }
-
-                setFormData({ email: '', password: '' });
+                
+                setFormData({ email: '', password: '' }); 
                 return;
             }
 
@@ -95,7 +95,7 @@ export function SignInForm({ onToggleForm }) {
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
             setError(error.message || 'Hubo un error con el servidor. Inténtalo más tarde.');
-            setFormData({ email: '', password: '' });
+            setFormData({ email: '', password: '' }); 
         }
     };
 
@@ -151,11 +151,11 @@ export function SignInForm({ onToggleForm }) {
                             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
                         >
                             {showPassword ? (
-
-                                <Eye size={20} />
+                             
+                             <Eye size={20} />
                             ) : (
-
-                                <EyeOff size={20} />
+                                
+                                <EyeOff size={20} /> 
                             )}
                         </button>
                     </div>
