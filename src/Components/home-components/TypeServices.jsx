@@ -29,7 +29,7 @@ export function TypeServices() {
     };
 
     return (
-        <div className="flex flex-wrap justify-center mt-8 mb-24">
+        <div className="flex flex-wrap justify-center mt-8 mb-8">
             {services.map((service, index) => (
                 <div key={service.id} className="flex flex-col items-center space-y-2 m-4 transition duration-500 hover:scale-110 w-24 sm:w-32 lg:w-40 lg:mx-6">
                     <div 

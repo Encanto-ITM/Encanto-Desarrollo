@@ -18,7 +18,7 @@ export function PopularServices() {
     };
 
     return (
-        <div className="w-full">
+        <div className="w-full mt-24">
             <section className="p-10">
                 <div className="text-center p-8">
                     <h2 className="text-3xl font-bold text-white mb-4 max-w-[94rem]">Servicios populares</h2>

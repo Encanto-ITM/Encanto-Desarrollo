@@ -178,13 +178,13 @@ export function List() {
                                             {user.acounttype_id === 3 && (
                                                 <>
                                                 <button
-                                                    className="text-green border-2 border-green px-4 py-2 rounded hover:scale-105 duration-500"
+                                                    className="text-white bg-green px-4 py-2 rounded hover:scale-105 duration-500"
                                                     onClick={() => handleAccept(appointment.id)}
                                                 >
                                                     Aceptar
                                                 </button>
                                                 <button
-                                                    className="text-red border-2 border-red px-4 py-2 rounded hover:scale-105 duration-500"
+                                                    className="text-white bg-red px-4 py-2 rounded hover:scale-105 duration-500"
                                                     onClick={() => handleCancel(appointment.id)}
                                                 >
                                                     Cancelar

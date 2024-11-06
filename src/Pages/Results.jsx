@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Search } from "../Components/home-components/Search";
 import { Nav } from '../Components/Activity/Nav.jsx';
 import { TypeServices } from "../Components/home-components/TypeServices.jsx";
+import { Search } from '../Components/Home-components/Search.jsx';
 import Footer from "../Components/Activity/Footer.jsx";
 
 export function Results() {
@@ -32,7 +32,7 @@ export function Results() {
                 setServices(data.data); 
             } catch (err) {
                 console.error(err);
-                setError(<p className="text-center">No se han encontrado servicios que coincidan con su búsqueda.</p>); 
+                setError(<p className="text-center text-gray-500 mt-6">No se han encontrado servicios que coincidan con su búsqueda.</p>); 
             } finally {
                 setLoading(false); 
             }
@@ -57,41 +57,55 @@ export function Results() {
         <div>
             <Nav />
             <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <div className="flex justify-center mb-6 px-20 sm:px-10 md:px-20 ">
+                <input
+                    type="text"
+                    placeholder="Busqueda por categoria"
+                    className="border border-gray-300 rounded-full px-10 py-3 w-full sm:w-1/3 text-lg outline-none focus:ring-2 focus:ring-purple text-center"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
             <TypeServices />
             <div className="p-6">
-                <h1 className="text-2xl font-bold text-center mb-4">Resultados de Busqueda:</h1>
-                {loading && <p className="text-center">Por favor espere...</p>}
+                <h1 className="text-2xl font-bold text-center mb-4 mt-8">Resultados de Búsqueda:</h1>
+                
+                {loading && <p className="text-center text-gray-500 mt-6">Por favor espere...</p>}
                 {error && <p className="text-center text-red-500">{error}</p>}
+                
                 {!loading && !error && filteredServices.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {filteredServices.map(service => (
                             <div key={service.id} className="bg-white shadow-lg rounded-md flex flex-col">
                                 <img
-                                    src={/*service.imageUr ||*/ `https://picsum.photos/seed/${service.id}/800/800`} 
+                                    src={`https://picsum.photos/seed/${service.id}/800/800`}
                                     alt={`Image of ${service.name}`}
                                     className="w-full h-48 object-cover rounded-t-md"
                                 />
                                 <div className='p-4'>
-                                <h2 className="text-xl font-semibold mt-2">{service.name}</h2>
-                                <h2 className="text-xl font-semibold mt-2">₡{service.price}</h2>
-                                <p className="text-sm text-gray-600 line-clamp-2">
-                                    {service.details} 
-                                </p>
-                                <button
-                                    className="mt-4 w-full bg-purple text-white rounded-md px-4 py-2 duration-300 hover:scale-[102%]"
-                                    onClick={() => handleOrder(service.id)} 
-                                >
-                                    Ordena Ahora
-                                </button>
+                                    <h2 className="text-xl font-semibold mt-2">{service.name}</h2>
+                                    <h2 className="text-xl font-semibold mt-2">₡{service.price}</h2>
+                                    <p className="text-sm text-gray-600 line-clamp-2">
+                                        {service.details}
+                                    </p>
+                                    <button
+                                        className="mt-4 w-full bg-purple text-white rounded-md px-4 py-2 duration-300 hover:scale-[102%]"
+                                        onClick={() => handleOrder(service.id)}
+                                    >
+                                        Ordena Ahora
+                                    </button>
                                 </div>
                             </div>
                         ))}
                     </div>
                 ) : (
-                    !loading && <p className="text-center"></p> 
+                    !loading && !error && filteredServices.length === 0 && (
+                        <p className="text-center text-gray-500 mt-6">No se encontraron resultados de tu busqueda en esta categoría.</p>
+                    )
                 )}
             </div>
             <Footer />
         </div>
     );
+    
 }
