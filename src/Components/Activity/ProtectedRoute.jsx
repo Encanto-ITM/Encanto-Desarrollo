@@ -1,6 +1,7 @@
+// Components/Activity/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children, isAuthenticated }) => {
+const ProtectedRoute = ({ isAuthenticated, children }) => {
     if (!isAuthenticated) {
         return <Navigate to="/landing" replace />;
     }

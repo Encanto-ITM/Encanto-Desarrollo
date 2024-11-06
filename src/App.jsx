@@ -14,23 +14,12 @@ import AboutUs from './Pages/AboutUs';
 import { CartProvider } from './Components/Cart/CartContext';
 import CartList from './Pages/CartList';
 import { Service } from './Pages/Service';
-import ProtectedRoute from './Components/Activity/ProtectedRoute'; 
 
 export function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    useEffect(() => {
-        const user = localStorage.getItem('user');
-        if (user) {
-            setIsAuthenticated(true);
-        }
-    }, []);
-
     return (
         <div>
             <CartProvider>
                 <Routes>
-                  
                     <Route path="/" element={<Landing />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/cartlist" element={<CartList />} />
@@ -41,55 +30,13 @@ export function App() {
                     <Route path="/results/:id" element={<Results />} />
                     <Route path="/aboutus" element={<AboutUs />} />
 
-                   
-                    <Route 
-                        path="/home" 
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <Home />
-                            </ProtectedRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/workerprofile/:id" 
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <WorkerProfile />
-                            </ProtectedRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/order/:id" 
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <Order />
-                            </ProtectedRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/confirmation/:id" 
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <Confirmation />
-                            </ProtectedRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/service/:id" 
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <Service />
-                            </ProtectedRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/list/:id" 
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <List />
-                            </ProtectedRoute>
-                        } 
-                    />
+                    
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/workerprofile/:id" element={<WorkerProfile />} />
+                    <Route path="/order/:id" element={<Order />} />
+                    <Route path="/confirmation/:id" element={<Confirmation />} />
+                    <Route path="/service/:id" element={<Service />} />
+                    <Route path="/list/:id" element={<List />} />
                 </Routes>
             </CartProvider>
         </div>
