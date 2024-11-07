@@ -33,7 +33,7 @@ export function ContactUs() {
             <div className='flex flex-col sm:flex-row max-sm:flex-col gap-4 relative z-20 -mt-28 mx-16 mb-20'>
                 <div className='bg-white shadow-lg rounded-lg p-6 w-full sm:w-1/2 text-center grid'>
                     <img className='w-12 mx-auto' src="/img/Iconos/telefono.png" alt="telefono" />
-                    <h3 className='text-2xl font-semibold mb-4 text-purple'>llámanos</h3>
+                    <h3 className='text-2xl font-semibold mb-4 text-purple'>Llámanos</h3>
                     <p className='text-gray-600'>Podes contactarnos por cualquiera de los siguientes medios:</p>
                     <p className='text-gray-600'>ianxd03@gmail.com</p>
                     <p className='text-gray-600'>+506 86083131</p>
