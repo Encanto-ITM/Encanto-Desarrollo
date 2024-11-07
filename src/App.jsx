@@ -15,31 +15,39 @@ import { CartProvider } from './Components/Cart/CartContext';
 import CartList from './Pages/CartList';
 import { Service } from './Pages/Service';
 import { ContactUs } from './Pages/ContactUs';
-import ProtectedRoute from './Components/Activity/ProtectedRoute'; 
+import { ProtectedRoute } from './Components/Activity/ProtectedRoute';
+import { PublicRoute } from './Components/Activity/PublicRoute';
 
 export function App() {
     return (
         <div>
             <CartProvider>
                 <Routes>
-                    <Route path="/" element={<Landing />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/cartlist" element={<CartList />} />
-                    <Route path="/loginem" element={<LoginEm />} />
-                    <Route path="/resetpassword" element={<ResetPassword />} />
-                    <Route path="/landing" element={<Landing />} />
-                    <Route path="/results" element={<Results />} />
-                    <Route path="/results/:id" element={<Results />} />
+                    {/* Public routes */}
+                    <Route element={<PublicRoute />}>
+                        <Route path="/" element={<Landing />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/landing" element={<Landing />} />
+                        <Route path="/loginem" element={<LoginEm />} />
+                        <Route path="/resetpassword" element={<ResetPassword />} />
+                    </Route>
+
+                    {/* General routes */}
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/contactus" element={<ContactUs />} />
 
-                    
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/workerprofile/:id" element={<WorkerProfile />} />
-                    <Route path="/order/:id" element={<Order />} />
-                    <Route path="/confirmation/:id" element={<Confirmation />} />
-                    <Route path="/service/:id" element={<Service />} />
-                    <Route path="/list/:id" element={<List />} />
+                    {/* Protected routes */}
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/cartlist" element={<CartList />} />
+                        <Route path="/results" element={<Results />} />
+                        <Route path="/results/:id" element={<Results />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/workerprofile/:id" element={<WorkerProfile />} />
+                        <Route path="/order/:id" element={<Order />} />
+                        <Route path="/confirmation/:id" element={<Confirmation />} />
+                        <Route path="/service/:id" element={<Service />} />
+                        <Route path="/list/:id" element={<List />} />
+                    </Route>
                 </Routes>
             </CartProvider>
         </div>

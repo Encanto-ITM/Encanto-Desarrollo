@@ -89,7 +89,8 @@ export function SignInForm({ onToggleForm }) {
             }
 
             const result = await response.json();
-            localStorage.setItem('token', result.token);
+            // console.log(result);
+            localStorage.setItem('token', result.access_token);
             localStorage.setItem('email', formData.email);
             navigate('/home');
         } catch (error) {
