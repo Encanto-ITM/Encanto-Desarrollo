@@ -25,7 +25,7 @@ export function ContactUs() {
                         Estamos para ayudarte en cualquier duda o consulta
                     </h1>
                 </div>
-                <div className="relative overflow-hidden rounded-tl-[200px] rounded-bl-[300px] w-full">
+                <div className="relative overflow-hidden rounded-tl-[200px] rounded-bl-[200px] w-full">
                     <img src="/img/ContactUs.jpg" alt="ContactUs" className="w-full h-auto object-cover" />
                 </div>
             </div>
