@@ -12,6 +12,7 @@ import { WorkerProfile } from './Pages/WorkerProfile';
 import { Order } from './Pages/Order';
 import { List } from './Pages/List';
 import AboutUs from './Pages/AboutUs';
+import Notifications from './Pages/Notifications';
 import { CartProvider } from './Components/Cart/CartContext';
 import CartList from './Pages/CartList';
 import { Service } from './Pages/Service';
@@ -32,6 +33,7 @@ export function App() {
                         <Route path="/loginem" element={<LoginEm />} />
                         <Route path="/resetpassword" element={<ResetPassword />} />
                         <Route path="/updatepassword/:token" element={<UpdatePassword />} />
+                        <Route path="/notifications" element={<Notifications />} />
                     </Route>
 
                     {/* General routes */}
