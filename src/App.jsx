@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Login from './Pages/Login';
 import LoginEm from './Pages/LoginEm';
 import ResetPassword from './Pages/ResetPassword';
+import UpdatePassword from './Pages/UpdatePassword';
 import Landing from './Pages/Landing';
 import { Confirmation } from './Pages/Confirmation';
 import { Results } from './Pages/Results';
@@ -30,6 +31,7 @@ export function App() {
                         <Route path="/landing" element={<Landing />} />
                         <Route path="/loginem" element={<LoginEm />} />
                         <Route path="/resetpassword" element={<ResetPassword />} />
+                        <Route path="/updatepassword/:token" element={<UpdatePassword />} />
                     </Route>
 
                     {/* General routes */}
