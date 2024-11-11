@@ -42,7 +42,7 @@ export function App() {
                     <Route path="/results" element={<Results />} />
                     <Route path="/results/:id" element={<Results />} />
                     <Route path="/order/:id" element={<Order />} />
-                    <Route path="/cartliXst" element={<CartList />} />
+                    <Route path="/cartlist" element={<CartList />} />
                     <Route path="/list/:id" element={<List />} />
 
                     {/* Protected routes */}
