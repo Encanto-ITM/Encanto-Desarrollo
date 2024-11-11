@@ -75,9 +75,15 @@ export default function UserProfile({ open, onClose }) {
         closeModal();
     };
 
+    const handleCloseModal = (e) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
         <Modal open={open} onClose={closeModal}>
-            <Box className="fixed inset-0 flex items-start justify-end p-4 pt-20">
+            <Box className="fixed inset-0 flex items-start justify-end p-4 pt-20" onClick={handleCloseModal}>
                 <Grow in={showContent && !isExiting} timeout={500}>
                     <div className='bg-white text-black max-w-lg w-full rounded-lg relative shadow-lg overflow-y-auto' style={{ maxHeight: '90vh' }}>
                         
