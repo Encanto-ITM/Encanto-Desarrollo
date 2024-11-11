@@ -43,6 +43,7 @@ export function App() {
                     <Route path="/results/:id" element={<Results />} />
                     <Route path="/order/:id" element={<Order />} />
                     <Route path="/cartliXst" element={<CartList />} />
+                    <Route path="/list/:id" element={<List />} />
 
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
@@ -50,7 +51,6 @@ export function App() {
                         <Route path="/home" element={<Home />} />
                         <Route path="/workerprofile/:id" element={<WorkerProfile />} />
                         <Route path="/confirmation/:id" element={<Confirmation />} />
-                        <Route path="/list/:id" element={<List />} />
                     </Route>
                 </Routes>
             </CartProvider>
