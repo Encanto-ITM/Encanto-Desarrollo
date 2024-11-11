@@ -34,7 +34,7 @@ export function ResetPasswordForm() {
         }
 
         try {
-            const response = await fetch('https://tulookapiv2.vercel.app/api/api/auth/recover-password', {
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/password/forgot', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
