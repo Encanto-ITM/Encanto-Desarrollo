@@ -117,6 +117,12 @@ export default function NewServiceModal({ open, onClose, worker }) {
         }
     };
 
+    const handleCloseModal = (e) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     const handleTypeServiceChange = (e) => {
         const selectedId = e.target.value;
         const selectedService = typeServices.find(service => service.id === parseInt(selectedId));
@@ -129,7 +135,7 @@ export default function NewServiceModal({ open, onClose, worker }) {
 
     return (
         <Modal open={open} onClose={onClose}>
-            <div className="fixed inset-0 flex items-center justify-center p-4">
+            <div className="fixed inset-0 flex items-center justify-center p-4" onClick={handleCloseModal}>
                 <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[80vh] overflow-y-auto relative">
                     <button onClick={onClose} className="absolute top-2 right-2 text-red-500 font-bold">X</button>
                     <h2 className="text-xl font-bold mb-4">Nuevo Servicio</h2>
@@ -240,7 +246,7 @@ export default function NewServiceModal({ open, onClose, worker }) {
                             </select>
                         </div>
 
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mt-4">
                             <GenericButton type="submit" placeholder="Agregar Servicio" />
                         </div>
                     </form>

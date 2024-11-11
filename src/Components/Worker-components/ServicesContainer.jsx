@@ -31,11 +31,19 @@ export default function ServicesContainer({ ownerId }) {
     }, [ownerId]);
 
     if (error) {
-        return <div>{error}</div>;
+        return (
+            <div className="flex items-center justify-center h-full">
+                <p className="text-center text-xl font-semibold text-purple-700">{error}</p>
+            </div>
+        );
     }
 
     if (services.length === 0) {
-        return <div>No posee servicios.</div>; 
+        return (
+            <div className="flex items-center justify-center h-full">
+                <p className="text-center text-xl font-semibold text-purple-700">No posee servicios.</p>
+            </div>
+        );
     }
 
     return (

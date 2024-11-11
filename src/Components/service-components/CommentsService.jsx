@@ -18,7 +18,7 @@ export function CommentsService({ serviceId, userId, initialComment = '', initia
 
     const checkIfCommented = async () => {
       try {
-        const response = await fetch(`https://tulookapiv2.vercel.app/api/api/comments/${userId}/service`, {
+        const response = await fetch(`https://tulookapiv2.vercel.app/api/api/comments/${serviceId}/service`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
