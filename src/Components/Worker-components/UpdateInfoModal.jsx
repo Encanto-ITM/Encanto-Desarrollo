@@ -74,9 +74,15 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
         10: 'Maquilladora',
     };
 
+    const handleCloseModal = (e) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
         <Modal open={open} onClose={onClose}>
-            <div className="fixed inset-0 flex items-center justify-center p-4">
+            <div className="fixed inset-0 flex items-center justify-center p-4" onClick={handleCloseModal}>
                 <div className="bg-white text-black max-w-lg w-full rounded-lg relative shadow-lg p-6 overflow-y-auto" style={{ maxHeight: '80vh' }}>
                     <button onClick={onClose} className="absolute top-4 right-4 text-black text-lg">X</button>
                     <h2 className="text-2xl font-bold mb-4 text-center">Actualizar Información</h2>
