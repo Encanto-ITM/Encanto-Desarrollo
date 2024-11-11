@@ -39,13 +39,13 @@ export function App() {
                     {/* General routes */}
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/contactus" element={<ContactUs />} />
-                    <Route path="/service/:id" element={<Service />} />
+                    <Route path="/results" element={<Results />} />
+                    <Route path="/results/:id" element={<Results />} />
 
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
                         <Route path="/cartlist" element={<CartList />} />
-                        <Route path="/results" element={<Results />} />
-                        <Route path="/results/:id" element={<Results />} />
+                        <Route path="/service/:id" element={<Service />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/workerprofile/:id" element={<WorkerProfile />} />
                         <Route path="/order/:id" element={<Order />} />
