@@ -41,14 +41,14 @@ export function App() {
                     <Route path="/contactus" element={<ContactUs />} />
                     <Route path="/results" element={<Results />} />
                     <Route path="/results/:id" element={<Results />} />
+                    <Route path="/order/:id" element={<Order />} />
+                    <Route path="/cartliXst" element={<CartList />} />
 
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
-                        <Route path="/cartlist" element={<CartList />} />
                         <Route path="/service/:id" element={<Service />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/workerprofile/:id" element={<WorkerProfile />} />
-                        <Route path="/order/:id" element={<Order />} />
                         <Route path="/confirmation/:id" element={<Confirmation />} />
                         <Route path="/list/:id" element={<List />} />
                     </Route>
