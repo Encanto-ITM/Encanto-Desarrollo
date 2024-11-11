@@ -109,7 +109,7 @@ export function Results() {
                         {filteredServices.map(service => (
                             <div key={service.id} className="bg-white shadow-lg rounded-md flex flex-col">
                                 <img
-                                    src={`https://picsum.photos/seed/${service.id}/800/800`}
+                                    src={`${service.image}`}
                                     alt={`Image of ${service.name}`}
                                     className="w-full h-48 object-cover rounded-t-md"
                                 />

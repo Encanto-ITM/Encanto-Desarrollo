@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Login from './Pages/Login';
 import LoginEm from './Pages/LoginEm';
 import ResetPassword from './Pages/ResetPassword';
+import UpdatePassword from './Pages/UpdatePassword';
 import Landing from './Pages/Landing';
 import { Confirmation } from './Pages/Confirmation';
 import { Results } from './Pages/Results';
@@ -11,6 +12,7 @@ import { WorkerProfile } from './Pages/WorkerProfile';
 import { Order } from './Pages/Order';
 import { List } from './Pages/List';
 import AboutUs from './Pages/AboutUs';
+import Notifications from './Pages/Notifications';
 import { CartProvider } from './Components/Cart/CartContext';
 import CartList from './Pages/CartList';
 import { Service } from './Pages/Service';
@@ -30,6 +32,8 @@ export function App() {
                         <Route path="/landing" element={<Landing />} />
                         <Route path="/loginem" element={<LoginEm />} />
                         <Route path="/resetpassword" element={<ResetPassword />} />
+                        <Route path="/updatepassword/:token" element={<UpdatePassword />} />
+                        <Route path="/notifications" element={<Notifications />} />
                     </Route>
 
                     {/* General routes */}

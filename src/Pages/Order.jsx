@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
@@ -6,7 +6,8 @@ import ServiceCard from '../Components/UI/ServiceCard.jsx';
 import { Calendario } from '../Components/UI/Calendario.jsx';
 import { useCart } from '../Components/Cart/CartContext';
 import { NavLanding } from "../Components/landing-components/NavLanding";
-import LoginModal from '../Components/UI/LoginModal.jsx'; // Importa el componente LoginModal
+import LoginModal from '../Components/UI/LoginModal.jsx';
+
 
 export function Order() {
     const { id } = useParams();
@@ -16,11 +17,14 @@ export function Order() {
     const [error, setError] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
     const [warningMessage, setWarningMessage] = useState('');
+    const [isValidDate, setIsValidDate] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    
+    const warningMessageRef = useRef(null);  
 
     const { addToCart } = useCart();
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isModalVisible, setIsModalVisible] = useState(false); 
+    const currentDateTime = new Date();
 
     useEffect(() => {
         const fetchService = async () => {
@@ -50,33 +54,65 @@ export function Order() {
 
     const handleOrder = () => {
         if (isLoggedIn) {
-            if (service && selectedTime) {
+            if (service && isValidDate) {
                 navigate(`/confirmation/${service.id}`, { state: { service, selectedTime } });
-                setWarningMessage('');
+                setWarningMessage(''); 
             } else {
-                setWarningMessage('Por favor, seleccione una hora de cita.');
+                setWarningMessage('Por favor, seleccione una fecha y hora válidas.');
             }
         } else {
-            setIsModalVisible(true); 
+            setIsModalVisible(true);
         }
     };
-
+    
     const handleAddToCart = () => {
-        if (service) {
+        if (service && isValidDate) {
             const serviceWithTime = {
                 ...service,
                 selectedTime: selectedTime,
             };
             addToCart(serviceWithTime);
-            setWarningMessage('Servicio agregado al carrito.');
+            setWarningMessage(''); 
+        } else {
+            setWarningMessage('Por favor, seleccione una fecha y hora válidas.');
         }
     };
-
+    
     const handleDateChange = (newValue) => {
         setSelectedTime(newValue);
-        setWarningMessage('');
+    
+        // Limpiar la hora y minutos para solo comparar la fecha
+        const selectedDateTime = new Date(newValue);
+        selectedDateTime.setHours(0, 0, 0, 0); // Establecer la hora a medianoche
+    
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0); // Limpiar la hora actual
+    
+        const threeMonthsLater = new Date(currentDate);
+        threeMonthsLater.setMonth(currentDate.getMonth() + 3);  
+        threeMonthsLater.setHours(0, 0, 0, 0); // Limpiar la hora de la fecha 3 meses más tarde
+    
+        if (selectedDateTime > currentDate && selectedDateTime <= threeMonthsLater) {
+            setIsValidDate(true);
+            setWarningMessage(''); // Limpiar el mensaje de advertencia
+        } else if (selectedDateTime <= currentDate) {
+            setIsValidDate(false);
+            setWarningMessage('No se pueden seleccionar fechas pasadas.');
+            setSelectedTime(null); // Limpiar la fecha si es inválida
+        } else if (selectedDateTime > threeMonthsLater) {
+            setIsValidDate(false);
+            setWarningMessage('La cita solo se puede agendar hasta 3 meses en el futuro.');
+            setSelectedTime(null); // Limpiar la fecha si es inválida
+        }
     };
-
+    
+    // Usamos un useEffect para reaccionar cuando el mensaje de advertencia cambie
+    useEffect(() => {
+        if (warningMessageRef.current && warningMessage !== '') {
+            warningMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }, [warningMessage]);  // Este efecto se ejecuta cada vez que warningMessage cambia
+    
     const handleLoginRedirect = () => {
         setIsModalVisible(false);
         navigate('/login');
@@ -103,7 +139,9 @@ export function Order() {
                 {service && (
                     <div className="flex flex-col md:flex-row gap-4 mb-4 w-full">
                         <div className="w-full md:w-1/2 flex flex-col items-center">
+
                             <Calendario onTimeSelect={handleDateChange} />
+
                             <div className="flex flex-col items-center bg-white p-6 drop-shadow-md rounded-md w-full mb-4">
                                 <h2 className='text-purple text-xl font-semibold'>Costo del servicio</h2>
                                 <h2 className="text-purple text-lg text-center">₡{service.price}</h2>
@@ -121,15 +159,20 @@ export function Order() {
                             </div>
                             <ServiceCard serviceName={service.name} imgName="identificador" />
                             <ServiceCard serviceName={service.aprox_time} imgName="identificador" />
+
                         </div>
+
                     </div>
                 )}
-
-                {warningMessage && <p className="text-center text-red-500 mb-4">{warningMessage}</p>}
-
+                {warningMessage && (
+                    <p ref={warningMessageRef} className="text-center text-red mb-4">{warningMessage}</p>
+                )}
                 <div className="flex justify-center mt-6 mb-20 gap-4 flex-wrap">
-                    
-                    <button className="button" onClick={handleOrder} disabled={loading}>
+                    <button
+                        className={`button ${!isValidDate ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        onClick={handleOrder}
+                        disabled={!isValidDate || loading}
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" className="svg-icon">
                             <g stroke-width="2" stroke-linecap="round" stroke="#fff">
                                 <rect y="5" x="4" width="16" rx="2" height="16"></rect>
@@ -141,18 +184,30 @@ export function Order() {
                         <span className="lable">Completar</span>
                     </button>
 
-
-                    <button className="button" onClick={handleAddToCart} disabled={loading}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" className="svg-icon">
+                    <button
+                        className={`cartBtn button ${!isValidDate ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        onClick={handleAddToCart}
+                        disabled={!isValidDate || loading}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            viewBox="0 0 24 24"
+                            height="24"
+                            fill="none"
+                            className="svg-icon cart"
+                        >
                             <g stroke-width="2" stroke-linecap="round" stroke="#fff">
                                 <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-                                <path d="m8 3v4"></path>
-                                <path d="m16 3v4"></path>
-                                <path d="m4 11h16"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M4 11h16"></path>
                             </g>
                         </svg>
-                        <span className="lable">Agregar al Carrito</span>
+                        <span className="label">Agregar al Carrito</span>
                     </button>
+
+
                 </div>
 
 
@@ -162,7 +217,7 @@ export function Order() {
                         onCancelClick={handleCancel}
                     />
                 )}
-            </div>
+            </div >
             <Footer />
         </>
     );

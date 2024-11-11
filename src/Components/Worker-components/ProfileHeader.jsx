@@ -13,7 +13,7 @@ export function ProfileHeader() {
     <div className="relative">
       <img
         className="w-full h-80 object-cover"
-        src={worker.headerphoto || 'https://picsum.photos/800/400'}
+        src={worker.headerphoto }
         alt="header photo"
       />
 
