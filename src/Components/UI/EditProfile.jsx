@@ -15,6 +15,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
   const [showContent, setShowContent] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false); 
+  const [errors, setErrors] = useState({}); // Estado para manejar errores
 
   useEffect(() => {
     if (open) {
@@ -24,27 +25,33 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
       setLastname(user.lastname || '');
       setDescription(user.description || '');
       setContactNumber(user.contact_number || ''); 
-    } else {
-      if (isExiting) {
-        setShowContent(false);
-      }
+      setErrors({}); // Reiniciar errores cuando se abre el modal
+    } else if (isExiting) {
+      setShowContent(false);
     }
   }, [open, user, isExiting]);
 
+  const validateFields = () => {
+    const newErrors = {};
+    if (!name) newErrors.name = 'Este campo es obligatorio';
+    if (!lastname) newErrors.lastname = 'Este campo es obligatorio';
+    if (!description) newErrors.description = 'Este campo es obligatorio';
+    if (!contactNumber) newErrors.contactNumber = 'Este campo es obligatorio';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleUpdate = async () => {
+    if (!validateFields()) return; // Validar antes de proceder
+
     const token = localStorage.getItem('token');
     if (!token) {
       console.error('No se encontró el token de autenticación.');
       return;
     }
-
-    if (!name || !lastname || !contactNumber) {
-      console.error('Los campos nombre, apellido y número de contacto son obligatorios.');
-      return;
-    }
-
+  
     const data = { name, lastname, description, contact_number: contactNumber };
-
+  
     try {
       setIsLoading(true);
       const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${user.id}`, {
@@ -55,12 +62,12 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
         },
         body: JSON.stringify(data),
       });
-
+  
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(`Error al actualizar la información: ${errorMessage}`);
       }
-
+  
       const responseBody = await response.json();
       onProfileUpdated(responseBody);
       closeModal();
@@ -70,6 +77,7 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
       setIsLoading(false);
     }
   };
+  
 
   const closeModal = () => {
     setIsExiting(true);
@@ -87,10 +95,16 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
     setIsChangePasswordOpen(false); 
   };
 
+  const handleCloseModal = (e) => {
+    if (e.target === e.currentTarget) {
+        onClose();
+    }
+};
+
   return (
     <>
       <Modal open={open} onClose={closeModal}>
-        <Box className="fixed inset-0 flex items-start justify-end p-4 pt-20">
+        <Box className="fixed inset-0 flex items-start justify-end p-4 pt-20" onClick={handleCloseModal}>
           <Grow in={showContent && !isExiting} timeout={500}>
             <div className="max-w-lg w-full rounded-lg shadow-lg overflow-y-auto" style={{ maxHeight: '90vh' }}>
               <div className="bg-white text-black rounded-t-lg p-4 relative">
@@ -106,10 +120,34 @@ export default function EditProfile({ open, onClose, user, onProfileUpdated }) {
 
               <div className="bg-purple text-white p-4 rounded-b-lg">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 justify-items-center">
-                  <EditInput label="Nombre" id="name" value={name} onChange={(e) => setName(e.target.value)} />
-                  <EditInput label="Apellido" id="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
-                  <EditInput label="Descripción" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
-                  <EditInput label="Número de Contacto" id="contactNumber" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} />
+                  <EditInput 
+                    label="Nombre" 
+                    id="name" 
+                    value={name} 
+                    onChange={(e) => setName(e.target.value)} 
+                    error={errors.name} 
+                  />
+                  <EditInput 
+                    label="Apellido" 
+                    id="lastname" 
+                    value={lastname} 
+                    onChange={(e) => setLastname(e.target.value)} 
+                    error={errors.lastname} 
+                  />
+                  <EditInput 
+                    label="Descripción" 
+                    id="description" 
+                    value={description} 
+                    onChange={(e) => setDescription(e.target.value)} 
+                    error={errors.description} 
+                  />
+                  <EditInput 
+                    label="Número de Contacto" 
+                    id="contactNumber" 
+                    value={contactNumber} 
+                    onChange={(e) => setContactNumber(e.target.value)} 
+                    error={errors.contactNumber} 
+                  />
                 </div>
 
                 <div className="flex flex-col md:flex-row mt-10 mb-16 md:space-y-0 md:space-x-4">

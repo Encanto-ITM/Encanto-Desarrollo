@@ -44,9 +44,15 @@ export function EditService({ serviceData, isOpen, onClose, onUpdate }) {
         }
     };
 
+    const handleCloseModal = (e) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
         <Modal open={isOpen} onClose={onClose}>
-            <div className="fixed inset-0 flex items-center justify-center p-4">
+            <div className="fixed inset-0 flex items-center justify-center p-4" onClick={handleCloseModal}>
                 <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[80vh] overflow-y-auto relative">
                     <button onClick={onClose} className="absolute top-2 right-2 text-red-500 font-bold">X</button>
                     <h2 className="text-xl font-bold mb-4">Editar Servicio</h2>

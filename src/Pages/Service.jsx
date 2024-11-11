@@ -23,6 +23,12 @@ export function Service() {
     const [currentUser, setCurrentUser] = useState(null);
     const [isOwner, setIsOwner] = useState(false);
     const [comments, setComments] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const email = localStorage.getItem('email');
+        setIsLoggedIn(!!email);
+    }, []);
 
     useEffect(() => {
         if (initialServiceData) {
@@ -71,6 +77,10 @@ export function Service() {
         setServiceData(updatedService);
     };
 
+    const handleAddComment = (newComment) => {
+        setComments((prevComments) => [...prevComments, newComment]);
+    };
+
     const handleDeactivate = (updatedService) => {
         console.log("Servicio actualizado:", updatedService); 
         setServiceData(updatedService); 
@@ -86,13 +96,6 @@ export function Service() {
     if (error) return <div className="text-red-600">{error}</div>;
     if (!serviceData) return <div>No se encontró el servicio.</div>;
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const email = localStorage.getItem('email');
-    setIsLoggedIn(!!email);
-  }, []);
-
     return (
         <>
             {isLoggedIn ? <Nav /> : <NavLanding />}
@@ -100,68 +103,45 @@ export function Service() {
                 <h1 className="text-5xl font-bold text-center text-blue-700 mb-8">Servicio</h1>
 
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-               <div className="relative flex flex-col md:flex-row items-start md:space-x-6 space-y-4 md:space-y-0 p-4">
-
-               <div className="relative flex flex-col md:flex-row items-start md:space-x-6 space-y-4 md:space-y-0 p-4">
-
-                  
-                    <div className="flex-shrink-0 w-full md:w-1/3">
-                        <img
-                            src='/img/Death Note.jpg'
-                            alt={serviceData.name}
-                            className="w-full h-[20rem] object-cover rounded-lg"
-                        />
-                    </div>
-
-                    
-                    <div className="flex flex-col w-full md:w-2/3">
-                        
-                        <h2 className="text-3xl font-semibold text-center mb-4 ">{serviceData.name}</h2>
-
-                        <div className="border-t border-gray-300 mt-4"></div>
-
-                     
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 flex-grow p-5">
-                            <p className="text-lg"><strong>-Propietario:</strong> {ownerData ? `${ownerData.name} ${ownerData.lastname}` : 'Cargando...'}</p>
-                            <p className="text-lg">
-                                <strong>-Estado:</strong> 
-                                <span 
-                                    className={`inline-block mx-2 px-4 py-1 rounded-md text-white
-                                    ${serviceData.is_active === 2 ? 'bg-red' : 'bg-green'}`}
-                                >
-                                    {serviceData.is_active === 2 ? "Inactivo" : "Activo"}
-                                </span>
-                            </p>
-
-                            <p className="text-lg"><strong>-Precio:</strong> <span>${serviceData.price}</span></p>
-                            <p className="text-lg"><strong>-Horario:</strong> {serviceData.schedule}</p>
-
-                            <p className="text-lg"><strong>-Duración estimada:</strong> {serviceData.aprox_time}</p>
-                            <p className="text-lg"><strong>-Materiales:</strong> {serviceData.material_list}</p>
-
-                            <p className="text-lg"><strong>-Detalles:</strong> {serviceData.details}</p>
-                            <p className="text-lg"><strong>-Consideraciones:</strong> {serviceData.considerations}</p>
+                    <div className="relative flex flex-col md:flex-row items-start md:space-x-6 space-y-4 md:space-y-0 p-4">
+                        <div className="flex-shrink-0 w-full md:w-1/3">
+                            <img
+                                src={serviceData.image || '/img/Death Note.jpg'}
+                                alt={serviceData.name}
+                                className="w-full h-[20rem] object-cover rounded-lg"
+                            />
                         </div>
 
-                    
+                        <div className="flex flex-col w-full md:w-2/3">
+                            <h2 className="text-3xl font-semibold text-center mb-4 ">{serviceData.name}</h2>
+                            <div className="border-t border-gray-300 mt-4"></div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 flex-grow p-5">
+                                <p className="text-lg"><strong>-Propietario:</strong> {ownerData ? `${ownerData.name} ${ownerData.lastname}` : 'Cargando...'}</p>
+                                <p className="text-lg">
+                                    <strong>-Estado:</strong> 
+                                    <span 
+                                        className={`inline-block mx-2 px-4 py-1 rounded-md text-white
+                                        ${serviceData.is_active === 2 ? 'bg-red' : 'bg-green'}`}
+                                    >
+                                        {serviceData.is_active === 2 ? "Inactivo" : "Activo"}
+                                    </span>
+                                </p>
+                                <p className="text-lg"><strong>-Precio:</strong> <span>${serviceData.price}</span></p>
+                                <p className="text-lg"><strong>-Horario:</strong> {serviceData.schedule}</p>
+                                <p className="text-lg"><strong>-Duración estimada:</strong> {serviceData.aprox_time}</p>
+                                <p className="text-lg"><strong>-Materiales:</strong> {serviceData.material_list}</p>
+                                <p className="text-lg"><strong>-Detalles:</strong> {serviceData.details}</p>
+                                <p className="text-lg"><strong>-Consideraciones:</strong> {serviceData.considerations}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-
-</div>
-
-
-
-                      
                     <div className="p-8 space-y-6">
-                      
-
                         <CommentsService serviceId={serviceData.id} userId={currentUser ? currentUser.id : null} onSubmitComment={handleCommentSubmit} />
-
                         <div className="mt-6">
                             <ViewComments serviceId={serviceData.id} />
                         </div>
-                        
 
                         <div className="flex flex-col sm:flex-row justify-between sm:space-x-4 mt-8 space-y-4 sm:space-y-0">
                             <button
