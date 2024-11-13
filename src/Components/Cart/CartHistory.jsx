@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useCart } from './CartContext';
 import { useNavigate } from 'react-router-dom';
-import LoginModal from '../UI/LoginModal';  
+import LoginModal from '../UI/LoginModal';
+import { useAuth } from '../hooks/useAuth'; 
 
 export function CartHistory() {
     const { cart, history, removeFromCart } = useCart();
     const navigate = useNavigate();
-    
-    const [isAuthenticated, setIsAuthenticated] = useState(false); 
-    const [showModal, setShowModal] = useState(false); 
+    const { isAuthenticated, logout } = useAuth(); 
+
+    const [showModal, setShowModal] = useState(false);
 
     const addedItems = history.filter(action =>
         action.type === 'ADD' && cart.some(item => item.id === action.item.id)
@@ -79,7 +80,7 @@ export function CartHistory() {
 
             {showModal && (
                 <LoginModal 
-                    onLoginClick={() => setIsAuthenticated(true)} 
+                    onLoginClick={() => setShowModal(false)} 
                     onCancelClick={closeModal}
                 />
             )}

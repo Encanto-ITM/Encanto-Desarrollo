@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react'; 
+import { ShoppingCart } from 'lucide-react';
 import UserProfile from '../UI/UserProfile';
 import { fetchUserData } from '../hooks/userData';
 import { useCart } from '../Cart/CartContext';
@@ -24,17 +24,18 @@ export function Nav() {
     setIsOpen(!isOpen);
   };
 
-  const menuClasses = `
-    flex-col lg:flex-row text-lg space-x-4 gap-8 items-center lg:flex transition-all duration-500 ${isOpen ? 'fixed inset-0 bg-purple flex justify-center items-center flex-col text-center' : 'hidden'}
-  `;
-
   const getUserData = async () => {
     const user = await fetchUserData();
     setUserData(user);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getUserData();
+    const interval = setInterval(() => {
+      getUserData();
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleServiceClick = (event) => {
@@ -46,6 +47,7 @@ export function Nav() {
     event.preventDefault();
     navigate(`/aboutus`);
   };
+
   const handleCartClick = () => {
     navigate('/cartlist');
   };
@@ -55,20 +57,20 @@ export function Nav() {
   };
 
   const handleLogoClick = () => {
-    navigate('/home'); 
+    navigate('/home');
   };
 
   return (
     <nav className="bg-purple text-white px-8 py-1 flex justify-between items-center sticky top-0 z-20">
       <div className="flex items-center">
-      <img
+        <img
           src="/img/Logo-Landing.png"
           alt="TuLook Logo"
           className="h-16 w-30 mr-2 transition duration-500 hover:scale-110 cursor-pointer"
-          onClick={handleLogoClick} 
+          onClick={handleLogoClick}
         />
       </div>
-  
+
       <button className="block lg:hidden text-white z-30" onClick={toggleMenu}>
         {isOpen ? (
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -80,13 +82,13 @@ export function Nav() {
           </svg>
         )}
       </button>
-  
+
       <ul className={`flex flex-col lg:flex-row text-lg items-center lg:justify-center gap-8 transition-all duration-500 ${isOpen ? 'fixed inset-0 bg-purple flex justify-center items-center flex-col text-center' : 'hidden lg:flex'}`}>
         <li className="transition duration-500 hover:scale-110 cursor-pointer">
           <a onClick={handleServiceClick}>Servicios</a>
         </li>
         <li className="transition duration-500 hover:scale-110 cursor-pointer">
-        <a onClick={handleAboutClick}>Nosotros</a>
+          <a onClick={handleAboutClick}>Nosotros</a>
         </li>
         <li className="transition duration-500 hover:scale-110 cursor-pointer">
           <a onClick={handleContactClick}>Contáctanos</a>
@@ -109,24 +111,24 @@ export function Nav() {
               <div className="w-10 h-10 overflow-hidden border-2 border-gray-400 rounded-full transition-transform hover:scale-110">
                 {isImageLoading && (
                   <img
-                    src="/img/placeholder.jpg"
+                    src="https://via.placeholder.com/150/cccccc/ffffff?text=Loading" 
                     className="object-cover w-full h-full"
-                    alt="loading"
+                    alt="Cargando..."
                   />
                 )}
                 <img
-                  src={userData?.profilephoto || '/img/placeholder.jpg'}
+                  src={userData?.profilephoto ? `${userData.profilephoto}?t=${new Date().getTime()}` : 'https://via.placeholder.com/150/cccccc/ffffff?text=Loading'}
                   className={`object-cover w-full h-full ${isImageLoading ? 'hidden' : ''}`}
-                  alt="avatar"
-                  onLoad={() => setIsImageLoading(false)}
-                  onError={() => setIsImageLoading(false)}
+                  alt="Foto de perfil"
+                  onLoad={() => setIsImageLoading(false)} 
+                  onError={() => setIsImageLoading(false)} 
                 />
               </div>
             </div>
           </a>
         </li>
       </ul>
-  
+
       <UserProfile open={isModalOpen} onClose={closeModal} />
     </nav>
   );

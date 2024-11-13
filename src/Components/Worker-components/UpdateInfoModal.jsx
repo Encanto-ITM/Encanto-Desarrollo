@@ -12,6 +12,10 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
     const [x, setX] = useState('');
     const [tiktok, setTiktok] = useState('');
     const [linkedin, setLinkedin] = useState('');
+    const [profilePhoto, setProfilePhoto] = useState(null);
+    const [headerPhoto, setHeaderPhoto] = useState(null);
+    const [profilePhotoPreview, setProfilePhotoPreview] = useState(null);
+    const [headerPhotoPreview, setHeaderPhotoPreview] = useState(null);
 
     useEffect(() => {
         if (worker) {
@@ -27,26 +31,36 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
         }
     }, [worker, open]);
 
-    const handleSave = async () => {
-        const updatedInfo = {
-            address,
-            description,
-            professions_id: profession,
-            facebook,
-            instagram,
-            whatsapp,
-            x,
-            tiktok,
-            linkedin,
+    const handleFileChange = (e, setFile, setPreview) => {
+        const file = e.target.files[0];
+        setFile(file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreview(reader.result);
         };
+        if (file) reader.readAsDataURL(file);
+    };
+
+    const handleSave = async () => {
+        const formData = new FormData();
+        formData.append('address', address);
+        formData.append('description', description);
+        formData.append('professions_id', profession);
+        formData.append('facebook', facebook);
+        formData.append('instagram', instagram);
+        formData.append('whatsapp', whatsapp);
+        formData.append('x', x);
+        formData.append('tiktok', tiktok);
+        formData.append('linkedin', linkedin);
+        formData.append('_method', 'PUT');  
+
+        if (profilePhoto) formData.append('profilephoto', profilePhoto);
+        if (headerPhoto) formData.append('headerphoto', headerPhoto);
 
         try {
             const response = await fetch(`https://tulookapiv2.vercel.app/api/api/users/${worker.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedInfo),
+                method: 'POST',
+                body: formData,
             });
 
             const responseData = await response.json();
@@ -55,12 +69,14 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                 throw new Error(`Error ${response.status}: ${responseData.message || 'Error desconocido'}`);
             }
 
-            onUpdate(updatedInfo);
+            onUpdate(responseData);
             onClose();
         } catch (error) {
             console.error('Error al actualizar la información:', error);
         }
     };
+
+    
 
     const professionsMap = {
         2: 'Usuario',
@@ -122,6 +138,35 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                     </div>
 
                     <div className="mt-4">
+                        <label className="block text-sm font-medium text-black">Foto de Perfil</label>
+                        <input
+                            type="file"
+                            onChange={(e) => handleFileChange(e, setProfilePhoto, setProfilePhotoPreview)}
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
+                        />
+                        {profilePhotoPreview && (
+                            <div className="mt-2">
+                                <img src={profilePhotoPreview} alt="Previsualización Foto de Perfil" className="w-full h-auto rounded-md" />
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="mt-4">
+                        <label className="block text-sm font-medium text-black">Foto de Encabezado</label>
+                        <input
+                            type="file"
+                            onChange={(e) => handleFileChange(e, setHeaderPhoto, setHeaderPhotoPreview)}
+                            className="mt-1 p-2 border border-gray-300 rounded w-full"
+                        />
+                        {headerPhotoPreview && (
+                            <div className="mt-2">
+                                <img src={headerPhotoPreview} alt="Previsualización Foto de Encabezado" className="w-full h-auto rounded-md" />
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Redes sociales */}
+                    <div className="mt-4">
                         <label className="block text-sm font-medium text-black">Facebook</label>
                         <input
                             type="text"
@@ -182,7 +227,7 @@ export default function UpdateInfoModal({ open, onClose, worker, onUpdate }) {
                     </div>
 
                     <div className="flex justify-center mt-6">
-                        <GenericButton onClick={handleSave} placeholder="Guardar cambios" className="rounded mt-4 border-2  text-white p-2 hover:scale-105 duration-300" />
+                        <GenericButton onClick={handleSave} placeholder="Guardar cambios" className="rounded mt-4 border-2 text-white p-2 hover:scale-105 duration-300" />
                     </div>
                 </div>
             </div>
