@@ -1,11 +1,15 @@
 # Etapa de construcción
-FROM node:20.2 AS build
+FROM node:20.9.0 AS build
 
 # Establece el directorio de trabajo
 WORKDIR /app
 
 # Copia los archivos de configuración de dependencias
 COPY package.json package-lock.json ./
+
+# Instala Node.js 20.9.0
+RUN nvm install 20.9.0
+RUN nvm use 20.9.0
 
 # Instala las dependencias
 RUN npm install
@@ -26,7 +30,7 @@ COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Busca en todos los archivos la ruta https://tulookapiv2.vercel.app/api y la reemplaza por https://localhost:8080/
-RUN sed -i 's/https:\/\/tulookapiv2.vercel.app\/api/https:\/\/localhost:8080\/api/g' /usr/share/nginx/html/index.html
+RUN sed -i 's|https://tulookapiv2.vercel.app/api|https://localhost:8080/api|g' /usr/share/nginx/html/index.html
 
 # Expone el puerto 80
 EXPOSE 80
