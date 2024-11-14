@@ -7,10 +7,6 @@ WORKDIR /app
 # Copia los archivos de configuración de dependencias
 COPY package.json package-lock.json ./
 
-# Instala Node.js 20.9.0
-RUN nvm install 20.9.0
-RUN nvm use 20.9.0
-
 # Instala las dependencias
 RUN npm install
 
