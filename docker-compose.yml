@@ -9,8 +9,6 @@ services:
       - ./dist:/usr/share/nginx/html:ro
     environment:
       - NODE_ENV=production
-    depends_on:
-      - api
 
   nginx:
     image: nginx:stable-alpine
