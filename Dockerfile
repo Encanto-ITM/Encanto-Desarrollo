@@ -8,7 +8,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Instala las dependencias
-RUN npm install
+RUN apt update && apt install -y curl
+
+# actualiza npm
+RUN npm install npm@latest -g
 
 # Copia el resto del código de la aplicación
 COPY . .
