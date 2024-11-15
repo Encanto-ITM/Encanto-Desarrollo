@@ -60,7 +60,7 @@ export function SignUpForm({ onToggleForm }) {
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit);
 
-        fetch('https://tulookapiv2.vercel.app/api/api/auth/register', {
+        fetch(env.API_URL +'api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ export const fetchUserData = async () => {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('No hay token disponible.');
 
-        const response = await fetch('https://tulookapiv2.vercel.app/api/api/users', {
+        const response = await fetch(env.API_URL +'api/users', {
             headers: { 'Authorization': `Bearer ${token}` },
         });
 
