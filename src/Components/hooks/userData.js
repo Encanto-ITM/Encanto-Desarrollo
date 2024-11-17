@@ -3,7 +3,7 @@ export const fetchUserData = async () => {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('No hay token disponible.');
 
-        const response = await fetch(env.API_URL +'api/users', {
+        const response = await fetch(import.meta.env.VITE_API_URL +'api/users', {
             headers: { 'Authorization': `Bearer ${token}` },
         });
 

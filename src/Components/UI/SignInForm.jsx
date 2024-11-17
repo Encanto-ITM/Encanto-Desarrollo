@@ -16,7 +16,7 @@ export function SignInForm({ onToggleForm }) {
     useEffect(() => {
         const fetchAccountTypes = async () => {
             try {
-                const response = await fetch(env.API_URL +'api/acounttypes');
+                const response = await fetch(import.meta.env.VITE_API_URL +'api/acounttypes');
                 if (!response.ok) {
                     throw new Error('Error fetching account types');
                 }
@@ -66,7 +66,7 @@ export function SignInForm({ onToggleForm }) {
         }
 
         try {
-            const response = await fetch(env.API_URL +'api/auth/login', {
+            const response = await fetch(import.meta.env.VITE_API_URL +'api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

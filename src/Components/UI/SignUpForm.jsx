@@ -60,7 +60,7 @@ export function SignUpForm({ onToggleForm }) {
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit);
 
-        fetch(env.API_URL +'api/auth/register', {
+        fetch(import.meta.env.VITE_API_URL +'api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

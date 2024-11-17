@@ -34,7 +34,7 @@ export function Confirmation() {
         }
         console.log('Datos del usuario:', user);
         try {
-            const response = await fetch(env.API_URL +'api/appointments', {
+            const response = await fetch(import.meta.env.VITE_API_URL +'api/appointments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

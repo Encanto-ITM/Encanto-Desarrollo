@@ -65,7 +65,7 @@ export function CommentsService({ serviceId, userId, initialComment = '', initia
 
     try {
       const method = commentId ? 'PUT' : 'POST';
-      const url = commentId ? `https://tulookapiv2.vercel.app/api/api/comments/${commentId}` : env.API_URL +'api/comments';
+      const url = commentId ? `https://tulookapiv2.vercel.app/api/api/comments/${commentId}` : import.meta.env.VITE_API_URL +'api/comments';
 
       const response = await fetch(url, {
         method: method,

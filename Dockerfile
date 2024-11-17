@@ -7,9 +7,6 @@ WORKDIR /app
 # Copia los archivos necesarios
 COPY package.json package-lock.json ./
 
-# Busca en los archivos .jsx las coincidencias de tulookapiv2.vercel.app/api y las reemplaza por localhost:8080/api
-RUN sed -i 's/tulookapiv2.vercel.app/localhost:8080/g' package.json
-
 # Instala las dependencias
 RUN npm install
 
