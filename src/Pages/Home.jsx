@@ -19,7 +19,7 @@ export function Home() {
 
     const getWorkers = async () => {
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL +'api/workers');
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/workers');
             const data = await response.json();
             setWorkers(data); 
         } catch (error) {

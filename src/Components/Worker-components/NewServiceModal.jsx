@@ -23,7 +23,7 @@ export default function NewServiceModal({ open, onClose, worker}) {
     useEffect(() => {
         const fetchTypeServices = async () => {
             try {
-                const response = await fetch(import.meta.env.VITE_API_URL +'api/type_services');
+                const response = await fetch('https://tulookapiv2.vercel.app/api/api/type_services');
                 const data = await response.json();
                 setTypeServices(data);
             } catch (error) {
@@ -38,7 +38,7 @@ export default function NewServiceModal({ open, onClose, worker}) {
         if (open) {
             const fetchService = async () => {
                 try {
-                    const response = await fetch(import.meta.env.VITE_API_URL +'api/services');
+                    const response = await fetch('https://tulookapiv2.vercel.app/api/api/services');
                     const data = await response.json();
                     console.log('Response data:', data);
                 } catch (error) {
@@ -99,7 +99,7 @@ export default function NewServiceModal({ open, onClose, worker}) {
         }
 
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL +'api/services', {
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/services', {
                 method: 'POST',
                 body: formData, 
             });

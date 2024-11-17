@@ -17,7 +17,7 @@ export function SignInFormEm({ onToggleForm }) {
     useEffect(() => {
         const fetchAccountTypes = async () => {
             try {
-                const response = await fetch(import.meta.env.VITE_API_URL +'api/acounttypes');
+                const response = await fetch('https://tulookapiv2.vercel.app/api/api/acounttypes');
                 if (!response.ok) {
                     throw new Error('Error fetching account types');
                 }
@@ -47,7 +47,7 @@ export function SignInFormEm({ onToggleForm }) {
 
 
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL +'api/auth/login', {
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

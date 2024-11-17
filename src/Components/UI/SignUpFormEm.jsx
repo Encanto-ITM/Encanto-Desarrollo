@@ -27,7 +27,7 @@ export function SignUpFormEm({ onToggleForm }) {
     useEffect(() => {
         const fetchProfessions = async () => {
             try {
-                const response = await fetch(import.meta.env.VITE_API_URL +'api/professions');
+                const response = await fetch('https://tulookapiv2.vercel.app/api/api/professions');
                 const data = await response.json();
                 
                 if (Array.isArray(data)) {
@@ -83,7 +83,7 @@ export function SignUpFormEm({ onToggleForm }) {
 
         console.log('Datos del formulario antes de enviar:', formDataToSubmit); 
        
-        fetch(import.meta.env.VITE_API_URL +'api/auth/register', {
+        fetch('https://tulookapiv2.vercel.app/api/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

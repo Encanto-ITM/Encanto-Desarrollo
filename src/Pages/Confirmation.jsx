@@ -34,7 +34,7 @@ export function Confirmation() {
         }
         console.log('Datos del usuario:', user);
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL +'api/appointments', {
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/appointments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -34,7 +34,7 @@ export function ResetPasswordForm() {
         }
 
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL +'api/password/forgot', {
+            const response = await fetch('https://tulookapiv2.vercel.app/api/api/password/forgot', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
