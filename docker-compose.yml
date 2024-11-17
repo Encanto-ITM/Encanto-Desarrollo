@@ -5,10 +5,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./dist:/usr/share/nginx/html:ro
     environment:
       - NODE_ENV=production
+    command: >
+      sh -c "npm install && npm run build && cp -r dist /usr/share/nginx/html"
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
 
   nginx:
     image: nginx:stable-alpine
