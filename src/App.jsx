@@ -42,11 +42,11 @@ export function App() {
                     <Route path="/results" element={<Results />} />
                     <Route path="/results/:id" element={<Results />} />
                     <Route path="/order/:id" element={<Order />} />
-                    <Route path="/cartlist" element={<CartList />} />
                     <Route path="/list/:id" element={<List />} />
 
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
+                        <Route path="/cartlist" element={<CartList />} />
                         <Route path="/service/:id" element={<Service />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/workerprofile/:id" element={<WorkerProfile />} />

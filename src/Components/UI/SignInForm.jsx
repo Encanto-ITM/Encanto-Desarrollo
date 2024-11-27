@@ -92,7 +92,7 @@ export function SignInForm({ onToggleForm }) {
            
             localStorage.setItem('token', result.access_token);
             localStorage.setItem('email', formData.email);
-            navigate('/home');
+            window.location.href = '/home';
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
             setError(error.message || 'Hubo un error con el servidor. Inténtalo más tarde.');

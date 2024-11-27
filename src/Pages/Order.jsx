@@ -67,18 +67,41 @@ export function Order() {
     };
 
     const handleAddToCart = () => {
-        if (service && isValidDate) {
-            const serviceWithTime = {
-                ...service,
-                selectedTime: selectedTime,
-            };
-            addToCart(serviceWithTime);
-            setCartSuccessMessage('Servicio agregado al carrito exitosamente.');
-            setTimeout(() => setCartSuccessMessage(''), 3000);
-            setWarningMessage('');
+        if (isLoggedIn) {
+            if (service && isValidDate && selectedTime) {
+                
+                const formattedDate = formatDateToMySQLFormat(selectedTime);
+
+                const serviceWithDetails = {
+                    ...service,
+                    selectedTime: formattedDate,  
+                    service_id: service.id,
+                    date: formattedDate,  
+                };
+
+                addToCart(serviceWithDetails);
+                setCartSuccessMessage('Servicio agregado al carrito exitosamente.');
+                setTimeout(() => setCartSuccessMessage(''), 3000);
+                setWarningMessage('');
+            } else {
+                setWarningMessage('Por favor, seleccione una fecha y hora válidas.');
+            }
         } else {
-            setWarningMessage('Por favor, seleccione una fecha y hora válidas.');
+            setIsModalVisible(true); 
         }
+    };
+
+
+    const formatDateToMySQLFormat = (date) => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const hours = String(d.getHours()).padStart(2, '0');
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        const seconds = String(d.getSeconds()).padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     };
 
     const handleDateChange = (newValue) => {
@@ -212,6 +235,7 @@ export function Order() {
 
                         <span className="label">Agregar al Carrito</span>
                     </button>
+
                 </div>
             </div>
 

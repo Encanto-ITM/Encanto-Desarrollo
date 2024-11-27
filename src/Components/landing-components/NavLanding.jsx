@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
-import { useCart } from '../Cart/CartContext'; // Asegúrate de tener el contexto del carrito
+import { useCart } from '../Cart/CartContext'; 
 
 export function NavLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { cart } = useCart();  // Aquí se obtiene el carrito
+  const { cart } = useCart();  
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
@@ -19,6 +19,10 @@ export function NavLanding() {
   const handleCartClick = () => {
     navigate('/cartlist');
   };
+  const handleLogoClick = () => {
+    navigate('/landing');
+  };
+
 
   return (
     <nav className="bg-purple text-white px-8 py-1 flex justify-between items-center relative z-20">
@@ -27,6 +31,7 @@ export function NavLanding() {
           src="/img/Logo-Landing.png"
           alt="TuLook Logo"
           className="h-16 w-30 mr-2 transition duration-500 hover:scale-110 cursor-pointer"
+          onClick={handleLogoClick}
         />
       </div>
 
@@ -50,16 +55,7 @@ export function NavLanding() {
         <li className="transition duration-500 hover:scale-110"><a href="/aboutus">Nosotros</a></li>
         <li className="transition duration-500 hover:scale-110"><a href="/contactus">Contactanos</a></li>
         <li className="transition duration-500 hover:scale-110">
-          <a href="#" onClick={handleCartClick} className="flex items-center justify-center focus:outline-none gap-4">
-            <div className="relative flex items-start">
-              <ShoppingCart className="w-6 h-6" />
-              {cart.length > 0 && (
-                <span className="absolute top-0 right-0 bg-red text-white rounded-full w-4 h-4 flex items-center justify-center text-xs transform translate-x-1 translate-y-1">
-                  {cart.length}
-                </span>
-              )}
-            </div>
-          </a>
+          
         </li>
         <button
           className="bg-gray-100 text-purple transition duration-500 ease-in-out px-8 py-2 rounded hover:scale-105"
