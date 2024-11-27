@@ -38,7 +38,7 @@ export function List() {
         setLoading(true); 
         try {
             let response;
-            if (user.account_type === 3) {
+            if (user.acounttype_id == 3) {
                 response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${user.id}/owner`);
             } else {
                 response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${user.id}/client`);
@@ -60,11 +60,11 @@ export function List() {
 
     const handleAccept = async (appointmentId) => {
         try {
-            const appointment = appointments.find(app => app.id === appointmentId);
+            const appointment = appointments.find(app => app.id == appointmentId);
             const updatedData = {
                 service_id: appointment.service_id,
                 owner_id: appointment.owner_id,
-                applicant: user.id,
+                applicant: appointment.applicant,
                 date: appointment.date,
                 status: 'Aceptado',
                 total: appointment.total,
@@ -93,11 +93,11 @@ export function List() {
 
     const handleCancel = async (appointmentId) => {
         try {
-            const appointment = appointments.find(app => app.id === appointmentId);
+            const appointment = appointments.find(app => app.id == appointmentId);
             const updatedData = {
                 service_id: appointment.service_id,
                 owner_id: appointment.owner_id,
-                applicant: user.id,
+                applicant: appointment.applicant,
                 date: appointment.date,
                 status: 'Cancelado',
                 total: appointment.total,
@@ -129,7 +129,7 @@ export function List() {
     };
 
     const filteredAppointments = selectedStatus
-        ? appointments.filter(appointment => appointment.status === selectedStatus)
+        ? appointments.filter(appointment => appointment.status == selectedStatus)
         : appointments;
 
     return (
@@ -175,7 +175,7 @@ export function List() {
                                         <p className="font-semibold">Detalles: <span className="font-normal">{appointment.location}</span></p>
                                         <p className="font-semibold">Fecha: <span className="font-normal">{appointment.date}</span></p>
                                         <div className="flex gap-4 mt-4">
-                                            {user.acounttype_id === 3 && (
+                                            {user.acounttype_id == 3 && (
                                                 <>
                                                 <button
                                                     className="text-white bg-green px-4 py-2 rounded hover:scale-105 duration-500"

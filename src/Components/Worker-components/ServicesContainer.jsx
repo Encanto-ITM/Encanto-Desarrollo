@@ -33,7 +33,7 @@ export default function ServicesContainer({ ownerId }) {
     if (error) {
         return (
             <div className="flex items-center justify-center h-full">
-                <p className="text-center text-xl font-semibold text-purple-700">{error}</p>
+                <p className="text-center text-xl font-semibold text-purple">{error}</p>
             </div>
         );
     }

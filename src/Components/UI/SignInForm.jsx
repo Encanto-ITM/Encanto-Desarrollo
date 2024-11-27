@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';  
-import { Eye, EyeOff } from 'lucide-react';  // Importa los íconos de Lucide
+import { Eye, EyeOff } from 'lucide-react';  
 import SignInputs from './SignInputs';
 import GenericButton from './GenericButton';
 
@@ -89,10 +89,10 @@ export function SignInForm({ onToggleForm }) {
             }
 
             const result = await response.json();
-            // console.log(result);
+           
             localStorage.setItem('token', result.access_token);
             localStorage.setItem('email', formData.email);
-            navigate('/home');
+            window.location.href = '/home';
         } catch (error) {
             console.error('Error en la solicitud de login:', error);
             setError(error.message || 'Hubo un error con el servidor. Inténtalo más tarde.');
@@ -128,7 +128,7 @@ export function SignInForm({ onToggleForm }) {
 
                 {error && <p className="text-red text-center text-sm mb-4">{error}</p>}
 
-                <div className="w-3/4 flex flex-col gap-4">
+                <div className="w-3/4 flex flex-col gap-8">
                     <SignInputs
                         placeholder="Correo electrónico"
                         name="email"

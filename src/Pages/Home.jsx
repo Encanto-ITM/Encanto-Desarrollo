@@ -5,7 +5,6 @@ import { PopularServices } from "../Components/home-components/PopularServices.j
 import { PopularWorkers } from "../Components/home-components/PopularWorkers.jsx";
 import { Nav } from '../Components/Activity/Nav.jsx';
 import Footer from '../Components/Activity/Footer.jsx';
-import Notifications from '../Pages/Notifications';
 
 export function Home() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -27,22 +26,28 @@ export function Home() {
             console.error("Error fetching workers:", error);
         }
     };
-    
 
     useEffect(() => {
+       
         getWorkers();
-    }, []);
+        
+       
+        const interval = setInterval(() => {
+            getWorkers();
+        }, 5000);
+
+        
+        return () => clearInterval(interval);
+    }, []); 
 
     const filteredServices = popularServices.filter(service => 
         service.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-
     return (
         <>
             <div className="bg-gray-100 min-h-screen">
                 <Nav />
-                <Notifications /> {/* Aquí invocas el componente de notificaciones */}
                 <main className="p-0">
                     <div className="p-6">
                         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -60,5 +65,3 @@ export function Home() {
         </>
     );
 }
-
-

@@ -9,10 +9,15 @@ export function Confirmation() {
     const location = useLocation();
     const navigate = useNavigate(); 
     const { service, selectedTime } = location.state || {};
+    console.log('Datos recibidos en location.state:', location.state);
+    console.log('SelectedTime:', selectedTime);
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [user, setUser] = useState(null); 
-    const formattedDate = selectedTime ? dayjs(selectedTime.$d).format('YYYY-MM-DD HH:mm:ss') : 'Fecha no disponible';
+    const formattedDate = selectedTime 
+    ? (selectedTime.$d ? dayjs(selectedTime.$d).format('YYYY-MM-DD HH:mm:ss') : dayjs(selectedTime).format('YYYY-MM-DD HH:mm:ss')) 
+    : 'Fecha no disponible';
+   
 
     useEffect(() => {
         const getUserData = async () => {
@@ -72,11 +77,12 @@ export function Confirmation() {
                     <div className="mt-4 border p-4 rounded-lg shadow-lg">
                         <p className="font-semibold text-center">{service.name}</p>
                             <div className='line bg-purple h-1'></div>
-                            <p className="font-semibold">Duracion: <span className="font-normal">{service.aprox_time}</span></p>
-                            <p className="font-semibold">Total: <span className="font-normal">₡{service.price}</span></p>
-                            <p className="font-semibold">Consideraciones: <span className="font-normal">{service.considerations}</span></p>
-                            <p className="font-semibold">Detalles: <span className="font-normal">{service.details}</span></p>
-                            <p className="font-semibold">Fecha: <span className="font-normal">{formattedDate}</span></p>
+                            <p>Servicio: {service.name || 'No disponible'}</p>
+                <p>Duración: {service.aprox_time || 'No disponible'}</p>
+                <p>Total: ₡{service.price || 'No disponible'}</p>
+                <p>Consideraciones: {service.considerations || 'No disponible'}</p>
+                <p>Detalles: {service.details || 'No disponible'}</p>
+                <p>Fecha: {formattedDate || 'No disponible'}</p>
                                     
                     </div>
                 ) : (

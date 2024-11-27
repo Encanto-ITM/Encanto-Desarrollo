@@ -29,7 +29,7 @@ export default function SignInputs({ type, name, value, onChange, placeholder, c
       />
       <label
         onClick={handleLabelClick} 
-        className={`absolute top-8 transition-transform duration-500 ${isFocused || value ? '-translate-y-5 scale-75 top-2' : 'top-1/2 transform -translate-y-1/2 scale-100 cursor-pointer'}`}
+        className={`absolute top-6 transition-transform duration-500 ${isFocused || value ? '-translate-y-5 scale-75 top-2' : 'top-1/2 transform -translate-y-1/2 scale-100 cursor-pointer'}`}
       >
         {placeholder}
       </label>

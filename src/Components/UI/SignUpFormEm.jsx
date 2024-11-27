@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SignInputs from './SignInputs'; 
 import GenericButton from './GenericButton'; 
+import { Eye, EyeOff } from 'lucide-react';
 
 export function SignUpFormEm({ onToggleForm }) {
     const [formData, setFormData] = useState({
@@ -20,6 +21,8 @@ export function SignUpFormEm({ onToggleForm }) {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     useEffect(() => {
         const fetchProfessions = async () => {
@@ -48,7 +51,6 @@ export function SignUpFormEm({ onToggleForm }) {
         const { name, value } = e.target; 
         setFormData({ ...formData, [name]: value });
 
-        // Validar el formulario mientras el usuario escribe
         const formErrors = validateForm({ ...formData, [name]: value });
         setErrors(formErrors);
     };
@@ -168,27 +170,42 @@ export function SignUpFormEm({ onToggleForm }) {
                             onChange={handleChange} 
                             value={formData.contact_public} 
                             className="border-2 border-black text-center w-full h-12 rounded-md shadow-sm transition duration-300 ease-in-out hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            style={{ fontSize: '0.75rem' }}
                         >
                             <option value="0">Contacto Público No</option>
                             <option value="1">Contacto Público Sí</option>
                         </select>
                     </div>
-    
-                    <SignInputs 
-                        placeholder="Contraseña" 
-                        name="password" 
-                        type="password" 
-                        onChange={handleChange} 
-                    />
+
+                    <div className="relative flex flex-col">
+                        <SignInputs 
+                            placeholder="Contraseña" 
+                            name="password" 
+                            type={showPassword ? 'text' : 'password'} 
+                            onChange={handleChange} 
+                        />
+                        <div 
+                            onClick={() => setShowPassword(!showPassword)} 
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                        >
+                            {showPassword ? <Eye /> : <EyeOff />}
+                        </div>
+                    </div>
                     {submitted && errors.password && <p className="text-red text-sm">{errors.password}</p>}
-    
-                    <SignInputs
-                        placeholder="Confirmar contraseña" 
-                        name="password_confirmation" 
-                        type="password" 
-                        onChange={handleChange} 
-                    />
+
+                    <div className="relative flex flex-col">
+                        <SignInputs
+                            placeholder="Confirmar contraseña" 
+                            name="password_confirmation" 
+                            type={showConfirmPassword ? 'text' : 'password'} 
+                            onChange={handleChange} 
+                        />
+                        <div 
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)} 
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                        >
+                            {showConfirmPassword ? <Eye /> : <EyeOff />}
+                        </div>
+                    </div>
                     {submitted && errors.password_confirmation && <p className="text-red text-sm">{errors.password_confirmation}</p>}
                     
                     <div className="w-full">
@@ -197,7 +214,6 @@ export function SignUpFormEm({ onToggleForm }) {
                             onChange={handleChange} 
                             value={formData.professions_id} 
                             className="border-2 border-black text-center w-full h-12 rounded-md shadow-sm transition duration-300 ease-in-out hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                            style={{ fontSize: '0.75rem' }}
                         >
                             <option value="">Selecciona una profesión</option>
                             {Array.isArray(professions) && professions.length > 0 ? (

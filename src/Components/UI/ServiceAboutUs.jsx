@@ -5,8 +5,9 @@ export function ServiceAboutUs(){
             <div className="grid grid-cols-1 md:grid-cols-1 gap-1 px-6">
                 <h3 className="text-4xl font-bold mb-12 text-gray-800">Quiénes Somos</h3>
                 <p className="mb-12 max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed text-center text-justify">
-                    Somos un equipo de compañeros de carrera de Informatica y Tecnología Multimedia de la Universidad de Costa Rica. Nuestro Proyecto TuLook llegó producto de un curso de carrera en el cuál se propusieron ideas para desarrollar como equipo. La idea de esta Aplicación nos llamó la atención y como equipo se propusieron ideas entre todos, las cuáles fueron enriqueciendo el proyecto.
-                    Hemos creado TuLook para ti, para que te acompañe en tú camino hacia la belleza al alcance de un click como nuestro lema lo menciona, con esta App tendrás la facilidad de tener cualquier servicio de belleza y salud con solo buscar en nuestra Aplicación.
+                Somos un equipo de estudiantes de la carrera de Informática y Tecnología Multimedia de la Universidad de Costa Rica. Nuestro proyecto, TuLook, nació como parte de un curso en el que se nos propuso desarrollar ideas en equipo. La propuesta de crear esta aplicación nos pareció interesante, y, a medida que compartíamos nuestras ideas, el proyecto fue evolucionando y mejorando gracias a la colaboración de todos.
+                <br/><br/>
+                TuLook ha sido diseñada para facilitarte la búsqueda de servicios de belleza y cuidado personal, tales como barberías, estilismo, manicura, depilación, diseño de cejas, tratamientos de skin care, entre otros. Nuestro lema, "La belleza al alcance de un clic", refleja nuestro compromiso de poner a tu disposición una amplia variedad de servicios con solo unos toques en tu móvil. Así, tendrás acceso rápido y sencillo a todo lo que necesitas para tu bienestar y cuidado personal.
                 </p>
                 <br />
             </div>

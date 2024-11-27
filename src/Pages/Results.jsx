@@ -6,7 +6,7 @@ import { Search } from '../Components/home-components/Search.jsx';
 import Footer from "../Components/Activity/Footer.jsx";
 import { NavLanding } from "../Components/landing-components/NavLanding";
 
-export function Results() {
+export function Results(service) {
     const { id } = useParams(); 
     const navigate = useNavigate(); 
     const location = useLocation();
@@ -77,6 +77,10 @@ export function Results() {
         navigate(`/order/${id}`); 
     };
 
+    const handleViewMore = (id) => {
+        navigate(`/service/${id}`);
+    };
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -100,10 +104,10 @@ export function Results() {
             <TypeServices />
             <div className="p-6 mb-20">
                 <h1 className="text-2xl font-bold text-center mb-4 mt-8">Resultados de Búsqueda:</h1>
-                
+
                 {loading && <p className="text-center text-gray-500 mt-6">Por favor espere...</p>}
                 {error && <p className="text-center text-red-500">{error}</p>}
-                
+
                 {!loading && !error && filteredServices.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {filteredServices.map(service => (
@@ -119,12 +123,20 @@ export function Results() {
                                     <p className="text-sm text-gray-600 line-clamp-2">
                                         {service.details}
                                     </p>
-                                    <button
-                                        className="mt-4 w-full bg-purple text-white rounded-md px-4 py-2 duration-300 hover:scale-[102%]"
-                                        onClick={() => handleOrder(service.id)}
-                                    >
-                                        Ordena Ahora
-                                    </button>
+                                    <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                                        <button
+                                            className="w-full  bg-purple text-white rounded-md px-4 py-2 duration-300 hover:scale-[102%]"
+                                            onClick={() => handleOrder(service.id)}
+                                        >
+                                            Ordena Ahora
+                                        </button>
+                                        <button
+                                            className="w-full bg-purple text-white rounded-md px-4 py-2 duration-300 hover:scale-[102%]"
+                                            onClick={() => handleViewMore(service.id)}
+                                        >
+                                            Ver más
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         ))}
