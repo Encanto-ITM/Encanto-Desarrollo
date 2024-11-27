@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ImageUploader from './ImageUploader';
 import Modal from '@mui/material/Modal';
-import EditProfile from './EditProfile';
+import {EditProfile} from './EditProfile';
 import { fetchUserData } from '../hooks/userData'; 
 import { logout } from '../hooks/useLogout'; 
 import Box from '@mui/material/Box';
@@ -143,11 +142,6 @@ export default function UserProfile({ open, onClose }) {
                                 
                                 <div class="text">Logout</div>
                             </button>
-
-
-
-
-
                         </div>
         
                         <EditProfile 

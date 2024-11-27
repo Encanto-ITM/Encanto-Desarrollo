@@ -43,6 +43,7 @@ export function App() {
                     <Route path="/results/:id" element={<Results />} />
                     <Route path="/order/:id" element={<Order />} />
                     <Route path="/list/:id" element={<List />} />
+                    <Route path="/service/:id" element={<Service />} />
 
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
