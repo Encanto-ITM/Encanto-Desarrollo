@@ -56,9 +56,17 @@ export function Nav() {
 
   const fetchAppointmentsData = async () => {
     if (userData) {
-      const response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${userData.id}/client`);
-      const data = await response.json();
-      setAppointments(data.data || []);
+      try {
+        const response = await fetch(`https://tulookapiv2.vercel.app/api/api/appointments/${userData.id}/client`);
+        if (!response.ok) {
+          console.error(`Error fetching appointments: ${response.status} - ${response.statusText}`);
+          return;
+        }
+        const data = await response.json();
+        setAppointments(data.data || []);
+      } catch (error) {
+        console.error("Failed to fetch appointments:", error);
+      }
     }
   };
 
@@ -66,7 +74,7 @@ export function Nav() {
     getUserData();
     const interval = setInterval(() => {
       getUserData();
-    }, 1000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);

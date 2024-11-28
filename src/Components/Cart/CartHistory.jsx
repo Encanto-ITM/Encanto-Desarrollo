@@ -54,7 +54,6 @@ export function CartHistory() {
             return;
         }
     
-        console.log(item);  // Para asegurarte de que el objeto item tiene la estructura correcta
     
         // Redirigir a la página de confirmación y pasar la información en location.state
         navigate(`/confirmation/${item.service_id}`, { 

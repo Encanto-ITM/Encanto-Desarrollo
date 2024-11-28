@@ -9,8 +9,6 @@ export function Confirmation() {
     const location = useLocation();
     const navigate = useNavigate(); 
     const { service, selectedTime } = location.state || {};
-    console.log('Datos recibidos en location.state:', location.state);
-    console.log('SelectedTime:', selectedTime);
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [user, setUser] = useState(null); 
