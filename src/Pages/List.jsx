@@ -171,7 +171,7 @@ export function List() {
                                         <p className="font-semibold text-center">{appointment.service_name}</p>
                                         <div className='line bg-purple h-1'></div>
                                         <p className="font-semibold">Estado: <span className="font-normal">{appointment.status}</span></p>
-                                        <p className="font-semibold">Total: <span className="font-normal">${appointment.total}</span></p>
+                                        <p className="font-semibold">Total: <span className="font-normal">₡{appointment.total}</span></p>
                                         <p className="font-semibold">Detalles: <span className="font-normal">{appointment.location}</span></p>
                                         <p className="font-semibold">Fecha: <span className="font-normal">{appointment.date}</span></p>
                                         <div className="flex gap-4 mt-4">

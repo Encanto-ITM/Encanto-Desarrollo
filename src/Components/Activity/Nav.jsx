@@ -153,41 +153,41 @@ export function Nav() {
             </div>
           </a>
         </li>
-        <li className="transition duration-500 hover:scale-110 relative">
-          {userData && userData.acounttype_id == 2 && futureAppointments.length > 0 && (
-            <a
-              href="#"
-              onClick={openNotificationsModal}
-              className="flex items-center justify-center focus:outline-none gap-4 relative"
-            >
-              <div className="flex flex-col items-center relative">
-                <img
-                  src="/img/Iconos/notification_icon.png"
-                  alt="Notificaciones"
-                  className="w-6 h-6 object-contain transition-transform transform hover:scale-110 hover:text-yellow-400"
-                />
-                <div
-                  className="absolute top-0 left-3 rounded-full w-5 h-5 transform -translate-y-2"
-                  style={{
-                    backgroundColor: '#e60000',
-                    zIndex: 0,
-                  }}
-                ></div>
-                <div
-                  className={`absolute top-0 left-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold transform -translate-y-2 ${futureAppointments.length > 0 ? 'z-10' : ''}`}
-                  style={{
-                    position: 'absolute',
-                    top: '0',
-                    left: 'calc(80% - 0.5rem)',
-                    transform: 'translateY(-50%)',
-                  }}
-                >
-                  {futureAppointments.length}
+        {userData && userData.acounttype_id == 2 && (
+          <li className="transition duration-500 hover:scale-110 relative">
+              <a
+                href="#"
+                onClick={openNotificationsModal}
+                className="flex items-center justify-center focus:outline-none gap-4 relative"
+              >
+                <div className="flex flex-col items-center relative">
+                  <img
+                    src="/img/Iconos/notification_icon.png"
+                    alt="Notificaciones"
+                    className="w-6 h-6 object-contain transition-transform transform hover:scale-110 hover:text-yellow-400"
+                  />
+                  <div
+                    className="absolute top-0 left-3 rounded-full w-5 h-5 transform -translate-y-2"
+                    style={{
+                      backgroundColor: '#e60000',
+                      zIndex: 0,
+                    }}
+                  ></div>
+                  <div
+                    className={`absolute top-0 left-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold transform -translate-y-2 ${futureAppointments.length > 0 ? 'z-10' : ''}`}
+                    style={{
+                      position: 'absolute',
+                      top: '0',
+                      left: 'calc(80% - 0.5rem)',
+                      transform: 'translateY(-50%)',
+                    }}
+                  >
+                    {futureAppointments.length}
+                  </div>
                 </div>
-              </div>
-            </a>
-          )}
-        </li>
+              </a>
+          </li>
+        )}
         <li className="transition duration-500 hover:scale-110">
           <a href="#" onClick={openModal} className="flex items-center justify-center focus:outline-none gap-4">
             <div className="w-10 h-10 overflow-hidden border-2 border-gray-400 rounded-full transition-transform hover:scale-110">
